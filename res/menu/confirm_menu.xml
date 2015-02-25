@@ -1,0 +1,14 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="com.mbottomsheet.MBottomSheet" >
+
+    <item
+        android:id="@+id/yes"
+        android:icon="@drawable/ic_action_accept"
+        android:title="@string/yes"/>
+    <item
+        android:id="@+id/no"
+        android:icon="@drawable/ic_action_cancel"
+        android:title="@string/no"/>
+
+</menu>

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!-- Generated with http://android-holo-colors.com -->
+<resources xmlns:android="http://schemas.android.com/apk/res/android">
+
+  <style name="kakumapp_white" parent="@style/_kakumapp_white"/>
+
+  <style name="_kakumapp_white" parent="Theme.AppCompat.Light.DarkActionBar">
+
+    <item name="android:editTextStyle">@style/EditTextkakumapp_white</item>
+
+    <item name="android:spinnerStyle">@style/Spinnerkakumapp_white</item>
+
+    <item name="android:spinnerDropDownItemStyle">@style/SpinnerDropDownItemkakumapp_white</item>
+
+  </style>
+
+</resources>

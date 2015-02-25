@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">Kakumapp</string>
+    <string name="app_name_caps">KAKUMAPP</string>
+    <string name="app_desc">Kakumapp reconnects you with your lost loved ones. We enable you to find your friends and family.</string>
+    <string name="action_settings">Settings</string>
+    <string name="get_started">TAP TO GET STARTED</string>
+    <string name="image">Image</string>
+    <string name="help">Help</string>
+    <string name="home">Home</string>
+    <string name="username">Username</string>
+    <string name="name">Name</string>
+    <string name="password">Password</string>
+    <string name="confirm_pass">Confirm password</string>
+    <string name="continue_text">Continue</string>
+    <string name="email">Email</string>
+    <string name="login">Login</string>
+    <string name="register">Register</string>
+    <string name="forgot_pass">Forgot Password</string>
+    <string name="phone">Phone number</string>
+    <string name="create_account">Create new account</string>
+    <string name="submit">Submit</string>
+    <string name="ok">OK</string>
+    <string name="no">No</string>
+    <string name="yes">Yes</string>
+    <string name="share">Share</string>
+    <string name="share_social">Share on social media</string>
+    <string name="more">More</string>
+    <string name="select">Select</string>
+    <string name="edit">Edit</string>
+    <string name="search">Search</string>
+    <string name="delete">Delete</string>
+    <string name="details">Details</string>
+    <string name="place_of_origin">Place of origin</string>
+    <string name="title_activity_account_new">AccountNew</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="how_to_use">How to use kakumapp</string>
+    <string name="find_a_person">Find a person</string>
+    <string name="image_desc">Image</string>
+    <string name="register_instr">Register in a few easy steps</string>
+    <string name="phone_desc">Your phone number will make it easier for people to find you</string>
+    <string name="name_desc">Using your real name make it easier for other people to recognize you</string>
+    <string name="first_name">First name</string>
+    <string name="last_name">Last name</string>
+    <string name="take_picture">Take picture</string>
+    <string name="take_photo">Take photo</string>
+    <string name="how_help">How it works I am not sure yet :)</string>
+
+</resources>

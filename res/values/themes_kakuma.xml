@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!-- Generated with http://android-holo-colors.com -->
+<resources xmlns:android="http://schemas.android.com/apk/res/android">
+
+  <style name="kakuma" parent="@style/_kakuma"/>
+
+  <style name="_kakuma" parent="Theme.AppCompat.Light.DarkActionBar">
+
+    <item name="android:editTextStyle">@style/EditTextkakuma</item>
+
+    <item name="android:textColorHighlight">#9900a99d</item>
+
+    <item name="android:autoCompleteTextViewStyle">@style/AutoCompleteTextViewkakuma</item>
+
+    <item name="android:checkboxStyle">@style/CheckBoxkakuma</item>
+
+    <item name="android:radioButtonStyle">@style/RadioButtonkakuma</item>
+
+    <item name="android:buttonStyle">@style/Buttonkakuma</item>
+
+    <item name="android:imageButtonStyle">@style/ImageButtonkakuma</item>
+
+    <item name="android:spinnerStyle">@style/Spinnerkakuma</item>
+
+    <item name="android:spinnerDropDownItemStyle">@style/SpinnerDropDownItemkakuma</item>
+
+    <item name="android:progressBarStyleHorizontal">@style/ProgressBarkakuma</item>
+
+    <item name="android:seekBarStyle">@style/SeekBarkakuma</item>
+
+    <item name="android:ratingBarStyle">@style/RatingBarkakuma</item>
+
+    <item name="android:ratingBarStyleIndicator">@style/RatingBarBigkakuma</item>
+
+    <item name="android:ratingBarStyleSmall">@style/RatingBarSmallkakuma</item>
+
+    <item name="android:buttonStyleToggle">@style/Togglekakuma</item>
+
+    <item name="android:listViewStyle">@style/ListViewkakuma</item>
+
+    <item name="android:listViewWhiteStyle">@style/ListViewkakuma.White</item>
+
+    <item name="android:spinnerItemStyle">@style/SpinnerItemkakuma</item>
+
+  </style>
+
+</resources>
