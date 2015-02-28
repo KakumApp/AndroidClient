@@ -45,11 +45,11 @@ public final class R {
 		public static final int bs_list_selector = 0x7f02003c;
 	}
 	public static final class id {
-		public static final int bottom_sheet_gridview = 0x7f090061;
-		public static final int bottom_sheet_title = 0x7f090060;
-		public static final int bottom_sheet_title_image = 0x7f09005f;
-		public static final int bs_list_image = 0x7f090062;
-		public static final int bs_list_title = 0x7f090063;
+		public static final int bottom_sheet_gridview = 0x7f090066;
+		public static final int bottom_sheet_title = 0x7f090065;
+		public static final int bottom_sheet_title_image = 0x7f090064;
+		public static final int bs_list_image = 0x7f090067;
+		public static final int bs_list_title = 0x7f090068;
 		public static final int bs_more = 0x7f090009;
 	}
 	public static final class integer {
@@ -65,29 +65,29 @@ public final class R {
 		public static final int bs_list_entry = 0x7f030022;
 	}
 	public static final class string {
-		public static final int bs_more = 0x7f0a0010;
+		public static final int bs_more = 0x7f0a0011;
 	}
 	public static final class style {
-		public static final int BottomSheet = 0x7f0b00eb;
-		public static final int BottomSheet_Animation = 0x7f0b00fe;
-		public static final int BottomSheet_Dialog = 0x7f0b00ec;
-		public static final int BottomSheet_Dialog_Dark = 0x7f0b00ed;
-		public static final int BottomSheet_Grid = 0x7f0b00fc;
-		public static final int BottomSheet_Grid_Item = 0x7f0b00fd;
-		public static final int BottomSheet_Grid_Item_Image = 0x7f0b00fa;
-		public static final int BottomSheet_Grid_Item_Title = 0x7f0b00fb;
-		public static final int BottomSheet_List = 0x7f0b00f4;
-		public static final int BottomSheet_List_Dark = 0x7f0b00f5;
-		public static final int BottomSheet_List_Divider = 0x7f0b00f9;
-		public static final int BottomSheet_List_Item = 0x7f0b00f6;
-		public static final int BottomSheet_List_Item_Image = 0x7f0b00f7;
-		public static final int BottomSheet_List_Item_Title = 0x7f0b00f8;
-		public static final int BottomSheet_Title = 0x7f0b00f3;
-		public static final int Text = 0x7f0b00ee;
-		public static final int Text_Headline = 0x7f0b00ef;
-		public static final int Text_Hint = 0x7f0b00f1;
-		public static final int Text_Subhead = 0x7f0b00f2;
-		public static final int Text_Title = 0x7f0b00f0;
+		public static final int BottomSheet = 0x7f0b00ee;
+		public static final int BottomSheet_Animation = 0x7f0b0101;
+		public static final int BottomSheet_Dialog = 0x7f0b00ef;
+		public static final int BottomSheet_Dialog_Dark = 0x7f0b00f0;
+		public static final int BottomSheet_Grid = 0x7f0b00ff;
+		public static final int BottomSheet_Grid_Item = 0x7f0b0100;
+		public static final int BottomSheet_Grid_Item_Image = 0x7f0b00fd;
+		public static final int BottomSheet_Grid_Item_Title = 0x7f0b00fe;
+		public static final int BottomSheet_List = 0x7f0b00f7;
+		public static final int BottomSheet_List_Dark = 0x7f0b00f8;
+		public static final int BottomSheet_List_Divider = 0x7f0b00fc;
+		public static final int BottomSheet_List_Item = 0x7f0b00f9;
+		public static final int BottomSheet_List_Item_Image = 0x7f0b00fa;
+		public static final int BottomSheet_List_Item_Title = 0x7f0b00fb;
+		public static final int BottomSheet_Title = 0x7f0b00f6;
+		public static final int Text = 0x7f0b00f1;
+		public static final int Text_Headline = 0x7f0b00f2;
+		public static final int Text_Hint = 0x7f0b00f4;
+		public static final int Text_Subhead = 0x7f0b00f5;
+		public static final int Text_Title = 0x7f0b00f3;
 	}
 	public static final class styleable {
 		public static final int[] BottomSheet = { 0x7f0100c0, 0x7f0100c1, 0x7f0100c2, 0x7f0100c3, 0x7f0100c4, 0x7f0100c5, 0x7f0100c6, 0x7f0100c7, 0x7f0100c8, 0x7f0100c9, 0x7f0100ca };

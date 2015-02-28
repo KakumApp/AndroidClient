@@ -13,12 +13,20 @@ import android.widget.TextView;
 
 import com.kakumapp.utils.Utils;
 
+/**
+ * Register name
+ * 
+ * @author paul
+ * 
+ */
 public class RegisterName extends ActionBarActivity {
 
 	private Button continueButton;
 	private TextView descTextView, findPersonTextView;
 	private Typeface typeface;
-	private EditText firstNameEditText, lastNameEditText;
+	private EditText firstNameEditText, lastNameEditText, otherNameEditText;
+	private String firstName, lastName, otherName;
+	private String phoneNumber, countryCode;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -30,20 +38,31 @@ public class RegisterName extends ActionBarActivity {
 		findPersonTextView = (TextView) findViewById(R.id.textView_register_find_person);
 		firstNameEditText = (EditText) findViewById(R.id.edittext_first_name);
 		lastNameEditText = (EditText) findViewById(R.id.edittext_last_name);
+		otherNameEditText = (EditText) findViewById(R.id.edittext_other_name);
 
 		typeface = new Utils(this).getFont("Ubuntu-L");
 		findPersonTextView.setTypeface(typeface);
 		descTextView.setTypeface(typeface);
 		firstNameEditText.setHintTextColor(Color.WHITE);
 		lastNameEditText.setHintTextColor(Color.WHITE);
+		otherNameEditText.setHintTextColor(Color.WHITE);
 
 		continueButton.setOnClickListener(new OnClickListener() {
 
 			@Override
 			public void onClick(View v) {
-				Intent originIntent = new Intent(RegisterName.this,
-						RegisterOrigin.class);
-				startActivity(originIntent);
+				if (isValidData()) {
+					Bundle bundle = new Bundle();
+					bundle.putString("phone", phoneNumber);
+					bundle.putString("code", countryCode);
+					bundle.putString("firstName", firstName);
+					bundle.putString("lastName", lastName);
+					bundle.putString("otherName", otherName);
+					Intent originIntent = new Intent(RegisterName.this,
+							RegisterOrigin.class);
+					originIntent.putExtras(bundle);
+					startActivity(originIntent);
+				}
 			}
 		});
 
@@ -51,10 +70,59 @@ public class RegisterName extends ActionBarActivity {
 
 			@Override
 			public void onClick(View v) {
-				Intent findPersonIntent = new Intent(RegisterName.this, Home.class);
+				Intent findPersonIntent = new Intent(RegisterName.this,
+						Home.class);
 				startActivity(findPersonIntent);
 			}
 		});
 
+		// get data if passed
+		Bundle bundle = getIntent().getExtras();
+		if (bundle != null) {
+			// for the phone number
+			phoneNumber = bundle.getString("phone");
+			countryCode = bundle.getString("code");
+			// if any data passed for this activity
+			firstName = bundle.getString("firstName");
+			lastName = bundle.getString("lastName");
+			otherName = bundle.getString("otherName");
+
+			// set the data on the different fields
+			if (firstName != null) {
+				firstNameEditText.setText(firstName);
+			}
+
+			if (lastName != null) {
+				lastNameEditText.setText(lastName);
+			}
+
+			if (otherName != null) {
+				otherNameEditText.setText(otherName);
+			}
+		}
+	}
+
+	/**
+	 * validate the data entered
+	 * 
+	 * @return true if valid,false otherwise
+	 */
+	protected boolean isValidData() {
+		boolean valid = false;
+		// get the data
+		firstName = firstNameEditText.getText().toString().trim();
+		lastName = lastNameEditText.getText().toString().trim();
+		otherName = otherNameEditText.getText().toString().trim();
+		// validate
+		if (firstName != null && !firstName.equals("")) {
+			if (lastName != null && !lastName.equals("")) {
+				valid = true;
+			} else {
+				lastNameEditText.setError("Required");
+			}
+		} else {
+			firstNameEditText.setError("Required");
+		}
+		return valid;
 	}
 }

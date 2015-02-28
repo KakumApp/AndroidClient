@@ -29,32 +29,28 @@
             android:layout_below="@+id/imageView_register_name"
             android:layout_centerHorizontal="true"
             android:layout_gravity="center"
-            android:layout_marginRight="8dp"
             android:layout_marginTop="20dp"
-            android:layout_weight="40"
-            android:paddingLeft="5dp"
-            android:paddingRight="5dp" />
+            android:layout_weight="40" />
 
-        <Spinner
-            android:id="@+id/spinner_origin_places"
-            style="@style/Spinnerkakumapp_white"
+        <MultiAutoCompleteTextView
+            android:id="@+id/autocomplete_origin_places"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@+id/spinner_origin_countries"
             android:layout_centerHorizontal="true"
             android:layout_gravity="center"
-            android:layout_marginRight="8dp"
             android:layout_marginTop="20dp"
-            android:layout_weight="40"
-            android:paddingLeft="5dp"
-            android:paddingRight="5dp" />
+            android:hint="@string/select_place"
+            android:padding="8dp"
+            android:textColor="@color/white"
+            android:textSize="16sp" />
 
         <Button
             android:id="@+id/button_register_continue"
             style="@style/Buttonkakuma"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/spinner_origin_places"
+            android:layout_below="@+id/autocomplete_origin_places"
             android:layout_centerHorizontal="true"
             android:layout_marginRight="8dp"
             android:layout_marginTop="40dp"

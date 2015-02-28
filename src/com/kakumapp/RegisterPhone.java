@@ -17,6 +17,12 @@ import android.widget.TextView;
 
 import com.kakumapp.utils.Utils;
 
+/**
+ * Register phone number
+ * 
+ * @author paul
+ * 
+ */
 public class RegisterPhone extends ActionBarActivity {
 
 	private Button continueButton;
@@ -24,6 +30,8 @@ public class RegisterPhone extends ActionBarActivity {
 	private Typeface typeface;
 	private Spinner countriesSpinner;
 	private EditText phoneEditText;
+	private String phoneNumber, countryCode;
+	private ArrayAdapter<String> countriesCodesAdapter;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -44,9 +52,15 @@ public class RegisterPhone extends ActionBarActivity {
 
 			@Override
 			public void onClick(View v) {
-				Intent nameIntent = new Intent(RegisterPhone.this,
-						RegisterName.class);
-				startActivity(nameIntent);
+				if (isValidData()) {
+					Bundle bundle = new Bundle();
+					bundle.putString("phone", phoneNumber);
+					bundle.putString("code", countryCode);
+					Intent nameIntent = new Intent(RegisterPhone.this,
+							RegisterName.class);
+					nameIntent.putExtras(bundle);
+					startActivity(nameIntent);
+				}
 			}
 		});
 
@@ -54,18 +68,19 @@ public class RegisterPhone extends ActionBarActivity {
 
 			@Override
 			public void onClick(View v) {
-				Intent findPersonIntent = new Intent(RegisterPhone.this, Home.class);
+				Intent findPersonIntent = new Intent(RegisterPhone.this,
+						Home.class);
 				startActivity(findPersonIntent);
 			}
 		});
 
 		countriesSpinner = (Spinner) findViewById(R.id.spinner_phone_countries);
 		String[] list = { "AF +93", "KE +254", "ZW +263" };
-		ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(this,
+		countriesCodesAdapter = new ArrayAdapter<String>(this,
 				android.R.layout.simple_spinner_item, list);
-		dataAdapter
+		countriesCodesAdapter
 				.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-		countriesSpinner.setAdapter(dataAdapter);
+		countriesSpinner.setAdapter(countriesCodesAdapter);
 
 		countriesSpinner
 				.setOnItemSelectedListener(new OnItemSelectedListener() {
@@ -73,8 +88,12 @@ public class RegisterPhone extends ActionBarActivity {
 					@Override
 					public void onItemSelected(AdapterView<?> parent,
 							View arg1, int position, long arg3) {
-						((TextView) parent.getChildAt(0))
-								.setTextColor(Color.WHITE);
+						TextView textView = ((TextView) parent.getChildAt(0));
+						if (textView != null) {
+							textView.setTextColor(Color.WHITE);
+						}
+						countryCode = (String) parent
+								.getItemAtPosition(position);
 					}
 
 					@Override
@@ -82,5 +101,35 @@ public class RegisterPhone extends ActionBarActivity {
 					}
 				});
 
+		// set data if passed
+		Bundle bundle = getIntent().getExtras();
+		if (bundle != null) {
+			phoneNumber = bundle.getString("phone");
+			countryCode = bundle.getString("code");
+
+			if (phoneNumber != null) {
+				phoneEditText.setText(phoneNumber);
+			}
+
+			if (countryCode != null) {
+				countriesSpinner.setSelection(countriesCodesAdapter
+						.getPosition(countryCode));
+			}
+		}
+	}
+
+	protected boolean isValidData() {
+		boolean valid = false;
+		phoneNumber = phoneEditText.getText().toString().trim();
+		// remove the starting zero if present
+		if (phoneNumber.startsWith("0")) {
+			phoneNumber = phoneNumber.substring(1);
+		}
+		if (phoneNumber.matches("\\d+") && phoneNumber.length() <= 20) {
+			valid = true;
+		} else {
+			phoneEditText.setError("Invalid phone number");
+		}
+		return valid;
 	}
 }
