@@ -36,7 +36,6 @@ public class RegisterPhoto extends ActionBarActivity implements
 	// take photo
 	private Button captureButton;
 	private boolean hasFrontCamera;
-	private boolean isPreviewRunning;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -232,87 +231,12 @@ public class RegisterPhoto extends ActionBarActivity implements
 			break;// Landscape right
 		}
 		int rotate = (info.orientation - degrees + 360) % 360;
-
-		// Camera.CameraInfo info = new android.hardware.Camera.CameraInfo();
-		// Camera.getCameraInfo(currentCameraId, info);
-		// int rotation = activity.getWindowManager().getDefaultDisplay()
-		// .getRotation();
-		// int degrees = 0;
-		// switch (rotation) {
-		// case Surface.ROTATION_0:
-		// degrees = 0;
-		// break;
-		// case Surface.ROTATION_90:
-		// degrees = 90;
-		// break;
-		// case Surface.ROTATION_180:
-		// degrees = 180;
-		// break;
-		// case Surface.ROTATION_270:
-		// degrees = 270;
-		// break;
-		// }
-		// int result;
-		// if (info.facing == Camera.CameraInfo.CAMERA_FACING_FRONT) {
-		// result = (info.orientation + degrees) % 360;
-		// result = (360 - result) % 360; // compensate the mirror
-		// } else { // back-facing
-		// result = (info.orientation - degrees + 360) % 360;
-		// }
-		// mCamera.setDisplayOrientation(result);
-
 		// Set the 'rotation' parameter
 		Camera.Parameters params = mCamera.getParameters();
 		params.setRotation(rotate);
 		mCamera.setParameters(params);
 		mCamera.setDisplayOrientation(90);
 		mCamera.startPreview();
-	}
-
-	// @Override
-	// public void surfaceChanged(SurfaceHolder holder, int format, int width,
-	// int height) {
-	// if (isPreviewRunning) {
-	// mCamera.stopPreview();
-	// }
-	//
-	// Parameters parameters = mCamera.getParameters();
-	// Display display = ((WindowManager) getSystemService(WINDOW_SERVICE))
-	// .getDefaultDisplay();
-	//
-	// if (display.getRotation() == Surface.ROTATION_0) {
-	// parameters.setPreviewSize(height, width);
-	// mCamera.setDisplayOrientation(90);
-	// }
-	//
-	// if (display.getRotation() == Surface.ROTATION_90) {
-	// parameters.setPreviewSize(width, height);
-	// }
-	//
-	// if (display.getRotation() == Surface.ROTATION_180) {
-	// parameters.setPreviewSize(height, width);
-	// }
-	//
-	// if (display.getRotation() == Surface.ROTATION_270) {
-	// parameters.setPreviewSize(width, height);
-	// mCamera.setDisplayOrientation(180);
-	// }
-	// try {
-	// mCamera.setParameters(parameters);
-	// } catch (Exception e) {
-	// Log.e(TAG, "Exception " + e.getLocalizedMessage());
-	// }
-	// previewCamera(holder);
-	// }
-
-	public void previewCamera(SurfaceHolder holder) {
-		try {
-			mCamera.setPreviewDisplay(holder);
-			mCamera.startPreview();
-			isPreviewRunning = true;
-		} catch (Exception e) {
-			Log.d(TAG, "Cannot start preview", e);
-		}
 	}
 
 	private boolean hasAFrontCamera() {
