@@ -14,6 +14,7 @@ import com.kakumapp.utils.Utils;
 
 public class Kakuma extends ActionBarActivity implements SwipeGestureListener {
 
+	// private static final String TAG = "Kakuma";
 	private Button registerButton, findAPersonButton;
 	private TextView titleTextView, descTextView, howToUseTextView;
 	private Typeface typeface;
@@ -71,11 +72,11 @@ public class Kakuma extends ActionBarActivity implements SwipeGestureListener {
 
 	@Override
 	public void onSwipe(int direction) {
-		
+
 	}
 
 	@Override
 	public void onDoubleTap() {
-		
+
 	}
 }

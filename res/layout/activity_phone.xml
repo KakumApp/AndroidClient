@@ -19,7 +19,7 @@
             android:layout_alignParentTop="true"
             android:layout_centerHorizontal="true"
             android:contentDescription="@string/image_desc"
-            android:src="@drawable/ic_phone_email" />
+            android:src="@drawable/ic_phone" />
 
         <TextView
             android:id="@+id/textView_phone_desc"

@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:civ="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="16dp" >
+
+    <com.kakumapp.views.CircularImageView
+        android:id="@+id/image_view_photo"
+        android:layout_width="120dp"
+        android:layout_height="120dp"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="40dp"
+        android:clickable="true"
+        android:contentDescription="@string/image_desc"
+        civ:civ_shadow="true" >
+    </com.kakumapp.views.CircularImageView>
+
+    <TextView
+        android:id="@+id/textView_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/image_view_photo"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp"
+        android:textColor="@color/dark_grey"
+        android:textSize="18sp" />
+
+    <TextView
+        android:id="@+id/textView_phone"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/textView_name"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp"
+        android:text="Phn"
+        android:textColor="@color/dark_grey"
+        android:textSize="18sp" />
+
+    <TextView
+        android:id="@+id/textView_country"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/textView_phone"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp"
+        android:text="Cntry"
+        android:textColor="@color/dark_grey"
+        android:textSize="18sp" />
+
+    <TextView
+        android:id="@+id/textView_place"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/textView_country"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp"
+        android:text="Plc"
+        android:textColor="@color/dark_grey"
+        android:textSize="18sp" />
+
+    <Button
+        android:id="@+id/button_register"
+        style="@style/Buttonkakuma"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/textView_place"
+        android:layout_centerHorizontal="true"
+        android:layout_gravity="right"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/border_button"
+        android:text="@string/register"
+        android:textColor="@color/white" />
+
+</RelativeLayout>

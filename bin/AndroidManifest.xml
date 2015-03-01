@@ -8,12 +8,20 @@
         android:minSdkVersion="8"
         android:targetSdkVersion="21" />
 
+    <!-- Take user photo -->
     <uses-permission android:name="android.permission.CAMERA" />
+    <!-- Store the photos -->
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <!-- Internet Services. -->
+    <uses-permission android:name="android.permission.INTERNET" />
+    <!-- Network State Permissions to detect Internet status -->
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
+    <!-- Must have a camera -->
     <uses-feature
         android:name="android.hardware.camera"
         android:required="false" />
+    <!-- Not a must for the front camera -->
     <uses-feature
         android:name="android.hardware.camera.front"
         android:required="false" />
@@ -76,6 +84,13 @@
         <activity android:name=".RegisterPhoto" >
             <intent-filter>
                 <action android:name="com.kakumapp.RegisterPhoto" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".RegisterSummary" >
+            <intent-filter>
+                <action android:name="com.kakumapp.RegisterSummary" />
 
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>

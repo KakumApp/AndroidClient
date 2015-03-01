@@ -75,7 +75,8 @@ public class RegisterPhone extends ActionBarActivity {
 		});
 
 		countriesSpinner = (Spinner) findViewById(R.id.spinner_phone_countries);
-		String[] list = { "AF +93", "KE +254", "ZW +263" };
+		String[] list = { "SS +211", "SD +249", "SO +252", "ET +251",
+				"CD +243", "BI +257", "RW +250", "ER +291", "UG +256" };
 		countriesCodesAdapter = new ArrayAdapter<String>(this,
 				android.R.layout.simple_spinner_item, list);
 		countriesCodesAdapter

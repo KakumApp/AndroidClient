@@ -14,27 +14,27 @@ public final class R {
 		public static final int dock_bottom_exit = 0x7f04000b;
 	}
 	public static final class attr {
-		public static final int bottomSheetStyle = 0x7f0100c0;
-		public static final int bs_closeDrawable = 0x7f0100ca;
-		public static final int bs_dialogBackground = 0x7f0100c1;
-		public static final int bs_dividerColor = 0x7f0100c3;
-		public static final int bs_gridItemTitleTextAppearance = 0x7f0100c7;
-		public static final int bs_listItemTitleTextAppearance = 0x7f0100c6;
-		public static final int bs_listStyle = 0x7f0100c2;
-		public static final int bs_moreDrawable = 0x7f0100c8;
-		public static final int bs_moreText = 0x7f0100c9;
-		public static final int bs_numColumns = 0x7f0100c4;
-		public static final int bs_titleTextAppearance = 0x7f0100c5;
+		public static final int bottomSheetStyle = 0x7f0100d0;
+		public static final int bs_closeDrawable = 0x7f0100da;
+		public static final int bs_dialogBackground = 0x7f0100d1;
+		public static final int bs_dividerColor = 0x7f0100d3;
+		public static final int bs_gridItemTitleTextAppearance = 0x7f0100d7;
+		public static final int bs_listItemTitleTextAppearance = 0x7f0100d6;
+		public static final int bs_listStyle = 0x7f0100d2;
+		public static final int bs_moreDrawable = 0x7f0100d8;
+		public static final int bs_moreText = 0x7f0100d9;
+		public static final int bs_numColumns = 0x7f0100d4;
+		public static final int bs_titleTextAppearance = 0x7f0100d5;
 	}
 	public static final class color {
-		public static final int bs_dark_divider_color = 0x7f060032;
-		public static final int bs_divider_color = 0x7f060031;
+		public static final int bs_dark_divider_color = 0x7f060036;
+		public static final int bs_divider_color = 0x7f060035;
 	}
 	public static final class dimen {
-		public static final int bs_grid_bottom_padding = 0x7f070036;
-		public static final int bs_grid_left_padding = 0x7f070033;
-		public static final int bs_grid_right_padding = 0x7f070035;
-		public static final int bs_grid_top_padding = 0x7f070034;
+		public static final int bs_grid_bottom_padding = 0x7f07004f;
+		public static final int bs_grid_left_padding = 0x7f07004c;
+		public static final int bs_grid_right_padding = 0x7f07004e;
+		public static final int bs_grid_top_padding = 0x7f07004d;
 	}
 	public static final class drawable {
 		public static final int bs_ic_clear = 0x7f020037;
@@ -45,11 +45,11 @@ public final class R {
 		public static final int bs_list_selector = 0x7f02003c;
 	}
 	public static final class id {
-		public static final int bottom_sheet_gridview = 0x7f090066;
-		public static final int bottom_sheet_title = 0x7f090065;
-		public static final int bottom_sheet_title_image = 0x7f090064;
-		public static final int bs_list_image = 0x7f090067;
-		public static final int bs_list_title = 0x7f090068;
+		public static final int bottom_sheet_gridview = 0x7f09006b;
+		public static final int bottom_sheet_title = 0x7f09006a;
+		public static final int bottom_sheet_title_image = 0x7f090069;
+		public static final int bs_list_image = 0x7f09006c;
+		public static final int bs_list_title = 0x7f09006d;
 		public static final int bs_more = 0x7f090009;
 	}
 	public static final class integer {
@@ -59,38 +59,38 @@ public final class R {
 		public static final int bs_initial_list_row = 0x7f080003;
 	}
 	public static final class layout {
-		public static final int bottom_sheet_dialog = 0x7f03001f;
-		public static final int bs_grid_entry = 0x7f030020;
-		public static final int bs_list_divider = 0x7f030021;
-		public static final int bs_list_entry = 0x7f030022;
+		public static final int bottom_sheet_dialog = 0x7f030020;
+		public static final int bs_grid_entry = 0x7f030021;
+		public static final int bs_list_divider = 0x7f030022;
+		public static final int bs_list_entry = 0x7f030023;
 	}
 	public static final class string {
 		public static final int bs_more = 0x7f0a0011;
 	}
 	public static final class style {
-		public static final int BottomSheet = 0x7f0b00ee;
-		public static final int BottomSheet_Animation = 0x7f0b0101;
-		public static final int BottomSheet_Dialog = 0x7f0b00ef;
-		public static final int BottomSheet_Dialog_Dark = 0x7f0b00f0;
-		public static final int BottomSheet_Grid = 0x7f0b00ff;
-		public static final int BottomSheet_Grid_Item = 0x7f0b0100;
-		public static final int BottomSheet_Grid_Item_Image = 0x7f0b00fd;
-		public static final int BottomSheet_Grid_Item_Title = 0x7f0b00fe;
-		public static final int BottomSheet_List = 0x7f0b00f7;
-		public static final int BottomSheet_List_Dark = 0x7f0b00f8;
-		public static final int BottomSheet_List_Divider = 0x7f0b00fc;
-		public static final int BottomSheet_List_Item = 0x7f0b00f9;
-		public static final int BottomSheet_List_Item_Image = 0x7f0b00fa;
-		public static final int BottomSheet_List_Item_Title = 0x7f0b00fb;
-		public static final int BottomSheet_Title = 0x7f0b00f6;
-		public static final int Text = 0x7f0b00f1;
-		public static final int Text_Headline = 0x7f0b00f2;
-		public static final int Text_Hint = 0x7f0b00f4;
-		public static final int Text_Subhead = 0x7f0b00f5;
-		public static final int Text_Title = 0x7f0b00f3;
+		public static final int BottomSheet = 0x7f0b00f4;
+		public static final int BottomSheet_Animation = 0x7f0b0107;
+		public static final int BottomSheet_Dialog = 0x7f0b00f5;
+		public static final int BottomSheet_Dialog_Dark = 0x7f0b00f6;
+		public static final int BottomSheet_Grid = 0x7f0b0105;
+		public static final int BottomSheet_Grid_Item = 0x7f0b0106;
+		public static final int BottomSheet_Grid_Item_Image = 0x7f0b0103;
+		public static final int BottomSheet_Grid_Item_Title = 0x7f0b0104;
+		public static final int BottomSheet_List = 0x7f0b00fd;
+		public static final int BottomSheet_List_Dark = 0x7f0b00fe;
+		public static final int BottomSheet_List_Divider = 0x7f0b0102;
+		public static final int BottomSheet_List_Item = 0x7f0b00ff;
+		public static final int BottomSheet_List_Item_Image = 0x7f0b0100;
+		public static final int BottomSheet_List_Item_Title = 0x7f0b0101;
+		public static final int BottomSheet_Title = 0x7f0b00fc;
+		public static final int Text = 0x7f0b00f7;
+		public static final int Text_Headline = 0x7f0b00f8;
+		public static final int Text_Hint = 0x7f0b00fa;
+		public static final int Text_Subhead = 0x7f0b00fb;
+		public static final int Text_Title = 0x7f0b00f9;
 	}
 	public static final class styleable {
-		public static final int[] BottomSheet = { 0x7f0100c0, 0x7f0100c1, 0x7f0100c2, 0x7f0100c3, 0x7f0100c4, 0x7f0100c5, 0x7f0100c6, 0x7f0100c7, 0x7f0100c8, 0x7f0100c9, 0x7f0100ca };
+		public static final int[] BottomSheet = { 0x7f0100d0, 0x7f0100d1, 0x7f0100d2, 0x7f0100d3, 0x7f0100d4, 0x7f0100d5, 0x7f0100d6, 0x7f0100d7, 0x7f0100d8, 0x7f0100d9, 0x7f0100da };
 		public static final int BottomSheet_bottomSheetStyle = 0;
 		public static final int BottomSheet_bs_closeDrawable = 10;
 		public static final int BottomSheet_bs_dialogBackground = 1;
