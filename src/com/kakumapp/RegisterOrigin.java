@@ -6,11 +6,13 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 
+import org.apache.http.Header;
 import org.apache.http.HttpResponse;
 import org.apache.http.NameValuePair;
+import org.apache.http.auth.UsernamePasswordCredentials;
 import org.apache.http.client.HttpClient;
-import org.apache.http.client.entity.UrlEncodedFormEntity;
-import org.apache.http.client.methods.HttpPost;
+import org.apache.http.client.methods.HttpGet;
+import org.apache.http.impl.auth.BasicScheme;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.message.BasicNameValuePair;
 import org.apache.http.params.BasicHttpParams;
@@ -48,6 +50,8 @@ public class RegisterOrigin extends ActionBarActivity {
 	public static final String TAG = "RegisterOrigin";
 	private static final String SELECT_COUNTRY = "Select country";
 	private static final String URL = "http://kakumapp-api.herokuapp.com/";
+	public static final String USERNAME = "admin";
+	public static final String PASSWORD = "admin";
 	public static int FETCH_TYPE;
 	private Button continueButton;
 	private TextView findPersonTextView;
@@ -56,7 +60,7 @@ public class RegisterOrigin extends ActionBarActivity {
 	private MultiAutoCompleteTextView placesAutoCompleteTextView;
 	private String firstName, lastName, otherName, phoneNumber, countryCode,
 			selectedCountry;
-	private Country country;
+	private Country country, defaultCountry;
 	private ArrayList<String> selectedPlaces;
 	private ArrayAdapter<Country> dataAdapterCountries;
 	private ArrayAdapter<Place> dataAdapterPlaces;
@@ -95,7 +99,8 @@ public class RegisterOrigin extends ActionBarActivity {
 			}
 		});
 
-		countries.add(new Country(0, SELECT_COUNTRY, ""));
+		defaultCountry = new Country(0, SELECT_COUNTRY, "");
+		countries.add(defaultCountry);
 
 		dataAdapterCountries = new ArrayAdapter<Country>(this,
 				android.R.layout.simple_spinner_item, countries);
@@ -115,8 +120,8 @@ public class RegisterOrigin extends ActionBarActivity {
 						}
 						Country selectedCountry = (Country) parent
 								.getItemAtPosition(position);
+						country = selectedCountry;
 						if (!selectedCountry.getName().equals(SELECT_COUNTRY)) {
-							country = selectedCountry;
 							// get the places
 							FETCH_TYPE = 2;
 							FetchTask fetchTask = new FetchTask();
@@ -186,7 +191,7 @@ public class RegisterOrigin extends ActionBarActivity {
 		FetchTask fetchTask = new FetchTask();
 		fetchTask.addNameValuePair("username", "admin");
 		fetchTask.addNameValuePair("password", "admin");
-		fetchTask.execute(new String[] { URL + "countries" });
+		fetchTask.execute(new String[] { URL + "countries/" });
 	}
 
 	protected void goNext() {
@@ -197,6 +202,7 @@ public class RegisterOrigin extends ActionBarActivity {
 			for (String plc : plcs) {
 				if (plc != null && !plc.equals("")) {
 					selectedPlaces.add(plc);
+					
 				}
 			}
 		}
@@ -224,7 +230,7 @@ public class RegisterOrigin extends ActionBarActivity {
 	protected boolean isValidData() {
 		boolean valid = false;
 		// validate
-		if (country != null && !country.equals("")) {
+		if (country != null && !country.getName().equals(SELECT_COUNTRY)) {
 			if (!selectedPlaces.isEmpty()) {
 				valid = true;
 			} else {
@@ -290,6 +296,8 @@ public class RegisterOrigin extends ActionBarActivity {
 				try {
 					JSONArray countriesArray = new JSONArray(response);
 					if (countriesArray.length() > 0) {
+						countries.clear();
+						countries.add(defaultCountry);
 						for (int j = 0; j < countriesArray.length(); j++) {
 							JSONObject countryJsonObject = countriesArray
 									.getJSONObject(j);
@@ -353,10 +361,21 @@ public class RegisterOrigin extends ActionBarActivity {
 			try {
 				// HttpGet httpget = new HttpGet(url);
 				// response = httpclient.execute(httpget);
-				HttpPost httppost = new HttpPost(url);
-				// Add parameters
-				httppost.setEntity(new UrlEncodedFormEntity(params));
-				response = httpclient.execute(httppost);
+				// HttpPost httppost = new HttpPost(url);
+				// httppost.setEntity(new UrlEncodedFormEntity(params));
+				// response = httpclient.execute(httppost);
+				// HttpGet httpget = new HttpGet(url + "?"
+				// + URLEncodedUtils.format(params, "utf-8"));
+				// response = httpclient.execute(httpget);
+
+				HttpGet request = new HttpGet(url);
+				UsernamePasswordCredentials credentials = new UsernamePasswordCredentials(
+						USERNAME, PASSWORD);
+				BasicScheme scheme = new BasicScheme();
+				Header authorizationHeader = scheme.authenticate(credentials,
+						request);
+				request.addHeader(authorizationHeader);
+				response = httpclient.execute(request);
 			} catch (Exception e) {
 				Log.e(TAG, e.getLocalizedMessage(), e);
 			}

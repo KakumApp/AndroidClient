@@ -10,25 +10,25 @@ public final class R {
 	public static final class anim {
 		public static final int bs_list_item_in = 0x7f040006;
 		public static final int bs_list_layout_anim_in = 0x7f040007;
-		public static final int dock_bottom_enter = 0x7f04000a;
-		public static final int dock_bottom_exit = 0x7f04000b;
+		public static final int dock_bottom_enter = 0x7f04000e;
+		public static final int dock_bottom_exit = 0x7f04000f;
 	}
 	public static final class attr {
-		public static final int bottomSheetStyle = 0x7f0100d0;
-		public static final int bs_closeDrawable = 0x7f0100da;
-		public static final int bs_dialogBackground = 0x7f0100d1;
-		public static final int bs_dividerColor = 0x7f0100d3;
-		public static final int bs_gridItemTitleTextAppearance = 0x7f0100d7;
-		public static final int bs_listItemTitleTextAppearance = 0x7f0100d6;
-		public static final int bs_listStyle = 0x7f0100d2;
-		public static final int bs_moreDrawable = 0x7f0100d8;
-		public static final int bs_moreText = 0x7f0100d9;
-		public static final int bs_numColumns = 0x7f0100d4;
-		public static final int bs_titleTextAppearance = 0x7f0100d5;
+		public static final int bottomSheetStyle = 0x7f0100e0;
+		public static final int bs_closeDrawable = 0x7f0100ea;
+		public static final int bs_dialogBackground = 0x7f0100e1;
+		public static final int bs_dividerColor = 0x7f0100e3;
+		public static final int bs_gridItemTitleTextAppearance = 0x7f0100e7;
+		public static final int bs_listItemTitleTextAppearance = 0x7f0100e6;
+		public static final int bs_listStyle = 0x7f0100e2;
+		public static final int bs_moreDrawable = 0x7f0100e8;
+		public static final int bs_moreText = 0x7f0100e9;
+		public static final int bs_numColumns = 0x7f0100e4;
+		public static final int bs_titleTextAppearance = 0x7f0100e5;
 	}
 	public static final class color {
-		public static final int bs_dark_divider_color = 0x7f060036;
-		public static final int bs_divider_color = 0x7f060035;
+		public static final int bs_dark_divider_color = 0x7f050038;
+		public static final int bs_divider_color = 0x7f050037;
 	}
 	public static final class dimen {
 		public static final int bs_grid_bottom_padding = 0x7f07004f;
@@ -37,12 +37,12 @@ public final class R {
 		public static final int bs_grid_top_padding = 0x7f07004d;
 	}
 	public static final class drawable {
-		public static final int bs_ic_clear = 0x7f020037;
-		public static final int bs_ic_clear_light = 0x7f020038;
-		public static final int bs_ic_more = 0x7f020039;
-		public static final int bs_ic_more_light = 0x7f02003a;
-		public static final int bs_list_dark_selector = 0x7f02003b;
-		public static final int bs_list_selector = 0x7f02003c;
+		public static final int bs_ic_clear = 0x7f020042;
+		public static final int bs_ic_clear_light = 0x7f020043;
+		public static final int bs_ic_more = 0x7f020044;
+		public static final int bs_ic_more_light = 0x7f020045;
+		public static final int bs_list_dark_selector = 0x7f020046;
+		public static final int bs_list_selector = 0x7f020047;
 	}
 	public static final class id {
 		public static final int bottom_sheet_gridview = 0x7f09006b;
@@ -90,7 +90,7 @@ public final class R {
 		public static final int Text_Title = 0x7f0b00f9;
 	}
 	public static final class styleable {
-		public static final int[] BottomSheet = { 0x7f0100d0, 0x7f0100d1, 0x7f0100d2, 0x7f0100d3, 0x7f0100d4, 0x7f0100d5, 0x7f0100d6, 0x7f0100d7, 0x7f0100d8, 0x7f0100d9, 0x7f0100da };
+		public static final int[] BottomSheet = { 0x7f0100e0, 0x7f0100e1, 0x7f0100e2, 0x7f0100e3, 0x7f0100e4, 0x7f0100e5, 0x7f0100e6, 0x7f0100e7, 0x7f0100e8, 0x7f0100e9, 0x7f0100ea };
 		public static final int BottomSheet_bottomSheetStyle = 0;
 		public static final int BottomSheet_bs_closeDrawable = 10;
 		public static final int BottomSheet_bs_dialogBackground = 1;

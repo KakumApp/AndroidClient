@@ -9,8 +9,18 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@android:color/background_dark"
+        android:background="@drawable/bck"
         android:padding="16dp" >
+
+        <!--
+        <ImageView
+            android:id="@+id/imageView1"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_alignParentTop="true"
+            android:contentDescription="@string/image_desc"
+            android:src="@drawable/bck" />
+        -->
 
         <TextView
             android:id="@+id/textView_title"
@@ -20,10 +30,10 @@
             android:layout_centerHorizontal="true"
             android:layout_marginTop="60dp"
             android:gravity="center"
-            android:padding="16dp"
+            android:padding="2dp"
             android:text="@string/app_name_caps"
             android:textColor="@color/white"
-            android:textSize="40sp" />
+            android:textSize="56sp" />
 
         <TextView
             android:id="@+id/textView_desc"
@@ -31,7 +41,7 @@
             android:layout_height="wrap_content"
             android:layout_below="@+id/textView_title"
             android:layout_centerHorizontal="true"
-            android:layout_marginTop="40dp"
+            android:layout_marginTop="90dp"
             android:gravity="center"
             android:padding="8dp"
             android:text="@string/app_desc"
@@ -42,8 +52,8 @@
             android:id="@+id/options_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/textView_desc"
-            android:layout_marginTop="40dp"
+            android:layout_above="@+id/textView_how_to_use"
+            android:layout_marginBottom="80dp"
             android:orientation="horizontal"
             android:paddingLeft="15dp"
             android:paddingRight="15dp"
@@ -55,7 +65,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="left"
-                android:layout_marginRight="8dp"
+                android:layout_marginRight="20dp"
                 android:layout_weight="50"
                 android:alpha="1.0"
                 android:background="@drawable/border_button_transparent"
@@ -70,7 +80,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="right"
-                android:layout_marginLeft="8dp"
+                android:layout_marginLeft="20dp"
                 android:layout_weight="50"
                 android:alpha="1.0"
                 android:background="@drawable/border_button"
@@ -84,9 +94,9 @@
             android:id="@+id/textView_how_to_use"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/options_layout"
+            android:layout_alignParentBottom="true"
             android:layout_centerHorizontal="true"
-            android:layout_marginTop="40dp"
+            android:layout_marginBottom="40dp"
             android:gravity="center"
             android:padding="8dp"
             android:text="@string/how_to_use"
