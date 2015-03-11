@@ -11,7 +11,9 @@ import org.apache.http.HttpResponse;
 import org.apache.http.NameValuePair;
 import org.apache.http.auth.UsernamePasswordCredentials;
 import org.apache.http.client.HttpClient;
+import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.HttpGet;
+import org.apache.http.client.methods.HttpPost;
 import org.apache.http.impl.auth.BasicScheme;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.message.BasicNameValuePair;
@@ -52,7 +54,7 @@ public class RegisterOrigin extends ActionBarActivity {
 	private static final String URL = "http://kakumapp-api.herokuapp.com/";
 	public static final String USERNAME = "admin";
 	public static final String PASSWORD = "admin";
-	public static int FETCH_TYPE;
+	public static int FETCH_TYPE, indexOfPlace;
 	private Button continueButton;
 	private TextView findPersonTextView;
 	private Typeface typeface;
@@ -66,6 +68,9 @@ public class RegisterOrigin extends ActionBarActivity {
 	private ArrayAdapter<Place> dataAdapterPlaces;
 	private ArrayList<Country> countries = new ArrayList<>();
 	private ArrayList<Place> places = new ArrayList<>();
+	private ArrayList<String> placeNames = new ArrayList<>();
+	private ArrayList<String> placesToRegister = new ArrayList<>();
+	private BottomSheet bottomSheet;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -124,9 +129,8 @@ public class RegisterOrigin extends ActionBarActivity {
 						if (!selectedCountry.getName().equals(SELECT_COUNTRY)) {
 							// get the places
 							FETCH_TYPE = 2;
-							FetchTask fetchTask = new FetchTask();
-							fetchTask.addNameValuePair("username", "admin");
-							fetchTask.addNameValuePair("password", "admin");
+							FetchTask fetchTask = new FetchTask(
+									FetchTask.GET_TASK);
 							fetchTask.execute(new String[] { URL + "countries/"
 									+ selectedCountry.getId() });
 						}
@@ -154,12 +158,12 @@ public class RegisterOrigin extends ActionBarActivity {
 					@Override
 					public void onItemClick(AdapterView<?> parent, View arg1,
 							int position, long arg3) {
-						Place place = (Place) parent
-								.getItemAtPosition(position);
-
-						if (!selectedPlaces.contains(place.getName())) {
-							selectedPlaces.add(place.getName());
-						}
+						// Place place = (Place) parent
+						// .getItemAtPosition(position);
+						//
+						// if (!selectedPlaces.contains(place.getName())) {
+						// selectedPlaces.add(place.getName());
+						// }
 					}
 				});
 
@@ -188,24 +192,44 @@ public class RegisterOrigin extends ActionBarActivity {
 		}
 		// get the countries
 		FETCH_TYPE = 1;
-		FetchTask fetchTask = new FetchTask();
-		fetchTask.addNameValuePair("username", "admin");
-		fetchTask.addNameValuePair("password", "admin");
+		FetchTask fetchTask = new FetchTask(FetchTask.GET_TASK);
 		fetchTask.execute(new String[] { URL + "countries/" });
 	}
 
 	protected void goNext() {
 		selectedPlaces.clear();
-		String places = placesAutoCompleteTextView.getText().toString().trim();
-		String[] plcs = places.split(",");
+		String placesEntered = placesAutoCompleteTextView.getText().toString()
+				.trim();
+		String[] plcs = placesEntered.split(",");
 		if (plcs.length > 0) {
 			for (String plc : plcs) {
 				if (plc != null && !plc.equals("")) {
-					selectedPlaces.add(plc);
-					
+					selectedPlaces.add(plc.trim());
 				}
 			}
 		}
+		// check the places not registered(user generated)
+		for (String selectedPlace : selectedPlaces) {
+			if (!placeNames.contains(selectedPlace)) {
+				placesToRegister.add(selectedPlace);
+			}
+		}
+		if (placesToRegister.size() > 0) {
+			for (indexOfPlace = 0; indexOfPlace < placesToRegister.size(); indexOfPlace++) {
+				// register a place
+				FETCH_TYPE = 3;
+				FetchTask fetchTask = new FetchTask(FetchTask.POST_TASK);
+				fetchTask.addNameValuePair("country", country.getId() + "");
+				fetchTask.addNameValuePair("name",
+						placesToRegister.get(indexOfPlace).trim());
+				fetchTask.execute(new String[] { URL + "places/" });
+			}
+		} else {
+			moveToNextScreen();
+		}
+	}
+
+	public void moveToNextScreen() {
 		if (isValidData()) {
 			Bundle bundle = new Bundle();
 			bundle.putString("phone", phoneNumber);
@@ -251,19 +275,28 @@ public class RegisterOrigin extends ActionBarActivity {
 	 * @param message
 	 */
 	public void showErrorMessage(String title, String message) {
-		BottomSheet bottomSheet = new BottomSheet.Builder(this,
-				R.style.BottomSheet_StyleDialog)
-				.icon(R.drawable.ic_action_warning).title(title)
-				.sheet(1, message).build();
-		bottomSheet.show();
+		if (bottomSheet == null || !bottomSheet.isShowing()) {
+			bottomSheet = new BottomSheet.Builder(this,
+					R.style.BottomSheet_StyleDialog)
+					.icon(R.drawable.ic_action_warning).title(title)
+					.sheet(1, message).build();
+			bottomSheet.show();
+		}
 	}
 
 	private class FetchTask extends AsyncTask<String, Integer, String> {
+		public static final int POST_TASK = 1;
+		public static final int GET_TASK = 2;
 		// connection timeout, in milliseconds-waiting to connect
 		private static final int CONN_TIMEOUT = 60000;
 		// socket timeout, in milliseconds-waiting for data
 		private static final int SOCKET_TIMEOUT = 60000;
 		private ArrayList<NameValuePair> params = new ArrayList<NameValuePair>();
+		private int TASK_TYPE;
+
+		public FetchTask(int TASK_TYPE) {
+			this.TASK_TYPE = TASK_TYPE;
+		}
 
 		public void addNameValuePair(String name, String value) {
 			params.add(new BasicNameValuePair(name, value));
@@ -291,7 +324,7 @@ public class RegisterOrigin extends ActionBarActivity {
 		@Override
 		protected void onPostExecute(String response) {
 			Log.e(TAG, "type is " + FETCH_TYPE + " response is " + response);
-
+			// fetch all countries
 			if (FETCH_TYPE == 1) {
 				try {
 					JSONArray countriesArray = new JSONArray(response);
@@ -313,8 +346,8 @@ public class RegisterOrigin extends ActionBarActivity {
 							"Connection could not be established.Check your internet settings.");
 				}
 			}
-
-			if (FETCH_TYPE == 2) {
+			// fetching places under a chosen country
+			else if (FETCH_TYPE == 2) {
 				try {
 					JSONArray placesArray = new JSONObject(response)
 							.getJSONArray("places");
@@ -326,12 +359,48 @@ public class RegisterOrigin extends ActionBarActivity {
 									placeJsonObject.getLong("country"),
 									placeJsonObject.getString("name"),
 									placeJsonObject.getString("url")));
+							placeNames.add(placeJsonObject.getString("name"));
 						}
 						dataAdapterPlaces.notifyDataSetChanged();
 					}
 				} catch (JSONException e) {
 					// showErrorMessage("Internet connection",
 					// "Connection could not be established.Check your internet settings.");
+				}
+			}
+			// registering places
+			else if (FETCH_TYPE == 3) {
+				try {
+					JSONObject placeJsonObject = new JSONObject(response);
+					places.add(new Place(placeJsonObject.getLong("id"),
+							placeJsonObject.getLong("country"), placeJsonObject
+									.getString("name"), placeJsonObject
+									.getString("url")));
+					placeNames.add(placeJsonObject.getString("name"));
+					// dataAdapterPlaces.notifyDataSetChanged();
+					dataAdapterPlaces = new ArrayAdapter<Place>(
+							RegisterOrigin.this,
+							android.R.layout.simple_list_item_1, places);
+					dataAdapterPlaces
+							.setDropDownViewResource(R.layout.spinner_dropdown);
+					placesAutoCompleteTextView.setAdapter(dataAdapterPlaces);
+					Log.e(TAG,
+							"indexOfPlace " + indexOfPlace
+									+ " placesToRegister size -1 "
+									+ (placesToRegister.size() - 1));
+					if (indexOfPlace >= placesToRegister.size()) {
+						moveToNextScreen();
+					}
+				} catch (JSONException e) {
+					try {
+						JSONObject placeJsonObject = new JSONObject(response);
+						if (placeJsonObject.getString("name").contains(
+								"This field must be unique")) {
+						}
+					} catch (JSONException e1) {
+						showErrorMessage("Internet connection",
+								"Connection could not be established.Check your internet settings.");
+					}
 				}
 			}
 		}
@@ -359,23 +428,28 @@ public class RegisterOrigin extends ActionBarActivity {
 			HttpClient httpclient = new DefaultHttpClient(getHttpParams());
 			HttpResponse response = null;
 			try {
-				// HttpGet httpget = new HttpGet(url);
-				// response = httpclient.execute(httpget);
-				// HttpPost httppost = new HttpPost(url);
-				// httppost.setEntity(new UrlEncodedFormEntity(params));
-				// response = httpclient.execute(httppost);
-				// HttpGet httpget = new HttpGet(url + "?"
-				// + URLEncodedUtils.format(params, "utf-8"));
-				// response = httpclient.execute(httpget);
-
-				HttpGet request = new HttpGet(url);
 				UsernamePasswordCredentials credentials = new UsernamePasswordCredentials(
 						USERNAME, PASSWORD);
 				BasicScheme scheme = new BasicScheme();
-				Header authorizationHeader = scheme.authenticate(credentials,
-						request);
-				request.addHeader(authorizationHeader);
-				response = httpclient.execute(request);
+				Header authorizationHeader;
+				switch (TASK_TYPE) {
+				case POST_TASK:
+					HttpPost httppost = new HttpPost(url);
+					httppost.setEntity(new UrlEncodedFormEntity(params));
+					authorizationHeader = scheme.authenticate(credentials,
+							httppost);
+					httppost.addHeader(authorizationHeader);
+					response = httpclient.execute(httppost);
+					break;
+				case GET_TASK:
+					HttpGet request = new HttpGet(url);
+					authorizationHeader = scheme.authenticate(credentials,
+							request);
+					request.addHeader(authorizationHeader);
+					response = httpclient.execute(request);
+					break;
+				}
+
 			} catch (Exception e) {
 				Log.e(TAG, e.getLocalizedMessage(), e);
 			}

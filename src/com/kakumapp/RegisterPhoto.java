@@ -32,6 +32,7 @@ import android.widget.Toast;
 
 import com.afollestad.materialdialogs.DialogAction;
 import com.afollestad.materialdialogs.MaterialDialog;
+import com.cocosw.bottomsheet.BottomSheet;
 
 @SuppressWarnings("deprecation")
 public class RegisterPhoto extends ActionBarActivity implements
@@ -54,6 +55,7 @@ public class RegisterPhoto extends ActionBarActivity implements
 	private String firstName, lastName, otherName, phoneNumber, countryCode,
 			country;
 	private ArrayList<String> places;
+	private BottomSheet bottomSheet;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -78,8 +80,12 @@ public class RegisterPhoto extends ActionBarActivity implements
 			// hide switch imageview
 			switchImageView.setVisibility(View.GONE);
 		}
-		mCamera = Camera.open(currentCameraId);
-
+		try {
+			mCamera = Camera.open(currentCameraId);
+		} catch (Exception exception) {
+			Log.e(TAG, "Exception " + exception.getLocalizedMessage());
+			showErrorMessage("Camera", "Could not open the camera");
+		}
 		switchImageView.setOnClickListener(new OnClickListener() {
 
 			@Override
@@ -491,5 +497,21 @@ public class RegisterPhoto extends ActionBarActivity implements
 		int width = metrics.widthPixels;
 		int height = metrics.heightPixels;
 		return new int[] { width, height };
+	}
+	
+	/**
+	 * Show a an message
+	 * 
+	 * @param title
+	 * @param message
+	 */
+	public void showErrorMessage(String title, String message) {
+		if (bottomSheet == null || !bottomSheet.isShowing()) {
+			bottomSheet = new BottomSheet.Builder(this,
+					R.style.BottomSheet_StyleDialog)
+					.icon(R.drawable.ic_action_warning).title(title)
+					.sheet(1, message).build();
+			bottomSheet.show();
+		}
 	}
 }
