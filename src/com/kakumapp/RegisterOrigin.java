@@ -62,12 +62,13 @@ public class RegisterOrigin extends ActionBarActivity {
 	private MultiAutoCompleteTextView placesAutoCompleteTextView;
 	private String firstName, lastName, otherName, phoneNumber, countryCode,
 			selectedCountry;
-	private Country country, defaultCountry;
+	public static Country country;
+	private Country defaultCountry;
 	private ArrayList<String> selectedPlaces;
 	private ArrayAdapter<Country> dataAdapterCountries;
 	private ArrayAdapter<Place> dataAdapterPlaces;
 	private ArrayList<Country> countries = new ArrayList<>();
-	private ArrayList<Place> places = new ArrayList<>();
+	public static ArrayList<Place> places = new ArrayList<>();
 	private ArrayList<String> placeNames = new ArrayList<>();
 	private ArrayList<String> placesToRegister = new ArrayList<>();
 	private BottomSheet bottomSheet;
@@ -396,6 +397,9 @@ public class RegisterOrigin extends ActionBarActivity {
 						JSONObject placeJsonObject = new JSONObject(response);
 						if (placeJsonObject.getString("name").contains(
 								"This field must be unique")) {
+							if (indexOfPlace >= placesToRegister.size()) {
+								moveToNextScreen();
+							}
 						}
 					} catch (JSONException e1) {
 						showErrorMessage("Internet connection",
