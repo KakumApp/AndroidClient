@@ -1,8 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:civ="http://schemas.android.com/apk/res-auto"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/primary"
     android:padding="16dp" >
 
     <com.kakumapp.views.CircularImageView
@@ -18,58 +20,167 @@
     </com.kakumapp.views.CircularImageView>
 
     <TextView
-        android:id="@+id/textView_name"
+        android:id="@+id/textView_desc"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/image_view_photo"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="20dp"
-        android:textColor="@color/dark_grey"
+        android:text="@string/register_summ_instr"
+        android:textColor="@color/white"
         android:textSize="18sp" />
 
-    <TextView
-        android:id="@+id/textView_phone"
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:id="@+id/name_layout"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/textView_name"
+        android:layout_below="@+id/textView_desc"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="20dp"
-        android:text="Phn"
-        android:textColor="@color/dark_grey"
-        android:textSize="18sp" />
+        android:gravity="center"
+        android:weightSum="100" >
 
-    <TextView
-        android:id="@+id/textView_country"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/textView_phone"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="20dp"
-        android:text="Cntry"
-        android:textColor="@color/dark_grey"
-        android:textSize="18sp" />
+        <TextView
+            android:id="@+id/textView_name"
+            android:layout_width="0dip"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_gravity="center_vertical|right"
+            android:layout_marginRight="8dp"
+            android:layout_weight="30"
+            android:gravity="right"
+            android:padding="8dp"
+            android:text="@string/name2"
+            android:textColor="@color/white"
+            android:textSize="18sp" />
 
-    <TextView
-        android:id="@+id/textView_place"
-        android:layout_width="wrap_content"
+        <com.rengwuxian.materialedittext.MaterialEditText
+            android:id="@+id/edittext_name"
+            android:layout_width="0dip"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_gravity="center_vertical|left"
+            android:layout_marginLeft="8dp"
+            android:layout_toRightOf="@+id/textView_name"
+            android:layout_weight="70"
+            android:gravity="left"
+            android:hint="@string/name"
+            android:inputType="textPersonName"
+            android:paddingLeft="8dp"
+            android:singleLine="true"
+            android:textColor="@color/white"
+            android:textCursorDrawable="@drawable/white_cursor"
+            app:baseColor="@color/white"
+            app:errorColor="@color/red_error"
+            app:floatingLabel="highlight"
+            app:primaryColorEdittext="@color/white" >
+        </com.rengwuxian.materialedittext.MaterialEditText>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/phone_no_layout"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/textView_country"
+        android:layout_below="@+id/name_layout"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="20dp"
-        android:text="Plc"
-        android:textColor="@color/dark_grey"
-        android:textSize="18sp" />
+        android:gravity="center"
+        android:weightSum="100" >
+
+        <TextView
+            android:id="@+id/textView_phone"
+            android:layout_width="0dip"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_gravity="center_vertical|right"
+            android:layout_marginRight="8dp"
+            android:layout_weight="30"
+            android:gravity="right"
+            android:padding="8dp"
+            android:text="@string/mobile"
+            android:textColor="@color/white"
+            android:textSize="18sp" />
+
+        <com.rengwuxian.materialedittext.MaterialEditText
+            android:id="@+id/edittext_phone"
+            android:layout_width="0dip"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_gravity="center_vertical|left"
+            android:layout_marginLeft="8dp"
+            android:layout_toRightOf="@+id/textView_phone"
+            android:layout_weight="70"
+            android:gravity="left"
+            android:hint="@string/phone"
+            android:inputType="textPersonName"
+            android:paddingLeft="8dp"
+            android:singleLine="true"
+            android:textColor="@color/white"
+            android:textCursorDrawable="@drawable/white_cursor"
+            app:baseColor="@color/white"
+            app:errorColor="@color/red_error"
+            app:floatingLabel="highlight"
+            app:primaryColorEdittext="@color/white" >
+        </com.rengwuxian.materialedittext.MaterialEditText>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/origin_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/phone_no_layout"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp"
+        android:gravity="center"
+        android:weightSum="100" >
+
+        <TextView
+            android:id="@+id/textView_origin"
+            android:layout_width="0dip"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_gravity="center_vertical|right"
+            android:layout_marginRight="8dp"
+            android:layout_weight="30"
+            android:gravity="right"
+            android:padding="8dp"
+            android:text="@string/origin2"
+            android:textColor="@color/white"
+            android:textSize="18sp" />
+
+        <com.rengwuxian.materialedittext.MaterialEditText
+            android:id="@+id/edittext_origin"
+            android:layout_width="0dip"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_gravity="center_vertical|left"
+            android:layout_marginLeft="8dp"
+            android:layout_toRightOf="@+id/textView_phone"
+            android:layout_weight="70"
+            android:gravity="left"
+            android:hint="@string/origin"
+            android:inputType="text"
+            android:paddingLeft="8dp"
+            android:singleLine="true"
+            android:textColor="@color/white"
+            android:textCursorDrawable="@drawable/white_cursor"
+            app:baseColor="@color/white"
+            app:errorColor="@color/red_error"
+            app:floatingLabel="highlight"
+            app:primaryColorEdittext="@color/white" >
+        </com.rengwuxian.materialedittext.MaterialEditText>
+    </LinearLayout>
 
     <Button
         android:id="@+id/button_register"
         style="@style/Buttonkakuma"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/textView_place"
+        android:layout_below="@+id/origin_layout"
         android:layout_centerHorizontal="true"
         android:layout_gravity="right"
         android:layout_marginTop="20dp"
-        android:background="@drawable/border_button"
+        android:background="@drawable/border_button_transparent"
         android:text="@string/register"
         android:textColor="@color/white" />
 

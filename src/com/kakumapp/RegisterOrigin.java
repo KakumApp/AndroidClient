@@ -42,10 +42,12 @@ import android.widget.MultiAutoCompleteTextView;
 import android.widget.Spinner;
 import android.widget.TextView;
 
+import com.afollestad.materialdialogs.MaterialDialog;
 import com.cocosw.bottomsheet.BottomSheet;
 import com.kakumapp.adapters.Country;
 import com.kakumapp.adapters.Place;
 import com.kakumapp.utils.Utils;
+import com.pnikosis.materialishprogress.ProgressWheel;
 
 public class RegisterOrigin extends ActionBarActivity {
 
@@ -61,17 +63,20 @@ public class RegisterOrigin extends ActionBarActivity {
 	private Spinner countriesSpinner;
 	private MultiAutoCompleteTextView placesAutoCompleteTextView;
 	private String firstName, lastName, otherName, phoneNumber, countryCode,
-			selectedCountry;
+			selectedCountryName;
 	public static Country country;
 	private Country defaultCountry;
 	private ArrayList<String> selectedPlaces;
 	private ArrayAdapter<Country> dataAdapterCountries;
 	private ArrayAdapter<Place> dataAdapterPlaces;
 	private ArrayList<Country> countries = new ArrayList<>();
-	public static ArrayList<Place> places = new ArrayList<>();
+	private ArrayList<Place> places = new ArrayList<>();
+	private ArrayList<String> selectedPlacesIds = new ArrayList<>();
 	private ArrayList<String> placeNames = new ArrayList<>();
 	private ArrayList<String> placesToRegister = new ArrayList<>();
 	private BottomSheet bottomSheet;
+	private ProgressWheel progressBar;
+	private MaterialDialog dialog;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -82,6 +87,7 @@ public class RegisterOrigin extends ActionBarActivity {
 		findPersonTextView = (TextView) findViewById(R.id.textView_register_find_person);
 		countriesSpinner = (Spinner) findViewById(R.id.spinner_origin_countries);
 		placesAutoCompleteTextView = (MultiAutoCompleteTextView) findViewById(R.id.autocomplete_origin_places);
+		progressBar = (ProgressWheel) findViewById(R.id.progressBar);
 
 		typeface = new Utils(this).getFont("Ubuntu-L");
 		findPersonTextView.setTypeface(typeface);
@@ -124,16 +130,14 @@ public class RegisterOrigin extends ActionBarActivity {
 						if (textView != null) {
 							textView.setTextColor(Color.WHITE);
 						}
-						Country selectedCountry = (Country) parent
-								.getItemAtPosition(position);
-						country = selectedCountry;
-						if (!selectedCountry.getName().equals(SELECT_COUNTRY)) {
+						country = (Country) parent.getItemAtPosition(position);
+						if (!country.getName().equals(SELECT_COUNTRY)) {
 							// get the places
 							FETCH_TYPE = 2;
 							FetchTask fetchTask = new FetchTask(
 									FetchTask.GET_TASK);
 							fetchTask.execute(new String[] { URL + "countries/"
-									+ selectedCountry.getId() });
+									+ country.getId() });
 						}
 					}
 
@@ -178,7 +182,7 @@ public class RegisterOrigin extends ActionBarActivity {
 			lastName = bundle.getString("lastName");
 			otherName = bundle.getString("otherName");
 			// // for this activity
-			selectedCountry = bundle.getString("country");
+			selectedCountryName = bundle.getString("country");
 			selectedPlaces = bundle.getStringArrayList("places");
 
 			if (selectedPlaces != null && !selectedPlaces.isEmpty()) {
@@ -195,6 +199,20 @@ public class RegisterOrigin extends ActionBarActivity {
 		FETCH_TYPE = 1;
 		FetchTask fetchTask = new FetchTask(FetchTask.GET_TASK);
 		fetchTask.execute(new String[] { URL + "countries/" });
+	}
+
+	private void showProgress() {
+		if (progressBar != null && continueButton != null) {
+			progressBar.setVisibility(View.VISIBLE);
+			continueButton.setVisibility(View.GONE);
+		}
+	}
+
+	private void hideprogress() {
+		if (progressBar != null && continueButton != null) {
+			progressBar.setVisibility(View.GONE);
+			continueButton.setVisibility(View.VISIBLE);
+		}
 	}
 
 	protected void goNext() {
@@ -232,14 +250,23 @@ public class RegisterOrigin extends ActionBarActivity {
 
 	public void moveToNextScreen() {
 		if (isValidData()) {
+			// get the ids of the places selected
+			for (String selectedPlace : selectedPlaces) {
+				for (Place place : places) {
+					if (place.getName().equals(selectedPlace)) {
+						selectedPlacesIds.add(place.getId() + "");
+					}
+				}
+			}
 			Bundle bundle = new Bundle();
 			bundle.putString("phone", phoneNumber);
 			bundle.putString("code", countryCode);
 			bundle.putString("firstName", firstName);
 			bundle.putString("lastName", lastName);
 			bundle.putString("otherName", otherName);
-			bundle.putString("country", selectedCountry);
+			bundle.putString("country", selectedCountryName);
 			bundle.putStringArrayList("places", selectedPlaces);
+			bundle.putStringArrayList("placesIds", selectedPlacesIds);
 			Intent nameIntent = new Intent(RegisterOrigin.this,
 					RegisterPhoto.class);
 			nameIntent.putExtras(bundle);
@@ -285,6 +312,70 @@ public class RegisterOrigin extends ActionBarActivity {
 		}
 	}
 
+	public void showRetry() {
+		hideprogress();
+		if (dialog == null || !dialog.isShowing()) {
+			dialog = new MaterialDialog.Builder(this)
+					.title(R.string.connect_error)
+					.content(R.string.connection_error_message)
+					.positiveText(R.string.yes).negativeText(R.string.cancel)
+					.callback(new MaterialDialog.ButtonCallback() {
+						@Override
+						public void onPositive(MaterialDialog dialog) {
+							FetchTask fetchTask = null;
+							switch (FETCH_TYPE) {
+							case 1:
+								fetchTask = new FetchTask(FetchTask.GET_TASK);
+								fetchTask.execute(new String[] { URL
+										+ "countries/" });
+								break;
+							case 2:
+								fetchTask = new FetchTask(FetchTask.GET_TASK);
+								fetchTask.execute(new String[] { URL
+										+ "countries/" + country.getId() });
+								break;
+							case 3:
+								if (placesToRegister.size() > 0) {
+									for (indexOfPlace = 0; indexOfPlace < placesToRegister
+											.size(); indexOfPlace++) {
+										fetchTask = new FetchTask(
+												FetchTask.POST_TASK);
+										fetchTask.addNameValuePair("country",
+												country.getId() + "");
+										fetchTask.addNameValuePair(
+												"name",
+												placesToRegister.get(
+														indexOfPlace).trim());
+										fetchTask.execute(new String[] { URL
+												+ "places/" });
+									}
+								}
+								break;
+							default:
+								break;
+							}
+						}
+
+						@Override
+						public void onNegative(MaterialDialog dialog) {
+							if (FETCH_TYPE == 1) {
+								Bundle bundle = new Bundle();
+								bundle.putString("phone", phoneNumber);
+								bundle.putString("code", countryCode);
+								bundle.putString("firstName", firstName);
+								bundle.putString("lastName", lastName);
+								bundle.putString("otherName", otherName);
+								Intent originIntent = new Intent(
+										RegisterOrigin.this, RegisterName.class);
+								originIntent.putExtras(bundle);
+								startActivity(originIntent);
+							}
+						}
+					}).build();
+			dialog.show();
+		}
+	}
+
 	private class FetchTask extends AsyncTask<String, Integer, String> {
 		public static final int POST_TASK = 1;
 		public static final int GET_TASK = 2;
@@ -301,6 +392,12 @@ public class RegisterOrigin extends ActionBarActivity {
 
 		public void addNameValuePair(String name, String value) {
 			params.add(new BasicNameValuePair(name, value));
+		}
+
+		@Override
+		protected void onPreExecute() {
+			super.onPreExecute();
+			showProgress();
 		}
 
 		protected String doInBackground(String... urls) {
@@ -327,6 +424,7 @@ public class RegisterOrigin extends ActionBarActivity {
 			Log.e(TAG, "type is " + FETCH_TYPE + " response is " + response);
 			// fetch all countries
 			if (FETCH_TYPE == 1) {
+				hideprogress();
 				try {
 					JSONArray countriesArray = new JSONArray(response);
 					if (countriesArray.length() > 0) {
@@ -343,12 +441,14 @@ public class RegisterOrigin extends ActionBarActivity {
 						dataAdapterCountries.notifyDataSetChanged();
 					}
 				} catch (JSONException e) {
-					showErrorMessage("Internet connection",
-							"Connection could not be established.Check your internet settings.");
+					showRetry();
+					// showErrorMessage("Internet connection",
+					// "Connection could not be established.Check your internet settings.");
 				}
 			}
 			// fetching places under a chosen country
 			else if (FETCH_TYPE == 2) {
+				hideprogress();
 				try {
 					JSONArray placesArray = new JSONObject(response)
 							.getJSONArray("places");
@@ -362,9 +462,18 @@ public class RegisterOrigin extends ActionBarActivity {
 									placeJsonObject.getString("url")));
 							placeNames.add(placeJsonObject.getString("name"));
 						}
-						dataAdapterPlaces.notifyDataSetChanged();
+						// notifyDataSetChanged not working sometimes
+						// dataAdapterPlaces.notifyDataSetChanged();
+						dataAdapterPlaces = new ArrayAdapter<Place>(
+								RegisterOrigin.this,
+								android.R.layout.simple_list_item_1, places);
+						dataAdapterPlaces
+								.setDropDownViewResource(R.layout.spinner_dropdown);
+						placesAutoCompleteTextView
+								.setAdapter(dataAdapterPlaces);
 					}
 				} catch (JSONException e) {
+					showRetry();
 					// showErrorMessage("Internet connection",
 					// "Connection could not be established.Check your internet settings.");
 				}
@@ -385,10 +494,7 @@ public class RegisterOrigin extends ActionBarActivity {
 					dataAdapterPlaces
 							.setDropDownViewResource(R.layout.spinner_dropdown);
 					placesAutoCompleteTextView.setAdapter(dataAdapterPlaces);
-					Log.e(TAG,
-							"indexOfPlace " + indexOfPlace
-									+ " placesToRegister size -1 "
-									+ (placesToRegister.size() - 1));
+
 					if (indexOfPlace >= placesToRegister.size()) {
 						moveToNextScreen();
 					}
@@ -402,8 +508,9 @@ public class RegisterOrigin extends ActionBarActivity {
 							}
 						}
 					} catch (JSONException e1) {
-						showErrorMessage("Internet connection",
-								"Connection could not be established.Check your internet settings.");
+						showRetry();
+						// showErrorMessage("Internet connection",
+						// "Connection could not be established.Check your internet settings.");
 					}
 				}
 			}

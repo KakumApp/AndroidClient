@@ -11,6 +11,9 @@
     <string name="home">Home</string>
     <string name="username">Username</string>
     <string name="name">Name</string>
+    <string name="name2">Name:</string>
+    <string name="origin">Origin</string>
+    <string name="origin2">Origin:</string>
     <string name="password">Password</string>
     <string name="confirm_pass">Confirm password</string>
     <string name="continue_text">Continue</string>
@@ -19,10 +22,12 @@
     <string name="register">Register</string>
     <string name="forgot_pass">Forgot Password</string>
     <string name="phone">Phone number</string>
+    <string name="mobile">Mobile:</string>
     <string name="create_account">Create new account</string>
     <string name="submit">Submit</string>
     <string name="ok">OK</string>
     <string name="no">No</string>
+    <string name="cancel">Cancel</string>
     <string name="yes">Yes</string>
     <string name="share">Share</string>
     <string name="share_social">Share on social media</string>
@@ -51,5 +56,8 @@
     <string name="taken_photo">Taken photo</string>
     <string name="take_another">Take another</string>
     <string name="ok_photo">This is ok</string>
+    <string name="register_summ_instr">Tap on a field to edit it</string>
+    <string name="connect_error">Connection error</string>
+    <string name="connection_error_message">A connection error has occurred.Retry?</string>
 
 </resources>

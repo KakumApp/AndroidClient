@@ -6,74 +6,90 @@
     android:fillViewport="true"
     android:orientation="vertical" >
 
-    <RelativeLayout
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/primary"
-        android:padding="16dp" >
+        android:orientation="vertical" >
 
-        <ImageView
-            android:id="@+id/imageView_register_name"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentTop="true"
-            android:layout_centerHorizontal="true"
-            android:contentDescription="@string/image_desc"
-            android:src="@drawable/ic_origin" />
-
-        <Spinner
-            android:id="@+id/spinner_origin_countries"
-            style="@style/Spinnerkakumapp_white"
+        <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/imageView_register_name"
-            android:layout_centerHorizontal="true"
-            android:layout_gravity="center"
-            android:layout_marginTop="20dp"
-            android:layout_weight="40" />
+            android:padding="16dp" >
 
-        <MultiAutoCompleteTextView
-            android:id="@+id/autocomplete_origin_places"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/spinner_origin_countries"
-            android:layout_centerHorizontal="true"
-            android:layout_gravity="center"
-            android:layout_marginTop="20dp"
-            android:hint="@string/select_place"
-            android:padding="8dp"
-            android:textColor="@color/white"
-            android:textSize="16sp" />
+            <ImageView
+                android:id="@+id/imageView_register_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_centerHorizontal="true"
+                android:contentDescription="@string/image_desc"
+                android:src="@drawable/ic_origin" />
 
-        <Button
-            android:id="@+id/button_register_continue"
-            style="@style/Buttonkakuma"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/autocomplete_origin_places"
-            android:layout_centerHorizontal="true"
-            android:layout_marginRight="8dp"
-            android:layout_marginTop="40dp"
-            android:alpha="0.7"
-            android:background="@drawable/border_button_transparent"
-            android:paddingLeft="5dp"
-            android:paddingRight="5dp"
-            android:text="@string/continue_text"
-            android:textColor="@color/white"
-            android:textStyle="bold" />
+            <Spinner
+                android:id="@+id/spinner_origin_countries"
+                style="@style/Spinnerkakumapp_white"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/imageView_register_name"
+                android:layout_centerHorizontal="true"
+                android:layout_gravity="center"
+                android:layout_marginTop="20dp"
+                android:layout_weight="40" />
+
+            <MultiAutoCompleteTextView
+                android:id="@+id/autocomplete_origin_places"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/spinner_origin_countries"
+                android:layout_centerHorizontal="true"
+                android:layout_gravity="center"
+                android:layout_marginTop="20dp"
+                android:hint="@string/select_place"
+                android:padding="8dp"
+                android:textColor="@color/white"
+                android:textSize="16sp" />
+
+            <com.pnikosis.materialishprogress.ProgressWheel
+                android:id="@+id/progressBar"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:layout_below="@+id/autocomplete_origin_places"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="35dp"
+                android:visibility="visible"
+                app:matProg_barColor="@color/white"
+                app:matProg_progressIndeterminate="true" />
+
+            <Button
+                android:id="@+id/button_register_continue"
+                style="@style/Buttonkakuma"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/autocomplete_origin_places"
+                android:layout_centerHorizontal="true"
+                android:layout_marginRight="8dp"
+                android:layout_marginTop="40dp"
+                android:alpha="0.7"
+                android:background="@drawable/border_button_transparent"
+                android:paddingLeft="5dp"
+                android:paddingRight="5dp"
+                android:text="@string/continue_text"
+                android:textColor="@color/white"
+                android:textStyle="bold" />
+        </RelativeLayout>
 
         <TextView
             android:id="@+id/textView_register_find_person"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/button_register_continue"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="40dp"
+            android:layout_gravity="center"
+            android:layout_marginTop="30dp"
             android:gravity="center"
             android:padding="8dp"
             android:text="@string/find_a_person"
             android:textColor="@color/white"
             android:textSize="14sp" />
-    </RelativeLayout>
+    </LinearLayout>
 
 </ScrollView>

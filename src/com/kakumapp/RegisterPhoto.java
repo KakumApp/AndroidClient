@@ -30,7 +30,6 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Toast;
 
-import com.afollestad.materialdialogs.DialogAction;
 import com.afollestad.materialdialogs.MaterialDialog;
 import com.cocosw.bottomsheet.BottomSheet;
 
@@ -54,7 +53,7 @@ public class RegisterPhoto extends ActionBarActivity implements
 	private boolean hasFrontCamera;
 	private String firstName, lastName, otherName, phoneNumber, countryCode,
 			country;
-	private ArrayList<String> places;
+	private ArrayList<String> places, placesIds;
 	private BottomSheet bottomSheet;
 
 	@Override
@@ -150,6 +149,7 @@ public class RegisterPhoto extends ActionBarActivity implements
 			otherName = bundle.getString("otherName");
 			country = bundle.getString("country");
 			places = bundle.getStringArrayList("places");
+			placesIds = bundle.getStringArrayList("placesIds");
 		}
 	}
 
@@ -333,25 +333,6 @@ public class RegisterPhoto extends ActionBarActivity implements
 		ImageView takenPhotoImageView = (ImageView) dialog.getCustomView()
 				.findViewById(R.id.imageView_taken_photo);
 
-		View positiveAction = dialog.getActionButton(DialogAction.POSITIVE);
-		View negativeAction = dialog.getActionButton(DialogAction.NEGATIVE);
-
-		positiveAction.setOnClickListener(new OnClickListener() {
-
-			@Override
-			public void onClick(View v) {
-
-			}
-		});
-
-		negativeAction.setOnClickListener(new OnClickListener() {
-
-			@Override
-			public void onClick(View v) {
-
-			}
-		});
-
 		if (bitmapImage != null) {
 			Log.e(TAG, "Bitmap NOt null " + photoFile.getAbsolutePath());
 			takenPhotoImageView.setImageBitmap(bitmapImage);
@@ -370,6 +351,7 @@ public class RegisterPhoto extends ActionBarActivity implements
 		bundle.putString("otherName", otherName);
 		bundle.putString("country", country);
 		bundle.putStringArrayList("places", places);
+		bundle.putStringArrayList("placesIds", placesIds);
 		Intent nameIntent = new Intent(RegisterPhoto.this,
 				RegisterSummary.class);
 		nameIntent.putExtras(bundle);
@@ -498,7 +480,7 @@ public class RegisterPhoto extends ActionBarActivity implements
 		int height = metrics.heightPixels;
 		return new int[] { width, height };
 	}
-	
+
 	/**
 	 * Show a an message
 	 * 

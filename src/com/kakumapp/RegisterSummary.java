@@ -12,15 +12,17 @@ import org.apache.http.HttpResponse;
 import org.apache.http.NameValuePair;
 import org.apache.http.auth.UsernamePasswordCredentials;
 import org.apache.http.client.HttpClient;
-import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
+import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.auth.BasicScheme;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.message.BasicNameValuePair;
 import org.apache.http.params.BasicHttpParams;
 import org.apache.http.params.HttpConnectionParams;
 import org.apache.http.params.HttpParams;
+import org.apache.http.protocol.HTTP;
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -38,6 +40,7 @@ import android.widget.TextView;
 import com.cocosw.bottomsheet.BottomSheet;
 import com.kakumapp.utils.Utils;
 import com.kakumapp.views.CircularImageView;
+import com.rengwuxian.materialedittext.MaterialEditText;
 
 public class RegisterSummary extends ActionBarActivity {
 
@@ -48,17 +51,17 @@ public class RegisterSummary extends ActionBarActivity {
 	public static int FETCH_TYPE = 1;
 	private String firstName, lastName, otherName, phoneNumber, countryCode,
 			country;
-	private ArrayList<String> places;
-	// private ArrayList<String> placesIds = new ArrayList<>();
-	private String placesIds = "";
+	private ArrayList<String> places, placesIds;
+	// private String placesIds = "";
 	private Typeface typeface;
-	private TextView nameTextView, phoneTextView, countryTextView,
-			placeTextView;
+	private TextView nameTextView, phoneTextView, placeTextView, textView_desc;
+	private MaterialEditText nameEditText, phoneEditText, placesEditText;
 	protected static File photoFile;
 	protected static Bitmap bitmap;
 	private CircularImageView circularImageView;
 	private BottomSheet bottomSheet;
 	private Button registerButton;
+	public String jsonData;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -67,16 +70,22 @@ public class RegisterSummary extends ActionBarActivity {
 
 		nameTextView = (TextView) findViewById(R.id.textView_name);
 		phoneTextView = (TextView) findViewById(R.id.textView_phone);
-		countryTextView = (TextView) findViewById(R.id.textView_country);
-		placeTextView = (TextView) findViewById(R.id.textView_place);
+		textView_desc = (TextView) findViewById(R.id.textView_desc);
+		placeTextView = (TextView) findViewById(R.id.textView_origin);
 		circularImageView = (CircularImageView) findViewById(R.id.image_view_photo);
+		nameEditText = (MaterialEditText) findViewById(R.id.edittext_name);
+		phoneEditText = (MaterialEditText) findViewById(R.id.edittext_phone);
+		placesEditText = (MaterialEditText) findViewById(R.id.edittext_origin);
 		registerButton = (Button) findViewById(R.id.button_register);
 
 		typeface = new Utils(this).getFont("Ubuntu-L");
 		nameTextView.setTypeface(typeface);
 		phoneTextView.setTypeface(typeface);
-		countryTextView.setTypeface(typeface);
+		textView_desc.setTypeface(typeface);
 		placeTextView.setTypeface(typeface);
+
+		places = new ArrayList<>();
+		placesIds = new ArrayList<>();
 
 		// get data if passed
 		Bundle bundle = getIntent().getExtras();
@@ -89,52 +98,77 @@ public class RegisterSummary extends ActionBarActivity {
 			otherName = bundle.getString("otherName");
 			country = bundle.getString("country");
 			places = bundle.getStringArrayList("places");
+			placesIds = bundle.getStringArrayList("placesIds");
 
 			if (firstName != null && lastName != null) {
-				nameTextView.setText(firstName + " " + lastName);
+				nameEditText.setText(firstName + " " + lastName);
 				if (otherName != null) {
-					nameTextView.append(" " + otherName);
+					nameEditText.append(" " + otherName);
+				} else {
+					otherName = null;
 				}
 			}
 
 			if (phoneNumber != null) {
-				phoneTextView.setText(phoneNumber);
-			}
-
-			if (country != null) {
-				countryTextView.setText(country);
+				phoneEditText.setText(phoneNumber);
 			}
 
 			if (places != null) {
 				String plcs = "";
 				for (String plc : places) {
-					plcs += plc;
+					plcs += plc + ",";
 				}
-				placeTextView.setText(plcs);
+				placesEditText.setText(plcs);
 			}
 
 			if (bitmap != null) {
 				circularImageView.setImageBitmap(bitmap);
 			}
 		}
-		for (int i = 0; i < RegisterOrigin.places.size(); i++) {
-			// placesIds.add(RegisterOrigin.places.get(i).getId() + "");
-			placesIds += RegisterOrigin.places.get(i).getId() + "";
-		}
+
+		// for (int i = 0; i < RegisterOrigin.places.size(); i++) {
+		// String id = RegisterOrigin.places.get(i).getId() + "";
+		// Log.e(TAG, "Id " + id);
+		// placesIds.add(id);
+		// // placesIds += RegisterOrigin.places.get(i).getId() + ",";
+		// }
+		// if (placesIds.endsWith(",")) {
+		// placesIds = placesIds.substring(0, placesIds.length() - 1);
+		// }
+
 		registerButton.setOnClickListener(new OnClickListener() {
 
 			@Override
 			public void onClick(View v) {
+				Log.e(TAG, "Othername " + otherName);
+				for (String id : placesIds) {
+					Log.e(TAG, "Id " + id);
+				}
 				RegisterTask registerTask = new RegisterTask(
 						RegisterTask.POST_TASK);
-				registerTask.addNameValuePair("first_name", firstName);
-				registerTask.addNameValuePair("last_name", lastName);
-				registerTask.addNameValuePair("other_name", otherName);
-				registerTask.addNameValuePair("phone_no", phoneNumber);
-				// registerTask.addNameValuePair("places",
+				JSONObject jsonObject = new JSONObject();
+				try {
+					jsonObject.put("first_name", firstName);
+					jsonObject.put("last_name", lastName);
+					jsonObject.put("other_name", otherName);
+					jsonObject.put("phone_no", phoneNumber);
+					jsonObject.put("photo", "URL");
+					JSONArray placesArray = new JSONArray();
+					for (String id : placesIds) {
+						placesArray.put(id);
+					}
+					jsonObject.put("places", placesArray);
+					jsonData = jsonObject.toString();
+				} catch (JSONException e) {
+					e.printStackTrace();
+				}
+				// registerTask.addNameValuePair("first_name", firstName);
+				// registerTask.addNameValuePair("last_name", lastName);
+				// registerTask.addNameValuePair("other_name", otherName);
+				// registerTask.addNameValuePair("phone_no", phoneNumber);
+				// registerTask.addNameValuePair("places[]",
 				// placesIds.toArray(new String[placesIds.size()]));
-				registerTask.addNameValuePair("places", placesIds);
-				registerTask.addNameValuePair("photo", "URL");
+				// registerTask.addNameValuePair("photo", "URL");
 				registerTask.execute(new String[] { URL + "targets/" });
 			}
 		});
@@ -170,8 +204,26 @@ public class RegisterSummary extends ActionBarActivity {
 			this.TASK_TYPE = TASK_TYPE;
 		}
 
+		/**
+		 * Add name value pairs for simple strings
+		 * 
+		 * @param name
+		 * @param value
+		 */
 		public void addNameValuePair(String name, String value) {
 			params.add(new BasicNameValuePair(name, value));
+		}
+
+		/**
+		 * Add name value pairs for string arrays
+		 * 
+		 * @param name
+		 * @param value
+		 */
+		public void addNameValuePair(String name, String[] values) {
+			for (String value : values) {
+				params.add(new BasicNameValuePair(name, value));
+			}
 		}
 
 		protected String doInBackground(String... urls) {
@@ -237,7 +289,10 @@ public class RegisterSummary extends ActionBarActivity {
 				switch (TASK_TYPE) {
 				case POST_TASK:
 					HttpPost httppost = new HttpPost(url);
-					httppost.setEntity(new UrlEncodedFormEntity(params));
+					StringEntity entity = new StringEntity(jsonData, HTTP.UTF_8);
+					entity.setContentType("application/json");
+					httppost.setEntity(entity);
+					// httppost.setEntity(new UrlEncodedFormEntity(params));
 					authorizationHeader = scheme.authenticate(credentials,
 							httppost);
 					httppost.addHeader(authorizationHeader);
