@@ -32,11 +32,14 @@ public class RegisterPhone extends ActionBarActivity {
 	private EditText phoneEditText;
 	private String phoneNumber, countryCode;
 	private ArrayAdapter<String> countriesCodesAdapter;
+	private KakumaApplication application;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_phone);
+
+		application = (KakumaApplication) getApplication();
 
 		continueButton = (Button) findViewById(R.id.button_register_continue);
 		descTextView = (TextView) findViewById(R.id.textView_phone_desc);
@@ -46,19 +49,24 @@ public class RegisterPhone extends ActionBarActivity {
 		typeface = new Utils(this).getFont("Ubuntu-L");
 		findPersonTextView.setTypeface(typeface);
 		descTextView.setTypeface(typeface);
-		phoneEditText.setHintTextColor(Color.WHITE);
+
+		int hintTextColor = getResources().getColor(R.color.half_white);
+		phoneEditText.setHintTextColor(hintTextColor);
 
 		continueButton.setOnClickListener(new OnClickListener() {
 
 			@Override
 			public void onClick(View v) {
 				if (isValidData()) {
-					Bundle bundle = new Bundle();
-					bundle.putString("phone", phoneNumber);
-					bundle.putString("code", countryCode);
+					application.setPhoneNumber(phoneNumber);
+					application.setCountryCode(countryCode);
+
+					// Bundle bundle = new Bundle();
+					// bundle.putString("phone", phoneNumber);
+					// bundle.putString("code", countryCode);
 					Intent nameIntent = new Intent(RegisterPhone.this,
-							RegisterName.class);
-					nameIntent.putExtras(bundle);
+							RegisterOrigin.class);
+					// nameIntent.putExtras(bundle);
 					startActivity(nameIntent);
 				}
 			}
@@ -102,21 +110,33 @@ public class RegisterPhone extends ActionBarActivity {
 					}
 				});
 
-		// set data if passed
-		Bundle bundle = getIntent().getExtras();
-		if (bundle != null) {
-			phoneNumber = bundle.getString("phone");
-			countryCode = bundle.getString("code");
+		phoneNumber = application.getPhoneNumber();
+		countryCode = application.getCountryCode();
 
-			if (phoneNumber != null) {
-				phoneEditText.setText(phoneNumber);
-			}
-
-			if (countryCode != null) {
-				countriesSpinner.setSelection(countriesCodesAdapter
-						.getPosition(countryCode));
-			}
+		if (phoneNumber != null) {
+			phoneEditText.setText(phoneNumber);
 		}
+
+		if (countryCode != null) {
+			countriesSpinner.setSelection(countriesCodesAdapter
+					.getPosition(countryCode));
+		}
+
+		// // set data if passed
+		// Bundle bundle = getIntent().getExtras();
+		// if (bundle != null) {
+		// phoneNumber = bundle.getString("phone");
+		// countryCode = bundle.getString("code");
+		//
+		// if (phoneNumber != null) {
+		// phoneEditText.setText(phoneNumber);
+		// }
+		//
+		// if (countryCode != null) {
+		// countriesSpinner.setSelection(countriesCodesAdapter
+		// .getPosition(countryCode));
+		// }
+		// }
 	}
 
 	protected boolean isValidData() {
@@ -132,5 +152,13 @@ public class RegisterPhone extends ActionBarActivity {
 			phoneEditText.setError("Invalid phone number");
 		}
 		return valid;
+	}
+
+	@Override
+	public void onBackPressed() {
+		super.onBackPressed();
+		Intent nameIntent = new Intent(RegisterPhone.this, RegisterName.class);
+		startActivity(nameIntent);
+		finish();
 	}
 }

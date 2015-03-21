@@ -5,7 +5,6 @@ import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Date;
 
 import android.content.Context;
@@ -51,16 +50,16 @@ public class RegisterPhoto extends ActionBarActivity implements
 	// take photo
 	private Button captureButton;
 	private boolean hasFrontCamera;
-	private String firstName, lastName, otherName, phoneNumber, countryCode,
-			country;
-	private ArrayList<String> places, placesIds;
 	private BottomSheet bottomSheet;
+	private KakumaApplication application;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_photo);
 		activity = this;
+
+		application = (KakumaApplication) getApplication();
 
 		mPreview = (SurfaceView) findViewById(R.id.camera_preview);
 		switchImageView = (ImageView) findViewById(R.id.imageView_switch);
@@ -138,19 +137,19 @@ public class RegisterPhoto extends ActionBarActivity implements
 
 		IMAGE_MAX_SIZE = getScreenSize()[1];
 
-		// get data if passed
-		Bundle bundle = getIntent().getExtras();
-		if (bundle != null) {
-			// for the phone number
-			phoneNumber = bundle.getString("phone");
-			countryCode = bundle.getString("code");
-			firstName = bundle.getString("firstName");
-			lastName = bundle.getString("lastName");
-			otherName = bundle.getString("otherName");
-			country = bundle.getString("country");
-			places = bundle.getStringArrayList("places");
-			placesIds = bundle.getStringArrayList("placesIds");
-		}
+		// // get data if passed
+		// Bundle bundle = getIntent().getExtras();
+		// if (bundle != null) {
+		// // for the phone number
+		// phoneNumber = bundle.getString("phone");
+		// countryCode = bundle.getString("code");
+		// firstName = bundle.getString("firstName");
+		// lastName = bundle.getString("lastName");
+		// otherName = bundle.getString("otherName");
+		// country = bundle.getString("country");
+		// places = bundle.getStringArrayList("places");
+		// placesIds = bundle.getStringArrayList("placesIds");
+		// }
 	}
 
 	private boolean hasFlash() {
@@ -343,20 +342,21 @@ public class RegisterPhoto extends ActionBarActivity implements
 	}
 
 	protected void goNext() {
-		Bundle bundle = new Bundle();
-		bundle.putString("phone", phoneNumber);
-		bundle.putString("code", countryCode);
-		bundle.putString("firstName", firstName);
-		bundle.putString("lastName", lastName);
-		bundle.putString("otherName", otherName);
-		bundle.putString("country", country);
-		bundle.putStringArrayList("places", places);
-		bundle.putStringArrayList("placesIds", placesIds);
+		// Bundle bundle = new Bundle();
+		// bundle.putString("phone", phoneNumber);
+		// bundle.putString("code", countryCode);
+		// bundle.putString("firstName", firstName);
+		// bundle.putString("lastName", lastName);
+		// bundle.putString("otherName", otherName);
+		// bundle.putString("country", country);
+		// bundle.putStringArrayList("places", places);
+		// bundle.putStringArrayList("placesIds", placesIds);
 		Intent nameIntent = new Intent(RegisterPhoto.this,
 				RegisterSummary.class);
-		nameIntent.putExtras(bundle);
-		RegisterSummary.bitmap = bitmap;
-		RegisterSummary.photoFile = photoFile;
+		// nameIntent.putExtras(bundle);
+
+		application.setPhotoFile(photoFile);
+
 		startActivity(nameIntent);
 	}
 
@@ -495,5 +495,13 @@ public class RegisterPhoto extends ActionBarActivity implements
 					.sheet(1, message).build();
 			bottomSheet.show();
 		}
+	}
+
+	@Override
+	public void onBackPressed() {
+		super.onBackPressed();
+		Intent nameIntent = new Intent(RegisterPhoto.this, RegisterOrigin.class);
+		startActivity(nameIntent);
+		finish();
 	}
 }

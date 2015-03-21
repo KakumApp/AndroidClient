@@ -26,12 +26,14 @@ public class RegisterName extends ActionBarActivity {
 	private Typeface typeface;
 	private EditText firstNameEditText, lastNameEditText, otherNameEditText;
 	private String firstName, lastName, otherName;
-	private String phoneNumber, countryCode;
+	private KakumaApplication application;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_name);
+
+		application = (KakumaApplication) getApplication();
 
 		continueButton = (Button) findViewById(R.id.button_register_continue);
 		descTextView = (TextView) findViewById(R.id.textView_name_desc);
@@ -43,24 +45,31 @@ public class RegisterName extends ActionBarActivity {
 		typeface = new Utils(this).getFont("Ubuntu-L");
 		findPersonTextView.setTypeface(typeface);
 		descTextView.setTypeface(typeface);
-		firstNameEditText.setHintTextColor(Color.WHITE);
-		lastNameEditText.setHintTextColor(Color.WHITE);
-		otherNameEditText.setHintTextColor(Color.WHITE);
+
+		int hintTextColor = getResources().getColor(R.color.half_white);
+		firstNameEditText.setHintTextColor(hintTextColor);
+		lastNameEditText.setHintTextColor(hintTextColor);
+		otherNameEditText.setHintTextColor(hintTextColor);
 
 		continueButton.setOnClickListener(new OnClickListener() {
 
 			@Override
 			public void onClick(View v) {
 				if (isValidData()) {
-					Bundle bundle = new Bundle();
-					bundle.putString("phone", phoneNumber);
-					bundle.putString("code", countryCode);
-					bundle.putString("firstName", firstName);
-					bundle.putString("lastName", lastName);
-					bundle.putString("otherName", otherName);
+					application.setFirstName(firstName);
+					application.setLastName(lastName);
+					application.setOtherName(otherName);
+
+					// Bundle bundle = new Bundle();
+					// bundle.putString("phone", phoneNumber);
+					// bundle.putString("code", countryCode);
+					// bundle.putString("firstName", firstName);
+					// bundle.putString("lastName", lastName);
+					// bundle.putString("otherName", otherName);
+					//
 					Intent originIntent = new Intent(RegisterName.this,
-							RegisterOrigin.class);
-					originIntent.putExtras(bundle);
+							RegisterPhone.class);
+					// originIntent.putExtras(bundle);
 					startActivity(originIntent);
 				}
 			}
@@ -76,30 +85,47 @@ public class RegisterName extends ActionBarActivity {
 			}
 		});
 
-		// get data if passed
-		Bundle bundle = getIntent().getExtras();
-		if (bundle != null) {
-			// for the phone number
-			phoneNumber = bundle.getString("phone");
-			countryCode = bundle.getString("code");
-			// if any data passed for this activity
-			firstName = bundle.getString("firstName");
-			lastName = bundle.getString("lastName");
-			otherName = bundle.getString("otherName");
+		firstName = application.getFirstName();
+		lastName = application.getLastName();
+		otherName = application.getOtherName();
 
-			// set the data on the different fields
-			if (firstName != null) {
-				firstNameEditText.setText(firstName);
-			}
-
-			if (lastName != null) {
-				lastNameEditText.setText(lastName);
-			}
-
-			if (otherName != null) {
-				otherNameEditText.setText(otherName);
-			}
+		// set the data on the different fields
+		if (firstName != null) {
+			firstNameEditText.setText(firstName);
 		}
+
+		if (lastName != null) {
+			lastNameEditText.setText(lastName);
+		}
+
+		if (otherName != null) {
+			otherNameEditText.setText(otherName);
+		}
+		//
+		// // get data if passed
+		// Bundle bundle = getIntent().getExtras();
+		// if (bundle != null) {
+		// // for the phone number
+		// phoneNumber = bundle.getString("phone");
+		// countryCode = bundle.getString("code");
+		// // if any data passed for this activity
+		// firstName = bundle.getString("firstName");
+		// lastName = bundle.getString("lastName");
+		// otherName = bundle.getString("otherName");
+		//
+		// // set the data on the different fields
+		// if (firstName != null) {
+		// firstNameEditText.setText(firstName);
+		// }
+		//
+		// if (lastName != null) {
+		// lastNameEditText.setText(lastName);
+		// }
+		//
+		// if (otherName != null) {
+		// otherNameEditText.setText(otherName);
+		// }
+		// }
 	}
 
 	/**
@@ -124,5 +150,13 @@ public class RegisterName extends ActionBarActivity {
 			firstNameEditText.setError("Required");
 		}
 		return valid;
+	}
+
+	@Override
+	public void onBackPressed() {
+		super.onBackPressed();
+		Intent nameIntent = new Intent(RegisterName.this, Register.class);
+		startActivity(nameIntent);
+		finish();
 	}
 }

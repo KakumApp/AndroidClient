@@ -77,11 +77,14 @@ public class RegisterOrigin extends ActionBarActivity {
 	private BottomSheet bottomSheet;
 	private ProgressWheel progressBar;
 	private MaterialDialog dialog;
+	private KakumaApplication application;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_origin);
+
+		application = (KakumaApplication) getApplication();
 
 		continueButton = (Button) findViewById(R.id.button_register_continue);
 		findPersonTextView = (TextView) findViewById(R.id.textView_register_find_person);
@@ -91,7 +94,9 @@ public class RegisterOrigin extends ActionBarActivity {
 
 		typeface = new Utils(this).getFont("Ubuntu-L");
 		findPersonTextView.setTypeface(typeface);
-		placesAutoCompleteTextView.setHintTextColor(Color.WHITE);
+
+		int hintTextColor = getResources().getColor(R.color.half_white);
+		placesAutoCompleteTextView.setHintTextColor(hintTextColor);
 
 		continueButton.setOnClickListener(new OnClickListener() {
 
@@ -172,29 +177,45 @@ public class RegisterOrigin extends ActionBarActivity {
 					}
 				});
 
-		// get data if passed
-		Bundle bundle = getIntent().getExtras();
-		if (bundle != null) {
-			// for the phone number
-			phoneNumber = bundle.getString("phone");
-			countryCode = bundle.getString("code");
-			firstName = bundle.getString("firstName");
-			lastName = bundle.getString("lastName");
-			otherName = bundle.getString("otherName");
-			// // for this activity
-			selectedCountryName = bundle.getString("country");
-			selectedPlaces = bundle.getStringArrayList("places");
+		selectedCountryName = application.getSelectedCountryName();
+		selectedPlaces = application.getSelectedPlaces();
+		selectedPlacesIds = application.getSelectedPlacesIds();
 
-			if (selectedPlaces != null && !selectedPlaces.isEmpty()) {
-				String plcs = "";
-				for (int i = 0; i < selectedPlaces.size(); i++) {
-					plcs += selectedPlaces.get(i) + ",";
-				}
-				placesAutoCompleteTextView.setText(plcs);
-			} else {
-				selectedPlaces = new ArrayList<>();
+		if (selectedPlaces != null && !selectedPlaces.isEmpty()) {
+			String plcs = "";
+			for (int i = 0; i < selectedPlaces.size(); i++) {
+				plcs += selectedPlaces.get(i) + ",";
 			}
+			placesAutoCompleteTextView.setText(plcs);
+		} else {
+			selectedPlaces = new ArrayList<>();
 		}
+
+		//
+		// // get data if passed
+		// Bundle bundle = getIntent().getExtras();
+		// if (bundle != null) {
+		// // for the phone number
+		// phoneNumber = bundle.getString("phone");
+		// countryCode = bundle.getString("code");
+		// firstName = bundle.getString("firstName");
+		// lastName = bundle.getString("lastName");
+		// otherName = bundle.getString("otherName");
+		// // // for this activity
+		// selectedCountryName = bundle.getString("country");
+		// selectedPlaces = bundle.getStringArrayList("places");
+		//
+		// if (selectedPlaces != null && !selectedPlaces.isEmpty()) {
+		// String plcs = "";
+		// for (int i = 0; i < selectedPlaces.size(); i++) {
+		// plcs += selectedPlaces.get(i) + ",";
+		// }
+		// placesAutoCompleteTextView.setText(plcs);
+		// } else {
+		// selectedPlaces = new ArrayList<>();
+		// }
+		// }
+
 		// get the countries
 		FETCH_TYPE = 1;
 		FetchTask fetchTask = new FetchTask(FetchTask.GET_TASK);
@@ -258,18 +279,24 @@ public class RegisterOrigin extends ActionBarActivity {
 					}
 				}
 			}
-			Bundle bundle = new Bundle();
-			bundle.putString("phone", phoneNumber);
-			bundle.putString("code", countryCode);
-			bundle.putString("firstName", firstName);
-			bundle.putString("lastName", lastName);
-			bundle.putString("otherName", otherName);
-			bundle.putString("country", selectedCountryName);
-			bundle.putStringArrayList("places", selectedPlaces);
-			bundle.putStringArrayList("placesIds", selectedPlacesIds);
+			// Bundle bundle = new Bundle();
+			// bundle.putString("phone", phoneNumber);
+			// bundle.putString("code", countryCode);
+			// bundle.putString("firstName", firstName);
+			// bundle.putString("lastName", lastName);
+			// bundle.putString("otherName", otherName);
+			// bundle.putString("country", selectedCountryName);
+			// bundle.putStringArrayList("places", selectedPlaces);
+			// bundle.putStringArrayList("placesIds", selectedPlacesIds);
+
+			application.setCountry(country);
+			application.setSelectedCountryName(selectedCountryName);
+			application.setSelectedPlaces(selectedPlaces);
+			application.setSelectedPlacesIds(selectedPlacesIds);
+
 			Intent nameIntent = new Intent(RegisterOrigin.this,
 					RegisterPhoto.class);
-			nameIntent.putExtras(bundle);
+			// nameIntent.putExtras(bundle);
 			startActivity(nameIntent);
 		}
 	}
@@ -366,7 +393,8 @@ public class RegisterOrigin extends ActionBarActivity {
 								bundle.putString("lastName", lastName);
 								bundle.putString("otherName", otherName);
 								Intent originIntent = new Intent(
-										RegisterOrigin.this, RegisterName.class);
+										RegisterOrigin.this,
+										RegisterPhone.class);
 								originIntent.putExtras(bundle);
 								startActivity(originIntent);
 							}
@@ -589,5 +617,13 @@ public class RegisterOrigin extends ActionBarActivity {
 			// Return full string
 			return total.toString();
 		}
+	}
+
+	@Override
+	public void onBackPressed() {
+		super.onBackPressed();
+		Intent nameIntent = new Intent(RegisterOrigin.this, RegisterPhone.class);
+		startActivity(nameIntent);
+		finish();
 	}
 }

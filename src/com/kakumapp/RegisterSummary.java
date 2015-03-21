@@ -26,7 +26,9 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Typeface;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -49,24 +51,26 @@ public class RegisterSummary extends ActionBarActivity {
 	public static final String USERNAME = "admin";
 	public static final String PASSWORD = "admin";
 	public static int FETCH_TYPE = 1;
-	private String firstName, lastName, otherName, phoneNumber, countryCode,
-			country;
+	private String firstName, lastName, otherName, phoneNumber, countryCode;
 	private ArrayList<String> places, placesIds;
 	// private String placesIds = "";
 	private Typeface typeface;
 	private TextView nameTextView, phoneTextView, placeTextView, textView_desc;
 	private MaterialEditText nameEditText, phoneEditText, placesEditText;
-	protected static File photoFile;
-	protected static Bitmap bitmap;
 	private CircularImageView circularImageView;
 	private BottomSheet bottomSheet;
 	private Button registerButton;
 	public String jsonData;
+	private KakumaApplication application;
+	private File photoFile;
+	private Bitmap bitmap;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_register_summary);
+
+		application = (KakumaApplication) getApplication();
 
 		nameTextView = (TextView) findViewById(R.id.textView_name);
 		phoneTextView = (TextView) findViewById(R.id.textView_phone);
@@ -87,44 +91,88 @@ public class RegisterSummary extends ActionBarActivity {
 		places = new ArrayList<>();
 		placesIds = new ArrayList<>();
 
-		// get data if passed
-		Bundle bundle = getIntent().getExtras();
-		if (bundle != null) {
-			// for the phone number
-			phoneNumber = bundle.getString("phone");
-			countryCode = bundle.getString("code");
-			firstName = bundle.getString("firstName");
-			lastName = bundle.getString("lastName");
-			otherName = bundle.getString("otherName");
-			country = bundle.getString("country");
-			places = bundle.getStringArrayList("places");
-			placesIds = bundle.getStringArrayList("placesIds");
+		firstName = application.getFirstName();
+		lastName = application.getLastName();
+		otherName = application.getOtherName();
+		phoneNumber = application.getPhoneNumber();
+		countryCode = application.getCountryCode();
+		places = application.getSelectedPlaces();
+		placesIds = application.getSelectedPlacesIds();
+		photoFile = application.getPhotoFile();
 
-			if (firstName != null && lastName != null) {
-				nameEditText.setText(firstName + " " + lastName);
-				if (otherName != null) {
-					nameEditText.append(" " + otherName);
-				} else {
-					otherName = null;
-				}
-			}
+		BitmapFactory.Options options = new BitmapFactory.Options();
+		bitmap = BitmapFactory.decodeFile(photoFile.getAbsolutePath(), options);
+		// bitmap = Bitmap.createScaledBitmap(bitmap, parent.getWidth(),
+		// parent.getHeight(), true);
 
-			if (phoneNumber != null) {
-				phoneEditText.setText(phoneNumber);
-			}
-
-			if (places != null) {
-				String plcs = "";
-				for (String plc : places) {
-					plcs += plc + ",";
-				}
-				placesEditText.setText(plcs);
-			}
-
-			if (bitmap != null) {
-				circularImageView.setImageBitmap(bitmap);
+		if (firstName != null && lastName != null) {
+			nameEditText.setText(firstName + " " + lastName);
+			if (otherName != null) {
+				nameEditText.append(" " + otherName);
+			} else {
+				otherName = null;
 			}
 		}
+
+		if (phoneNumber != null) {
+			if (phoneNumber.startsWith("0") && phoneNumber.length() > 1) {
+				phoneNumber = phoneNumber.substring(1);
+			}
+			phoneEditText.setText(countryCode + phoneNumber);
+		}
+
+		if (places != null) {
+			String plcs = "";
+			for (String plc : places) {
+				plcs += plc + ",";
+			}
+			placesEditText.setText(plcs);
+		}
+
+		if (bitmap != null) {
+			circularImageView.setImageBitmap(bitmap);
+		}
+
+		//
+		// // get data if passed
+		// Bundle bundle = getIntent().getExtras();
+		// if (bundle != null) {
+		// // for the phone number
+		// phoneNumber = bundle.getString("phone");
+		// countryCode = bundle.getString("code");
+		//
+		// firstName = bundle.getString("firstName");
+		// lastName = bundle.getString("lastName");
+		// otherName = bundle.getString("otherName");
+		// country = bundle.getString("country");
+		// places = bundle.getStringArrayList("places");
+		// placesIds = bundle.getStringArrayList("placesIds");
+		//
+		// if (firstName != null && lastName != null) {
+		// nameEditText.setText(firstName + " " + lastName);
+		// if (otherName != null) {
+		// nameEditText.append(" " + otherName);
+		// } else {
+		// otherName = null;
+		// }
+		// }
+		//
+		// if (phoneNumber != null) {
+		// phoneEditText.setText(phoneNumber);
+		// }
+		//
+		// if (places != null) {
+		// String plcs = "";
+		// for (String plc : places) {
+		// plcs += plc + ",";
+		// }
+		// placesEditText.setText(plcs);
+		// }
+		//
+		// if (bitmap != null) {
+		// circularImageView.setImageBitmap(bitmap);
+		// }
+		// }
 
 		// for (int i = 0; i < RegisterOrigin.places.size(); i++) {
 		// String id = RegisterOrigin.places.get(i).getId() + "";
@@ -335,5 +383,14 @@ public class RegisterSummary extends ActionBarActivity {
 			// Return full string
 			return total.toString();
 		}
+	}
+
+	@Override
+	public void onBackPressed() {
+		super.onBackPressed();
+		Intent nameIntent = new Intent(RegisterSummary.this,
+				RegisterPhoto.class);
+		startActivity(nameIntent);
+		finish();
 	}
 }

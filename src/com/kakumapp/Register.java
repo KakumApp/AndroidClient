@@ -41,8 +41,8 @@ public class Register extends ActionBarActivity {
 
 			@Override
 			public void onClick(View v) {
-				Intent phoneIntent=new Intent(Register.this,RegisterPhone.class);
-				startActivity(phoneIntent);
+				Intent nameIntent=new Intent(Register.this,RegisterName.class);
+				startActivity(nameIntent);
 			}
 		});
 
@@ -54,6 +54,13 @@ public class Register extends ActionBarActivity {
 				startActivity(findPersonIntent);
 			}
 		});
-
+	}
+	
+	@Override
+	public void onBackPressed() {
+		super.onBackPressed();
+		Intent nameIntent = new Intent(Register.this, Kakuma.class);
+		startActivity(nameIntent);
+		finish();
 	}
 }

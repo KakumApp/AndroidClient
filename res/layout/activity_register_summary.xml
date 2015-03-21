@@ -157,6 +157,7 @@
             android:layout_marginLeft="8dp"
             android:layout_toRightOf="@+id/textView_phone"
             android:layout_weight="70"
+            android:enabled="false"
             android:gravity="left"
             android:hint="@string/origin"
             android:inputType="text"
