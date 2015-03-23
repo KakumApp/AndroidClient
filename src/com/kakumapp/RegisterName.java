@@ -70,6 +70,7 @@ public class RegisterName extends ActionBarActivity {
 							RegisterPhone.class);
 					// originIntent.putExtras(bundle);
 					startActivity(originIntent);
+					finish();
 				}
 			}
 		});

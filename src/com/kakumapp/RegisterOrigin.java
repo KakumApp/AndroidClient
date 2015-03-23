@@ -301,6 +301,7 @@ public class RegisterOrigin extends ActionBarActivity {
 					RegisterPhoto.class);
 			// nameIntent.putExtras(bundle);
 			startActivity(nameIntent);
+			finish();
 		}
 	}
 

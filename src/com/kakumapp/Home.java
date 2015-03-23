@@ -60,4 +60,12 @@ public class Home extends ActionBarActivity {
 		}
 		return true;
 	}
+	
+	@Override
+	public void onBackPressed() {
+		// new Utils(this).quit();
+		finish();
+		moveTaskToBack(true);
+	}
+
 }

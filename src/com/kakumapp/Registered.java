@@ -72,4 +72,11 @@ public class Registered extends ActionBarActivity {
 			}
 		});
 	}
+
+	@Override
+	public void onBackPressed() {
+		Intent homeIntent = new Intent(Registered.this, Home.class);
+		startActivity(homeIntent);
+		finish();
+	}
 }

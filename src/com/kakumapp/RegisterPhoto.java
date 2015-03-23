@@ -358,6 +358,7 @@ public class RegisterPhoto extends ActionBarActivity implements
 		application.setPhotoFile(photoFile);
 
 		startActivity(nameIntent);
+		finish();
 	}
 
 	@Override
