@@ -101,7 +101,7 @@
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
-          <activity android:name=".Registered" >
+        <activity android:name=".Registered" >
             <intent-filter>
                 <action android:name="com.kakumapp.Registered" />
 
@@ -118,10 +118,10 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".Home"
-            android:label="@string/home" >
+            android:name=".MeetingPoints"
+            android:label="@string/meetingPoints" >
             <intent-filter>
-                <action android:name="com.kakumapp.Home" />
+                <action android:name="com.kakumapp.MeetingPoints" />
 
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>

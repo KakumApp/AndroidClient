@@ -66,7 +66,7 @@ public class Registered extends ActionBarActivity {
 
 			@Override
 			public void onClick(View v) {
-				Intent homeIntent = new Intent(Registered.this, Home.class);
+				Intent homeIntent = new Intent(Registered.this, MeetingPoints.class);
 				startActivity(homeIntent);
 				finish();
 			}
@@ -75,7 +75,7 @@ public class Registered extends ActionBarActivity {
 
 	@Override
 	public void onBackPressed() {
-		Intent homeIntent = new Intent(Registered.this, Home.class);
+		Intent homeIntent = new Intent(Registered.this, MeetingPoints.class);
 		startActivity(homeIntent);
 		finish();
 	}

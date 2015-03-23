@@ -396,17 +396,17 @@ public final class R {
 		public static final int abc_textfield_search_activated_mtrl_alpha = 0x7f020030;
 		public static final int abc_textfield_search_default_mtrl_alpha = 0x7f020031;
 		public static final int abc_textfield_search_material = 0x7f020032;
-		public static final int md_btn_selected = 0x7f0200f4;
-		public static final int md_btn_selected_dark = 0x7f0200f5;
-		public static final int md_btn_selector = 0x7f0200f6;
-		public static final int md_btn_selector_dark = 0x7f0200f7;
-		public static final int md_btn_selector_ripple = 0x7f0200f8;
-		public static final int md_btn_selector_ripple_dark = 0x7f0200f9;
-		public static final int md_item_selected = 0x7f0200fa;
-		public static final int md_item_selected_dark = 0x7f0200fb;
-		public static final int md_selector = 0x7f0200fc;
-		public static final int md_selector_dark = 0x7f0200fd;
-		public static final int md_transparent = 0x7f0200fe;
+		public static final int md_btn_selected = 0x7f0200f7;
+		public static final int md_btn_selected_dark = 0x7f0200f8;
+		public static final int md_btn_selector = 0x7f0200f9;
+		public static final int md_btn_selector_dark = 0x7f0200fa;
+		public static final int md_btn_selector_ripple = 0x7f0200fb;
+		public static final int md_btn_selector_ripple_dark = 0x7f0200fc;
+		public static final int md_item_selected = 0x7f0200fd;
+		public static final int md_item_selected_dark = 0x7f0200fe;
+		public static final int md_selector = 0x7f0200ff;
+		public static final int md_selector_dark = 0x7f020100;
+		public static final int md_transparent = 0x7f020101;
 	}
 	public static final class id {
 		public static final int action_bar = 0x7f0a0033;
@@ -526,7 +526,7 @@ public final class R {
 		public static final int md_listitem_singlechoice = 0x7f03002c;
 		public static final int md_progress_dialog = 0x7f03002d;
 		public static final int md_progress_dialog_indeterminate = 0x7f03002e;
-		public static final int support_simple_spinner_dropdown_item = 0x7f030033;
+		public static final int support_simple_spinner_dropdown_item = 0x7f030034;
 	}
 	public static final class string {
 		public static final int abc_action_bar_home_description = 0x7f050003;

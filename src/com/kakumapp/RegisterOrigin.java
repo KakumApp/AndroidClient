@@ -111,7 +111,7 @@ public class RegisterOrigin extends ActionBarActivity {
 			@Override
 			public void onClick(View v) {
 				Intent findPersonIntent = new Intent(RegisterOrigin.this,
-						Home.class);
+						MeetingPoints.class);
 				startActivity(findPersonIntent);
 			}
 		});

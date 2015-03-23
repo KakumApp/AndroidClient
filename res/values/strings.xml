@@ -9,6 +9,8 @@
     <string name="image">Image</string>
     <string name="help">Help</string>
     <string name="home">Home</string>
+    <string name="meetingPoints">MeetingPoints</string>
+    <string name="meeting_times">Meeting times</string>
     <string name="username">Username</string>
     <string name="name">Name</string>
     <string name="name2">Name:</string>
