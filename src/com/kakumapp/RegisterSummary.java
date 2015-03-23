@@ -39,9 +39,11 @@ import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.afollestad.materialdialogs.MaterialDialog;
 import com.cocosw.bottomsheet.BottomSheet;
 import com.kakumapp.utils.Utils;
 import com.kakumapp.views.CircularImageView;
+import com.pnikosis.materialishprogress.ProgressWheel;
 import com.rengwuxian.materialedittext.MaterialEditText;
 
 public class RegisterSummary extends ActionBarActivity {
@@ -64,6 +66,8 @@ public class RegisterSummary extends ActionBarActivity {
 	private KakumaApplication application;
 	private File photoFile;
 	private Bitmap bitmap;
+	private ProgressWheel progressBar;
+	private MaterialDialog dialog;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -81,12 +85,19 @@ public class RegisterSummary extends ActionBarActivity {
 		phoneEditText = (MaterialEditText) findViewById(R.id.edittext_phone);
 		placesEditText = (MaterialEditText) findViewById(R.id.edittext_origin);
 		registerButton = (Button) findViewById(R.id.button_register);
+		progressBar = (ProgressWheel) findViewById(R.id.progressBar);
 
 		typeface = new Utils(this).getFont("Ubuntu-L");
 		nameTextView.setTypeface(typeface);
 		phoneTextView.setTypeface(typeface);
 		textView_desc.setTypeface(typeface);
 		placeTextView.setTypeface(typeface);
+
+		placesEditText.setEnabled(false);
+		int hintTextColor = getResources().getColor(R.color.half_white);
+		nameEditText.setHintTextColor(hintTextColor);
+		phoneEditText.setHintTextColor(hintTextColor);
+		placesEditText.setHintTextColor(hintTextColor);
 
 		places = new ArrayList<>();
 		placesIds = new ArrayList<>();
@@ -188,38 +199,38 @@ public class RegisterSummary extends ActionBarActivity {
 
 			@Override
 			public void onClick(View v) {
-				Log.e(TAG, "Othername " + otherName);
-				for (String id : placesIds) {
-					Log.e(TAG, "Id " + id);
-				}
-				RegisterTask registerTask = new RegisterTask(
-						RegisterTask.POST_TASK);
-				JSONObject jsonObject = new JSONObject();
-				try {
-					jsonObject.put("first_name", firstName);
-					jsonObject.put("last_name", lastName);
-					jsonObject.put("other_name", otherName);
-					jsonObject.put("phone_no", phoneNumber);
-					jsonObject.put("photo", "URL");
-					JSONArray placesArray = new JSONArray();
-					for (String id : placesIds) {
-						placesArray.put(id);
-					}
-					jsonObject.put("places", placesArray);
-					jsonData = jsonObject.toString();
-				} catch (JSONException e) {
-					e.printStackTrace();
-				}
-				// registerTask.addNameValuePair("first_name", firstName);
-				// registerTask.addNameValuePair("last_name", lastName);
-				// registerTask.addNameValuePair("other_name", otherName);
-				// registerTask.addNameValuePair("phone_no", phoneNumber);
-				// registerTask.addNameValuePair("places[]",
-				// placesIds.toArray(new String[placesIds.size()]));
-				// registerTask.addNameValuePair("photo", "URL");
-				registerTask.execute(new String[] { URL + "targets/" });
+				registerUser();
 			}
 		});
+	}
+
+	private void registerUser() {
+		RegisterTask registerTask = new RegisterTask(
+				RegisterTask.POST_TASK);
+		JSONObject jsonObject = new JSONObject();
+		try {
+			jsonObject.put("first_name", firstName);
+			jsonObject.put("last_name", lastName);
+			jsonObject.put("other_name", otherName);
+			jsonObject.put("phone_no", phoneNumber);
+			jsonObject.put("photo", "URL");
+			JSONArray placesArray = new JSONArray();
+			for (String id : placesIds) {
+				placesArray.put(id);
+			}
+			jsonObject.put("places", placesArray);
+			jsonData = jsonObject.toString();
+		} catch (JSONException e) {
+			e.printStackTrace();
+		}
+		// registerTask.addNameValuePair("first_name", firstName);
+		// registerTask.addNameValuePair("last_name", lastName);
+		// registerTask.addNameValuePair("other_name", otherName);
+		// registerTask.addNameValuePair("phone_no", phoneNumber);
+		// registerTask.addNameValuePair("places[]",
+		// placesIds.toArray(new String[placesIds.size()]));
+		// registerTask.addNameValuePair("photo", "URL");
+		registerTask.execute(new String[] { URL + "targets/" });
 	}
 
 	/**
@@ -235,6 +246,41 @@ public class RegisterSummary extends ActionBarActivity {
 					.icon(R.drawable.ic_action_warning).title(title)
 					.sheet(1, message).build();
 			bottomSheet.show();
+		}
+	}
+
+	private void showProgress() {
+		if (progressBar != null && registerButton != null) {
+			progressBar.setVisibility(View.VISIBLE);
+			registerButton.setVisibility(View.GONE);
+		}
+	}
+
+	private void hideprogress() {
+		if (progressBar != null && registerButton != null) {
+			progressBar.setVisibility(View.GONE);
+			registerButton.setVisibility(View.VISIBLE);
+		}
+	}
+
+	public void showRetry() {
+		hideprogress();
+		if (dialog == null || !dialog.isShowing()) {
+			dialog = new MaterialDialog.Builder(this)
+					.title(R.string.connect_error)
+					.content(R.string.connection_error_message)
+					.positiveText(R.string.yes).negativeText(R.string.cancel)
+					.callback(new MaterialDialog.ButtonCallback() {
+						@Override
+						public void onPositive(MaterialDialog dialog) {
+							registerUser();
+						}
+
+						@Override
+						public void onNegative(MaterialDialog dialog) {
+						}
+					}).build();
+			dialog.show();
 		}
 	}
 
@@ -274,6 +320,12 @@ public class RegisterSummary extends ActionBarActivity {
 			}
 		}
 
+		@Override
+		protected void onPreExecute() {
+			super.onPreExecute();
+			showProgress();
+		}
+
 		protected String doInBackground(String... urls) {
 			String url = urls[0];
 			String result = "";
@@ -297,12 +349,17 @@ public class RegisterSummary extends ActionBarActivity {
 		protected void onPostExecute(String response) {
 			Log.e(TAG, "type is " + FETCH_TYPE + " response is " + response);
 			if (FETCH_TYPE == 1) {
+				hideprogress();
 				try {
 					JSONObject jsonObject = new JSONObject(response);
-
+					String url = jsonObject.getString("url");
+					if (url != null && !url.equals("")) {
+						moveToSuccessScreen();
+					}
 				} catch (JSONException e) {
-					showErrorMessage("Internet connection",
-							"Connection could not be established.Check your internet settings.");
+					showRetry();
+					// showErrorMessage("Internet connection",
+					// "Connection could not be established.Check your internet settings.");
 				}
 			}
 		}
@@ -391,6 +448,13 @@ public class RegisterSummary extends ActionBarActivity {
 		Intent nameIntent = new Intent(RegisterSummary.this,
 				RegisterPhoto.class);
 		startActivity(nameIntent);
+		finish();
+	}
+
+	public void moveToSuccessScreen() {
+		Intent successIntent = new Intent(RegisterSummary.this,
+				Registered.class);
+		startActivity(successIntent);
 		finish();
 	}
 }

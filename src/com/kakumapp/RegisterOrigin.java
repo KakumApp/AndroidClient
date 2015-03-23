@@ -191,7 +191,10 @@ public class RegisterOrigin extends ActionBarActivity {
 			selectedPlaces = new ArrayList<>();
 		}
 
-		//
+		if (selectedPlacesIds == null) {
+			selectedPlacesIds = new ArrayList<>();
+		}
+
 		// // get data if passed
 		// Bundle bundle = getIntent().getExtras();
 		// if (bundle != null) {
@@ -466,7 +469,14 @@ public class RegisterOrigin extends ActionBarActivity {
 									.getString("name"), countryJsonObject
 									.getString("url")));
 						}
-						dataAdapterCountries.notifyDataSetChanged();
+						// dataAdapterCountries.notifyDataSetChanged();
+						// countriesSpinner.setSelection(0);
+						dataAdapterCountries = new ArrayAdapter<Country>(
+								RegisterOrigin.this,
+								android.R.layout.simple_spinner_item, countries);
+						dataAdapterCountries
+								.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+						countriesSpinner.setAdapter(dataAdapterCountries);
 					}
 				} catch (JSONException e) {
 					showRetry();

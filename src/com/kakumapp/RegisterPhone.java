@@ -101,8 +101,12 @@ public class RegisterPhone extends ActionBarActivity {
 						if (textView != null) {
 							textView.setTextColor(Color.WHITE);
 						}
-						countryCode = (String) parent
+						String selected = (String) parent
 								.getItemAtPosition(position);
+						if (selected != null) {
+							countryCode = selected.substring(selected
+									.indexOf("+"));
+						}
 					}
 
 					@Override

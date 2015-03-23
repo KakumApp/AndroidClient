@@ -1,188 +1,204 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:civ="http://schemas.android.com/apk/res-auto"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/primary"
-    android:padding="16dp" >
+    android:fillViewport="true"
+    android:orientation="vertical" >
 
-    <com.kakumapp.views.CircularImageView
-        android:id="@+id/image_view_photo"
-        android:layout_width="120dp"
-        android:layout_height="120dp"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="40dp"
-        android:clickable="true"
-        android:contentDescription="@string/image_desc"
-        civ:civ_shadow="true" >
-    </com.kakumapp.views.CircularImageView>
-
-    <TextView
-        android:id="@+id/textView_desc"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/image_view_photo"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="20dp"
-        android:text="@string/register_summ_instr"
-        android:textColor="@color/white"
-        android:textSize="18sp" />
-
-    <LinearLayout
-        android:id="@+id/name_layout"
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/textView_desc"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="20dp"
-        android:gravity="center"
-        android:weightSum="100" >
+        android:background="@color/primary"
+        android:padding="16dp" >
+
+        <com.kakumapp.views.CircularImageView
+            android:id="@+id/image_view_photo"
+            android:layout_width="120dp"
+            android:layout_height="120dp"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="40dp"
+            android:clickable="true"
+            android:contentDescription="@string/image_desc"
+            app:civ_shadow="true" >
+        </com.kakumapp.views.CircularImageView>
 
         <TextView
-            android:id="@+id/textView_name"
-            android:layout_width="0dip"
+            android:id="@+id/textView_desc"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:layout_gravity="center_vertical|right"
-            android:layout_marginRight="8dp"
-            android:layout_weight="30"
-            android:gravity="right"
-            android:padding="8dp"
-            android:text="@string/name2"
+            android:layout_below="@+id/image_view_photo"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="20dp"
+            android:text="@string/register_summ_instr"
             android:textColor="@color/white"
             android:textSize="18sp" />
 
-        <com.rengwuxian.materialedittext.MaterialEditText
-            android:id="@+id/edittext_name"
-            android:layout_width="0dip"
+        <LinearLayout
+            android:id="@+id/name_layout"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:layout_gravity="center_vertical|left"
-            android:layout_marginLeft="8dp"
-            android:layout_toRightOf="@+id/textView_name"
-            android:layout_weight="70"
-            android:gravity="left"
-            android:hint="@string/name"
-            android:inputType="textPersonName"
-            android:paddingLeft="8dp"
-            android:singleLine="true"
-            android:textColor="@color/white"
-            android:textCursorDrawable="@drawable/white_cursor"
-            app:baseColor="@color/white"
-            app:errorColor="@color/red_error"
-            app:floatingLabel="highlight"
-            app:primaryColorEdittext="@color/white" >
-        </com.rengwuxian.materialedittext.MaterialEditText>
-    </LinearLayout>
+            android:layout_below="@+id/textView_desc"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="20dp"
+            android:gravity="center"
+            android:weightSum="100" >
 
-    <LinearLayout
-        android:id="@+id/phone_no_layout"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/name_layout"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="20dp"
-        android:gravity="center"
-        android:weightSum="100" >
+            <TextView
+                android:id="@+id/textView_name"
+                android:layout_width="0dip"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_gravity="center_vertical|right"
+                android:layout_marginRight="8dp"
+                android:layout_weight="30"
+                android:gravity="right"
+                android:padding="8dp"
+                android:text="@string/name2"
+                android:textColor="@color/white"
+                android:textSize="18sp" />
 
-        <TextView
-            android:id="@+id/textView_phone"
-            android:layout_width="0dip"
+            <com.rengwuxian.materialedittext.MaterialEditText
+                android:id="@+id/edittext_name"
+                android:layout_width="0dip"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_gravity="center_vertical|left"
+                android:layout_marginLeft="8dp"
+                android:layout_toRightOf="@+id/textView_name"
+                android:layout_weight="70"
+                android:gravity="left"
+                android:hint="@string/name"
+                android:inputType="textPersonName"
+                android:paddingLeft="8dp"
+                android:singleLine="true"
+                android:textColor="@color/white"
+                android:textCursorDrawable="@drawable/white_cursor"
+                app:baseColor="@color/white"
+                app:errorColor="@color/red_error"
+                app:floatingLabel="highlight"
+                app:primaryColorEdittext="@color/white" >
+            </com.rengwuxian.materialedittext.MaterialEditText>
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/phone_no_layout"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:layout_gravity="center_vertical|right"
-            android:layout_marginRight="8dp"
-            android:layout_weight="30"
-            android:gravity="right"
-            android:padding="8dp"
-            android:text="@string/mobile"
-            android:textColor="@color/white"
-            android:textSize="18sp" />
+            android:layout_below="@+id/name_layout"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="20dp"
+            android:gravity="center"
+            android:weightSum="100" >
 
-        <com.rengwuxian.materialedittext.MaterialEditText
-            android:id="@+id/edittext_phone"
-            android:layout_width="0dip"
+            <TextView
+                android:id="@+id/textView_phone"
+                android:layout_width="0dip"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_gravity="center_vertical|right"
+                android:layout_marginRight="8dp"
+                android:layout_weight="30"
+                android:gravity="right"
+                android:padding="8dp"
+                android:text="@string/mobile"
+                android:textColor="@color/white"
+                android:textSize="18sp" />
+
+            <com.rengwuxian.materialedittext.MaterialEditText
+                android:id="@+id/edittext_phone"
+                android:layout_width="0dip"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_gravity="center_vertical|left"
+                android:layout_marginLeft="8dp"
+                android:layout_toRightOf="@+id/textView_phone"
+                android:layout_weight="70"
+                android:gravity="left"
+                android:hint="@string/phone"
+                android:inputType="textPersonName"
+                android:paddingLeft="8dp"
+                android:singleLine="true"
+                android:textColor="@color/white"
+                android:textCursorDrawable="@drawable/white_cursor"
+                app:baseColor="@color/white"
+                app:errorColor="@color/red_error"
+                app:floatingLabel="highlight"
+                app:primaryColorEdittext="@color/white" >
+            </com.rengwuxian.materialedittext.MaterialEditText>
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/origin_layout"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:layout_gravity="center_vertical|left"
-            android:layout_marginLeft="8dp"
-            android:layout_toRightOf="@+id/textView_phone"
-            android:layout_weight="70"
-            android:gravity="left"
-            android:hint="@string/phone"
-            android:inputType="textPersonName"
-            android:paddingLeft="8dp"
-            android:singleLine="true"
-            android:textColor="@color/white"
-            android:textCursorDrawable="@drawable/white_cursor"
-            app:baseColor="@color/white"
-            app:errorColor="@color/red_error"
-            app:floatingLabel="highlight"
-            app:primaryColorEdittext="@color/white" >
-        </com.rengwuxian.materialedittext.MaterialEditText>
-    </LinearLayout>
+            android:layout_below="@+id/phone_no_layout"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="20dp"
+            android:gravity="center"
+            android:weightSum="100" >
 
-    <LinearLayout
-        android:id="@+id/origin_layout"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/phone_no_layout"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="20dp"
-        android:gravity="center"
-        android:weightSum="100" >
+            <TextView
+                android:id="@+id/textView_origin"
+                android:layout_width="0dip"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_gravity="center_vertical|right"
+                android:layout_marginRight="8dp"
+                android:layout_weight="30"
+                android:gravity="right"
+                android:padding="8dp"
+                android:text="@string/origin2"
+                android:textColor="@color/white"
+                android:textSize="18sp" />
 
-        <TextView
-            android:id="@+id/textView_origin"
-            android:layout_width="0dip"
+            <com.rengwuxian.materialedittext.MaterialEditText
+                android:id="@+id/edittext_origin"
+                android:layout_width="0dip"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_gravity="center_vertical|left"
+                android:layout_marginLeft="8dp"
+                android:layout_toRightOf="@+id/textView_phone"
+                android:layout_weight="70"
+                android:gravity="left"
+                android:hint="@string/origin"
+                android:inputType="text"
+                android:paddingLeft="8dp"
+                android:singleLine="true"
+                android:textColor="@color/white"
+                android:textCursorDrawable="@drawable/white_cursor"
+                app:baseColor="@color/white"
+                app:errorColor="@color/red_error"
+                app:floatingLabel="highlight"
+                app:primaryColorEdittext="@color/white" >
+            </com.rengwuxian.materialedittext.MaterialEditText>
+        </LinearLayout>
+
+        <com.pnikosis.materialishprogress.ProgressWheel
+            android:id="@+id/progressBar"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:layout_below="@+id/origin_layout"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="20dp"
+            android:visibility="gone"
+            app:matProg_barColor="@color/white"
+            app:matProg_progressIndeterminate="true" />
+
+        <Button
+            android:id="@+id/button_register"
+            style="@style/Buttonkakuma"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:layout_gravity="center_vertical|right"
-            android:layout_marginRight="8dp"
-            android:layout_weight="30"
-            android:gravity="right"
-            android:padding="8dp"
-            android:text="@string/origin2"
-            android:textColor="@color/white"
-            android:textSize="18sp" />
+            android:layout_below="@+id/origin_layout"
+            android:layout_centerHorizontal="true"
+            android:layout_gravity="right"
+            android:layout_marginTop="20dp"
+            android:background="@drawable/border_button_transparent"
+            android:text="@string/register"
+            android:textColor="@color/white" />
+    </RelativeLayout>
 
-        <com.rengwuxian.materialedittext.MaterialEditText
-            android:id="@+id/edittext_origin"
-            android:layout_width="0dip"
-            android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:layout_gravity="center_vertical|left"
-            android:layout_marginLeft="8dp"
-            android:layout_toRightOf="@+id/textView_phone"
-            android:layout_weight="70"
-            android:enabled="false"
-            android:gravity="left"
-            android:hint="@string/origin"
-            android:inputType="text"
-            android:paddingLeft="8dp"
-            android:singleLine="true"
-            android:textColor="@color/white"
-            android:textCursorDrawable="@drawable/white_cursor"
-            app:baseColor="@color/white"
-            app:errorColor="@color/red_error"
-            app:floatingLabel="highlight"
-            app:primaryColorEdittext="@color/white" >
-        </com.rengwuxian.materialedittext.MaterialEditText>
-    </LinearLayout>
-
-    <Button
-        android:id="@+id/button_register"
-        style="@style/Buttonkakuma"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/origin_layout"
-        android:layout_centerHorizontal="true"
-        android:layout_gravity="right"
-        android:layout_marginTop="20dp"
-        android:background="@drawable/border_button_transparent"
-        android:text="@string/register"
-        android:textColor="@color/white" />
-
-</RelativeLayout>
+</ScrollView>

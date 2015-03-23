@@ -101,6 +101,13 @@
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
+          <activity android:name=".Registered" >
+            <intent-filter>
+                <action android:name="com.kakumapp.Registered" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
         <activity
             android:name=".Help"
             android:label="@string/help" >
