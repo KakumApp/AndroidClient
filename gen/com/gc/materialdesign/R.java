@@ -53,9 +53,9 @@ public final class R {
 		public static final int float_button_shadow1 = 0x7f02004b;
 		public static final int ic_launcher = 0x7f020059;
 		public static final int ic_reloj_max = 0x7f02005e;
-		public static final int shadow_down = 0x7f020102;
-		public static final int shadow_right = 0x7f020103;
-		public static final int sprite_check = 0x7f020104;
+		public static final int shadow_down = 0x7f020103;
+		public static final int shadow_right = 0x7f020104;
+		public static final int sprite_check = 0x7f020105;
 	}
 	public static final class id {
 		public static final int blue = 0x7f0a0077;

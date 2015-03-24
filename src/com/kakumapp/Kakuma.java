@@ -30,7 +30,7 @@ public class Kakuma extends ActionBarActivity implements SwipeGestureListener {
 		descTextView = (TextView) findViewById(R.id.textView_desc);
 		howToUseTextView = (TextView) findViewById(R.id.textView_how_to_use);
 
-		typeface = new Utils(this).getFont("Ubuntu-L");
+		typeface = new Utils(this).getFont("Lato-Light");
 		titleTextView.setTypeface(typeface);
 		descTextView.setTypeface(typeface);
 		howToUseTextView.setTypeface(typeface);

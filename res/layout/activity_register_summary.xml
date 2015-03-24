@@ -24,22 +24,11 @@
             app:civ_shadow="true" >
         </com.kakumapp.views.CircularImageView>
 
-        <TextView
-            android:id="@+id/textView_desc"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/image_view_photo"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="20dp"
-            android:text="@string/register_summ_instr"
-            android:textColor="@color/white"
-            android:textSize="18sp" />
-
         <LinearLayout
             android:id="@+id/name_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/textView_desc"
+            android:layout_below="@+id/image_view_photo"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="20dp"
             android:gravity="center"
@@ -59,7 +48,7 @@
                 android:textColor="@color/white"
                 android:textSize="18sp" />
 
-            <com.rengwuxian.materialedittext.MaterialEditText
+            <TextView
                 android:id="@+id/edittext_name"
                 android:layout_width="0dip"
                 android:layout_height="wrap_content"
@@ -69,17 +58,10 @@
                 android:layout_toRightOf="@+id/textView_name"
                 android:layout_weight="70"
                 android:gravity="left"
-                android:hint="@string/name"
-                android:inputType="textPersonName"
                 android:paddingLeft="8dp"
                 android:singleLine="true"
                 android:textColor="@color/white"
-                android:textCursorDrawable="@drawable/white_cursor"
-                app:baseColor="@color/white"
-                app:errorColor="@color/red_error"
-                app:floatingLabel="highlight"
-                app:primaryColorEdittext="@color/white" >
-            </com.rengwuxian.materialedittext.MaterialEditText>
+                android:textSize="18sp" />
         </LinearLayout>
 
         <LinearLayout
@@ -106,7 +88,7 @@
                 android:textColor="@color/white"
                 android:textSize="18sp" />
 
-            <com.rengwuxian.materialedittext.MaterialEditText
+            <TextView
                 android:id="@+id/edittext_phone"
                 android:layout_width="0dip"
                 android:layout_height="wrap_content"
@@ -116,17 +98,10 @@
                 android:layout_toRightOf="@+id/textView_phone"
                 android:layout_weight="70"
                 android:gravity="left"
-                android:hint="@string/phone"
-                android:inputType="textPersonName"
                 android:paddingLeft="8dp"
                 android:singleLine="true"
                 android:textColor="@color/white"
-                android:textCursorDrawable="@drawable/white_cursor"
-                app:baseColor="@color/white"
-                app:errorColor="@color/red_error"
-                app:floatingLabel="highlight"
-                app:primaryColorEdittext="@color/white" >
-            </com.rengwuxian.materialedittext.MaterialEditText>
+                android:textSize="18sp" />
         </LinearLayout>
 
         <LinearLayout
@@ -153,7 +128,7 @@
                 android:textColor="@color/white"
                 android:textSize="18sp" />
 
-            <com.rengwuxian.materialedittext.MaterialEditText
+            <TextView
                 android:id="@+id/edittext_origin"
                 android:layout_width="0dip"
                 android:layout_height="wrap_content"
@@ -163,17 +138,10 @@
                 android:layout_toRightOf="@+id/textView_phone"
                 android:layout_weight="70"
                 android:gravity="left"
-                android:hint="@string/origin"
-                android:inputType="text"
                 android:paddingLeft="8dp"
                 android:singleLine="true"
                 android:textColor="@color/white"
-                android:textCursorDrawable="@drawable/white_cursor"
-                app:baseColor="@color/white"
-                app:errorColor="@color/red_error"
-                app:floatingLabel="highlight"
-                app:primaryColorEdittext="@color/white" >
-            </com.rengwuxian.materialedittext.MaterialEditText>
+                android:textSize="16sp" />
         </LinearLayout>
 
         <com.pnikosis.materialishprogress.ProgressWheel
@@ -195,7 +163,7 @@
             android:layout_below="@+id/origin_layout"
             android:layout_centerHorizontal="true"
             android:layout_gravity="right"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="30dp"
             android:background="@drawable/border_button_transparent"
             android:text="@string/register"
             android:textColor="@color/white" />

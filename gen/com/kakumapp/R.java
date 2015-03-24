@@ -2718,21 +2718,22 @@ containing a value of this type.
         public static final int kakumapp_white_textfield_disabled_focused_holo_light=0x7f0200f4;
         public static final int kakumapp_white_textfield_disabled_holo_light=0x7f0200f5;
         public static final int kakumapp_white_textfield_focused_holo_light=0x7f0200f6;
-        public static final int md_btn_selected=0x7f0200f7;
-        public static final int md_btn_selected_dark=0x7f0200f8;
-        public static final int md_btn_selector=0x7f0200f9;
-        public static final int md_btn_selector_dark=0x7f0200fa;
-        public static final int md_btn_selector_ripple=0x7f0200fb;
-        public static final int md_btn_selector_ripple_dark=0x7f0200fc;
-        public static final int md_item_selected=0x7f0200fd;
-        public static final int md_item_selected_dark=0x7f0200fe;
-        public static final int md_selector=0x7f0200ff;
-        public static final int md_selector_dark=0x7f020100;
-        public static final int md_transparent=0x7f020101;
-        public static final int shadow_down=0x7f020102;
-        public static final int shadow_right=0x7f020103;
-        public static final int sprite_check=0x7f020104;
-        public static final int white_cursor=0x7f020105;
+        public static final int landing=0x7f0200f7;
+        public static final int md_btn_selected=0x7f0200f8;
+        public static final int md_btn_selected_dark=0x7f0200f9;
+        public static final int md_btn_selector=0x7f0200fa;
+        public static final int md_btn_selector_dark=0x7f0200fb;
+        public static final int md_btn_selector_ripple=0x7f0200fc;
+        public static final int md_btn_selector_ripple_dark=0x7f0200fd;
+        public static final int md_item_selected=0x7f0200fe;
+        public static final int md_item_selected_dark=0x7f0200ff;
+        public static final int md_selector=0x7f020100;
+        public static final int md_selector_dark=0x7f020101;
+        public static final int md_transparent=0x7f020102;
+        public static final int shadow_down=0x7f020103;
+        public static final int shadow_right=0x7f020104;
+        public static final int sprite_check=0x7f020105;
+        public static final int white_cursor=0x7f020106;
     }
     public static final class id {
         public static final int action_bar=0x7f0a0033;

@@ -9,7 +9,6 @@ import java.util.ArrayList;
 
 import org.apache.http.Header;
 import org.apache.http.HttpResponse;
-import org.apache.http.NameValuePair;
 import org.apache.http.auth.UsernamePasswordCredentials;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpGet;
@@ -17,7 +16,6 @@ import org.apache.http.client.methods.HttpPost;
 import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.auth.BasicScheme;
 import org.apache.http.impl.client.DefaultHttpClient;
-import org.apache.http.message.BasicNameValuePair;
 import org.apache.http.params.BasicHttpParams;
 import org.apache.http.params.HttpConnectionParams;
 import org.apache.http.params.HttpParams;
@@ -44,7 +42,6 @@ import com.cocosw.bottomsheet.BottomSheet;
 import com.kakumapp.utils.Utils;
 import com.kakumapp.views.CircularImageView;
 import com.pnikosis.materialishprogress.ProgressWheel;
-import com.rengwuxian.materialedittext.MaterialEditText;
 
 public class RegisterSummary extends ActionBarActivity {
 
@@ -55,10 +52,9 @@ public class RegisterSummary extends ActionBarActivity {
 	public static int FETCH_TYPE = 1;
 	private String firstName, lastName, otherName, phoneNumber, countryCode;
 	private ArrayList<String> places, placesIds;
-	// private String placesIds = "";
 	private Typeface typeface;
 	private TextView nameTextView, phoneTextView, placeTextView, textView_desc;
-	private MaterialEditText nameEditText, phoneEditText, placesEditText;
+	private TextView nameEditText, phoneEditText, placesEditText;
 	private CircularImageView circularImageView;
 	private BottomSheet bottomSheet;
 	private Button registerButton;
@@ -81,9 +77,9 @@ public class RegisterSummary extends ActionBarActivity {
 		textView_desc = (TextView) findViewById(R.id.textView_desc);
 		placeTextView = (TextView) findViewById(R.id.textView_origin);
 		circularImageView = (CircularImageView) findViewById(R.id.image_view_photo);
-		nameEditText = (MaterialEditText) findViewById(R.id.edittext_name);
-		phoneEditText = (MaterialEditText) findViewById(R.id.edittext_phone);
-		placesEditText = (MaterialEditText) findViewById(R.id.edittext_origin);
+		nameEditText = (TextView) findViewById(R.id.edittext_name);
+		phoneEditText = (TextView) findViewById(R.id.edittext_phone);
+		placesEditText = (TextView) findViewById(R.id.edittext_origin);
 		registerButton = (Button) findViewById(R.id.button_register);
 		progressBar = (ProgressWheel) findViewById(R.id.progressBar);
 
@@ -92,12 +88,6 @@ public class RegisterSummary extends ActionBarActivity {
 		phoneTextView.setTypeface(typeface);
 		textView_desc.setTypeface(typeface);
 		placeTextView.setTypeface(typeface);
-
-		placesEditText.setEnabled(false);
-		int hintTextColor = getResources().getColor(R.color.half_white);
-		nameEditText.setHintTextColor(hintTextColor);
-		phoneEditText.setHintTextColor(hintTextColor);
-		placesEditText.setHintTextColor(hintTextColor);
 
 		places = new ArrayList<>();
 		placesIds = new ArrayList<>();
@@ -144,57 +134,6 @@ public class RegisterSummary extends ActionBarActivity {
 			circularImageView.setImageBitmap(bitmap);
 		}
 
-		//
-		// // get data if passed
-		// Bundle bundle = getIntent().getExtras();
-		// if (bundle != null) {
-		// // for the phone number
-		// phoneNumber = bundle.getString("phone");
-		// countryCode = bundle.getString("code");
-		//
-		// firstName = bundle.getString("firstName");
-		// lastName = bundle.getString("lastName");
-		// otherName = bundle.getString("otherName");
-		// country = bundle.getString("country");
-		// places = bundle.getStringArrayList("places");
-		// placesIds = bundle.getStringArrayList("placesIds");
-		//
-		// if (firstName != null && lastName != null) {
-		// nameEditText.setText(firstName + " " + lastName);
-		// if (otherName != null) {
-		// nameEditText.append(" " + otherName);
-		// } else {
-		// otherName = null;
-		// }
-		// }
-		//
-		// if (phoneNumber != null) {
-		// phoneEditText.setText(phoneNumber);
-		// }
-		//
-		// if (places != null) {
-		// String plcs = "";
-		// for (String plc : places) {
-		// plcs += plc + ",";
-		// }
-		// placesEditText.setText(plcs);
-		// }
-		//
-		// if (bitmap != null) {
-		// circularImageView.setImageBitmap(bitmap);
-		// }
-		// }
-
-		// for (int i = 0; i < RegisterOrigin.places.size(); i++) {
-		// String id = RegisterOrigin.places.get(i).getId() + "";
-		// Log.e(TAG, "Id " + id);
-		// placesIds.add(id);
-		// // placesIds += RegisterOrigin.places.get(i).getId() + ",";
-		// }
-		// if (placesIds.endsWith(",")) {
-		// placesIds = placesIds.substring(0, placesIds.length() - 1);
-		// }
-
 		registerButton.setOnClickListener(new OnClickListener() {
 
 			@Override
@@ -223,13 +162,6 @@ public class RegisterSummary extends ActionBarActivity {
 		} catch (JSONException e) {
 			e.printStackTrace();
 		}
-		// registerTask.addNameValuePair("first_name", firstName);
-		// registerTask.addNameValuePair("last_name", lastName);
-		// registerTask.addNameValuePair("other_name", otherName);
-		// registerTask.addNameValuePair("phone_no", phoneNumber);
-		// registerTask.addNameValuePair("places[]",
-		// placesIds.toArray(new String[placesIds.size()]));
-		// registerTask.addNameValuePair("photo", "URL");
 		registerTask.execute(new String[] { URL + "targets/" });
 	}
 
@@ -291,33 +223,10 @@ public class RegisterSummary extends ActionBarActivity {
 		private static final int CONN_TIMEOUT = 60000;
 		// socket timeout, in milliseconds-waiting for data
 		private static final int SOCKET_TIMEOUT = 60000;
-		private ArrayList<NameValuePair> params = new ArrayList<NameValuePair>();
 		private int TASK_TYPE;
 
 		public RegisterTask(int TASK_TYPE) {
 			this.TASK_TYPE = TASK_TYPE;
-		}
-
-		/**
-		 * Add name value pairs for simple strings
-		 * 
-		 * @param name
-		 * @param value
-		 */
-		public void addNameValuePair(String name, String value) {
-			params.add(new BasicNameValuePair(name, value));
-		}
-
-		/**
-		 * Add name value pairs for string arrays
-		 * 
-		 * @param name
-		 * @param value
-		 */
-		public void addNameValuePair(String name, String[] values) {
-			for (String value : values) {
-				params.add(new BasicNameValuePair(name, value));
-			}
 		}
 
 		@Override
