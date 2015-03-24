@@ -34,7 +34,6 @@ import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.AdapterView;
-import android.widget.AdapterView.OnItemClickListener;
 import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -49,6 +48,12 @@ import com.kakumapp.adapters.Place;
 import com.kakumapp.utils.Utils;
 import com.pnikosis.materialishprogress.ProgressWheel;
 
+/**
+ * Register a place of origin
+ * 
+ * @author paul
+ * 
+ */
 public class RegisterOrigin extends ActionBarActivity {
 
 	public static final String TAG = "RegisterOrigin";
@@ -62,8 +67,7 @@ public class RegisterOrigin extends ActionBarActivity {
 	private Typeface typeface;
 	private Spinner countriesSpinner;
 	private MultiAutoCompleteTextView placesAutoCompleteTextView;
-	private String firstName, lastName, otherName, phoneNumber, countryCode,
-			selectedCountryName;
+	private String selectedCountryName;
 	public static Country country;
 	private Country defaultCountry;
 	private ArrayList<String> selectedPlaces;
@@ -83,18 +87,18 @@ public class RegisterOrigin extends ActionBarActivity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_origin);
-
+		// global app
 		application = (KakumaApplication) getApplication();
-
+		// get the views
 		continueButton = (Button) findViewById(R.id.button_register_continue);
 		findPersonTextView = (TextView) findViewById(R.id.textView_register_find_person);
 		countriesSpinner = (Spinner) findViewById(R.id.spinner_origin_countries);
 		placesAutoCompleteTextView = (MultiAutoCompleteTextView) findViewById(R.id.autocomplete_origin_places);
 		progressBar = (ProgressWheel) findViewById(R.id.progressBar);
-
+		// fonts
 		typeface = new Utils(this).getFont("Ubuntu-L");
 		findPersonTextView.setTypeface(typeface);
-
+		// hints color
 		int hintTextColor = getResources().getColor(R.color.half_white);
 		placesAutoCompleteTextView.setHintTextColor(hintTextColor);
 
@@ -110,12 +114,13 @@ public class RegisterOrigin extends ActionBarActivity {
 
 			@Override
 			public void onClick(View v) {
+				// meeting activity
 				Intent findPersonIntent = new Intent(RegisterOrigin.this,
 						MeetingPoints.class);
 				startActivity(findPersonIntent);
 			}
 		});
-
+		// create the spinners adapters
 		defaultCountry = new Country(0, SELECT_COUNTRY, "");
 		countries.add(defaultCountry);
 
@@ -124,7 +129,7 @@ public class RegisterOrigin extends ActionBarActivity {
 		dataAdapterCountries
 				.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 		countriesSpinner.setAdapter(dataAdapterCountries);
-
+		// when a country is selected,get the places under that country
 		countriesSpinner
 				.setOnItemSelectedListener(new OnItemSelectedListener() {
 
@@ -150,7 +155,7 @@ public class RegisterOrigin extends ActionBarActivity {
 					public void onNothingSelected(AdapterView<?> arg0) {
 					}
 				});
-
+		// places spinner adatapter
 		dataAdapterPlaces = new ArrayAdapter<Place>(this,
 				android.R.layout.simple_list_item_1, places);
 
@@ -161,22 +166,7 @@ public class RegisterOrigin extends ActionBarActivity {
 		// comma to separate the different places
 		placesAutoCompleteTextView
 				.setTokenizer(new MultiAutoCompleteTextView.CommaTokenizer());
-		// when the user clicks an item of the drop-down list
-		placesAutoCompleteTextView
-				.setOnItemClickListener(new OnItemClickListener() {
-
-					@Override
-					public void onItemClick(AdapterView<?> parent, View arg1,
-							int position, long arg3) {
-						// Place place = (Place) parent
-						// .getItemAtPosition(position);
-						//
-						// if (!selectedPlaces.contains(place.getName())) {
-						// selectedPlaces.add(place.getName());
-						// }
-					}
-				});
-
+		// set global data if available
 		selectedCountryName = application.getSelectedCountryName();
 		selectedPlaces = application.getSelectedPlaces();
 		selectedPlacesIds = application.getSelectedPlacesIds();
@@ -194,37 +184,13 @@ public class RegisterOrigin extends ActionBarActivity {
 		if (selectedPlacesIds == null) {
 			selectedPlacesIds = new ArrayList<>();
 		}
-
-		// // get data if passed
-		// Bundle bundle = getIntent().getExtras();
-		// if (bundle != null) {
-		// // for the phone number
-		// phoneNumber = bundle.getString("phone");
-		// countryCode = bundle.getString("code");
-		// firstName = bundle.getString("firstName");
-		// lastName = bundle.getString("lastName");
-		// otherName = bundle.getString("otherName");
-		// // // for this activity
-		// selectedCountryName = bundle.getString("country");
-		// selectedPlaces = bundle.getStringArrayList("places");
-		//
-		// if (selectedPlaces != null && !selectedPlaces.isEmpty()) {
-		// String plcs = "";
-		// for (int i = 0; i < selectedPlaces.size(); i++) {
-		// plcs += selectedPlaces.get(i) + ",";
-		// }
-		// placesAutoCompleteTextView.setText(plcs);
-		// } else {
-		// selectedPlaces = new ArrayList<>();
-		// }
-		// }
-
 		// get the countries
 		FETCH_TYPE = 1;
 		FetchTask fetchTask = new FetchTask(FetchTask.GET_TASK);
 		fetchTask.execute(new String[] { URL + "countries/" });
 	}
 
+	// show progress bar and hide button
 	private void showProgress() {
 		if (progressBar != null && continueButton != null) {
 			progressBar.setVisibility(View.VISIBLE);
@@ -232,6 +198,7 @@ public class RegisterOrigin extends ActionBarActivity {
 		}
 	}
 
+	// hide progress bar and show button
 	private void hideprogress() {
 		if (progressBar != null && continueButton != null) {
 			progressBar.setVisibility(View.GONE);
@@ -240,6 +207,7 @@ public class RegisterOrigin extends ActionBarActivity {
 	}
 
 	protected void goNext() {
+		// if there are any places that the user has entered,register them first
 		selectedPlaces.clear();
 		String placesEntered = placesAutoCompleteTextView.getText().toString()
 				.trim();
@@ -257,6 +225,7 @@ public class RegisterOrigin extends ActionBarActivity {
 				placesToRegister.add(selectedPlace);
 			}
 		}
+		// register places(user generated)
 		if (placesToRegister.size() > 0) {
 			for (indexOfPlace = 0; indexOfPlace < placesToRegister.size(); indexOfPlace++) {
 				// register a place
@@ -273,6 +242,7 @@ public class RegisterOrigin extends ActionBarActivity {
 	}
 
 	public void moveToNextScreen() {
+		// if data is valid
 		if (isValidData()) {
 			// get the ids of the places selected
 			for (String selectedPlace : selectedPlaces) {
@@ -282,16 +252,6 @@ public class RegisterOrigin extends ActionBarActivity {
 					}
 				}
 			}
-			// Bundle bundle = new Bundle();
-			// bundle.putString("phone", phoneNumber);
-			// bundle.putString("code", countryCode);
-			// bundle.putString("firstName", firstName);
-			// bundle.putString("lastName", lastName);
-			// bundle.putString("otherName", otherName);
-			// bundle.putString("country", selectedCountryName);
-			// bundle.putStringArrayList("places", selectedPlaces);
-			// bundle.putStringArrayList("placesIds", selectedPlacesIds);
-
 			application.setCountry(country);
 			application.setSelectedCountryName(selectedCountryName);
 			application.setSelectedPlaces(selectedPlaces);
@@ -299,7 +259,6 @@ public class RegisterOrigin extends ActionBarActivity {
 
 			Intent nameIntent = new Intent(RegisterOrigin.this,
 					RegisterPhoto.class);
-			// nameIntent.putExtras(bundle);
 			startActivity(nameIntent);
 			finish();
 		}
@@ -343,8 +302,10 @@ public class RegisterOrigin extends ActionBarActivity {
 		}
 	}
 
+	// show a retry dialog for poor/no internet connection
 	public void showRetry() {
 		hideprogress();
+		// show only if there are no other dialogs already showing
 		if (dialog == null || !dialog.isShowing()) {
 			dialog = new MaterialDialog.Builder(this)
 					.title(R.string.connect_error)
@@ -353,6 +314,7 @@ public class RegisterOrigin extends ActionBarActivity {
 					.callback(new MaterialDialog.ButtonCallback() {
 						@Override
 						public void onPositive(MaterialDialog dialog) {
+							// refetch the data/retry to send some data
 							FetchTask fetchTask = null;
 							switch (FETCH_TYPE) {
 							case 1:
@@ -390,24 +352,26 @@ public class RegisterOrigin extends ActionBarActivity {
 						@Override
 						public void onNegative(MaterialDialog dialog) {
 							if (FETCH_TYPE == 1) {
-								Bundle bundle = new Bundle();
-								bundle.putString("phone", phoneNumber);
-								bundle.putString("code", countryCode);
-								bundle.putString("firstName", firstName);
-								bundle.putString("lastName", lastName);
-								bundle.putString("otherName", otherName);
+								// go back one screen since there is nothing one
+								// can do without net
 								Intent originIntent = new Intent(
 										RegisterOrigin.this,
 										RegisterPhone.class);
-								originIntent.putExtras(bundle);
 								startActivity(originIntent);
 							}
 						}
 					}).build();
+			dialog.setCancelable(false);
 			dialog.show();
 		}
 	}
 
+	/**
+	 * This class does pulling/pushing some data
+	 * 
+	 * @author paul
+	 * 
+	 */
 	private class FetchTask extends AsyncTask<String, Integer, String> {
 		public static final int POST_TASK = 1;
 		public static final int GET_TASK = 2;
@@ -432,6 +396,9 @@ public class RegisterOrigin extends ActionBarActivity {
 			showProgress();
 		}
 
+		/**
+		 * execute either GET/POST
+		 */
 		protected String doInBackground(String... urls) {
 			String url = urls[0];
 			String result = "";
@@ -481,8 +448,6 @@ public class RegisterOrigin extends ActionBarActivity {
 					}
 				} catch (JSONException e) {
 					showRetry();
-					// showErrorMessage("Internet connection",
-					// "Connection could not be established.Check your internet settings.");
 				}
 			}
 			// fetching places under a chosen country
@@ -513,8 +478,6 @@ public class RegisterOrigin extends ActionBarActivity {
 					}
 				} catch (JSONException e) {
 					showRetry();
-					// showErrorMessage("Internet connection",
-					// "Connection could not be established.Check your internet settings.");
 				}
 			}
 			// registering places
@@ -548,8 +511,6 @@ public class RegisterOrigin extends ActionBarActivity {
 						}
 					} catch (JSONException e1) {
 						showRetry();
-						// showErrorMessage("Internet connection",
-						// "Connection could not be established.Check your internet settings.");
 					}
 				}
 			}

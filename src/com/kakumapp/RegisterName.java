@@ -13,7 +13,9 @@ import android.widget.TextView;
 import com.kakumapp.utils.Utils;
 
 /**
- * Register name
+ * Register name activity
+ * 
+ * Displays UI for entering name
  * 
  * @author paul
  * 
@@ -31,20 +33,20 @@ public class RegisterName extends ActionBarActivity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_name);
-
+		// instance of the global application
 		application = (KakumaApplication) getApplication();
-
+		// get the fields
 		continueButton = (Button) findViewById(R.id.button_register_continue);
 		descTextView = (TextView) findViewById(R.id.textView_name_desc);
 		findPersonTextView = (TextView) findViewById(R.id.textView_register_find_person);
 		firstNameEditText = (EditText) findViewById(R.id.edittext_first_name);
 		lastNameEditText = (EditText) findViewById(R.id.edittext_last_name);
 		otherNameEditText = (EditText) findViewById(R.id.edittext_other_name);
-
+		// fonts
 		typeface = new Utils(this).getFont("Ubuntu-L");
 		findPersonTextView.setTypeface(typeface);
 		descTextView.setTypeface(typeface);
-
+		// hint color
 		int hintTextColor = getResources().getColor(R.color.half_white);
 		firstNameEditText.setHintTextColor(hintTextColor);
 		lastNameEditText.setHintTextColor(hintTextColor);
@@ -54,21 +56,15 @@ public class RegisterName extends ActionBarActivity {
 
 			@Override
 			public void onClick(View v) {
+				// if data is valid
 				if (isValidData()) {
+					// set global data
 					application.setFirstName(firstName);
 					application.setLastName(lastName);
 					application.setOtherName(otherName);
-
-					// Bundle bundle = new Bundle();
-					// bundle.putString("phone", phoneNumber);
-					// bundle.putString("code", countryCode);
-					// bundle.putString("firstName", firstName);
-					// bundle.putString("lastName", lastName);
-					// bundle.putString("otherName", otherName);
-					//
+					// start the origin activity
 					Intent originIntent = new Intent(RegisterName.this,
 							RegisterPhone.class);
-					// originIntent.putExtras(bundle);
 					startActivity(originIntent);
 					finish();
 				}
@@ -84,7 +80,7 @@ public class RegisterName extends ActionBarActivity {
 				startActivity(findPersonIntent);
 			}
 		});
-
+		// get the data and set on the fields
 		firstName = application.getFirstName();
 		lastName = application.getLastName();
 		otherName = application.getOtherName();
@@ -101,31 +97,6 @@ public class RegisterName extends ActionBarActivity {
 		if (otherName != null) {
 			otherNameEditText.setText(otherName);
 		}
-		//
-		// // get data if passed
-		// Bundle bundle = getIntent().getExtras();
-		// if (bundle != null) {
-		// // for the phone number
-		// phoneNumber = bundle.getString("phone");
-		// countryCode = bundle.getString("code");
-		// // if any data passed for this activity
-		// firstName = bundle.getString("firstName");
-		// lastName = bundle.getString("lastName");
-		// otherName = bundle.getString("otherName");
-		//
-		// // set the data on the different fields
-		// if (firstName != null) {
-		// firstNameEditText.setText(firstName);
-		// }
-		//
-		// if (lastName != null) {
-		// lastNameEditText.setText(lastName);
-		// }
-		//
-		// if (otherName != null) {
-		// otherNameEditText.setText(otherName);
-		// }
-		// }
 	}
 
 	/**
@@ -152,6 +123,9 @@ public class RegisterName extends ActionBarActivity {
 		return valid;
 	}
 
+	/**
+	 * explicitly state where to go back to
+	 */
 	@Override
 	public void onBackPressed() {
 		super.onBackPressed();

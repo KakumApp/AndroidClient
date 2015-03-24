@@ -17,23 +17,25 @@ public class Kakuma extends ActionBarActivity implements SwipeGestureListener {
 	// private static final String TAG = "Kakuma";
 	private Button registerButton, findAPersonButton;
 	private TextView titleTextView, descTextView, howToUseTextView;
-	private Typeface typeface;
+	private Typeface typeface, typeface2;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_kakuma);
-
+		// views
 		registerButton = (Button) findViewById(R.id.button_register);
 		findAPersonButton = (Button) findViewById(R.id.button_find_a_person);
 		titleTextView = (TextView) findViewById(R.id.textView_title);
 		descTextView = (TextView) findViewById(R.id.textView_desc);
 		howToUseTextView = (TextView) findViewById(R.id.textView_how_to_use);
-
+		// font
 		typeface = new Utils(this).getFont("Lato-Light");
+		typeface2 = new Utils(this).getFont("Ubuntu-L");
+
 		titleTextView.setTypeface(typeface);
-		descTextView.setTypeface(typeface);
-		howToUseTextView.setTypeface(typeface);
+		descTextView.setTypeface(typeface2);
+		howToUseTextView.setTypeface(typeface2);
 
 		registerButton.setOnClickListener(new OnClickListener() {
 
@@ -48,7 +50,8 @@ public class Kakuma extends ActionBarActivity implements SwipeGestureListener {
 
 			@Override
 			public void onClick(View v) {
-				Intent findPersonIntent = new Intent(Kakuma.this, MeetingPoints.class);
+				Intent findPersonIntent = new Intent(Kakuma.this,
+						MeetingPoints.class);
 				startActivity(findPersonIntent);
 			}
 		});

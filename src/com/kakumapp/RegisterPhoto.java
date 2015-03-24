@@ -32,6 +32,14 @@ import android.widget.Toast;
 import com.afollestad.materialdialogs.MaterialDialog;
 import com.cocosw.bottomsheet.BottomSheet;
 
+/**
+ * The activity that displays a Camera view and allows the user to take his/her
+ * photo
+ * 
+ * @author paul
+ * 
+ */
+
 @SuppressWarnings("deprecation")
 public class RegisterPhoto extends ActionBarActivity implements
 		SurfaceHolder.Callback, Camera.ShutterCallback, Camera.PictureCallback {
@@ -52,37 +60,41 @@ public class RegisterPhoto extends ActionBarActivity implements
 	private boolean hasFrontCamera;
 	private BottomSheet bottomSheet;
 	private KakumaApplication application;
+	private MaterialDialog dialog;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_photo);
 		activity = this;
-
+		// app
 		application = (KakumaApplication) getApplication();
-
+		// get the views
 		mPreview = (SurfaceView) findViewById(R.id.camera_preview);
 		switchImageView = (ImageView) findViewById(R.id.imageView_switch);
 		flashImageView = (ImageView) findViewById(R.id.imageView_flash);
 		flashImageView.setTag(R.drawable.ic_action_flash_automatic);
-
+		// get the preview
 		mPreview.getHolder().addCallback(this);
 		mPreview.getHolder().setType(SurfaceHolder.SURFACE_TYPE_PUSH_BUFFERS);
 
 		// prefer starting with front camera if present
 		if (hasAFrontCamera()) {
 			currentCameraId = Camera.CameraInfo.CAMERA_FACING_FRONT;
+			// assume the front camera doesn't have flash
 			showFlash(false);
 		} else {
 			currentCameraId = Camera.CameraInfo.CAMERA_FACING_BACK;
-			// hide switch imageview
+			// hide switch imageview since there is only one camera
 			switchImageView.setVisibility(View.GONE);
 		}
+		// try to open the camera,weird things can happen here ):
 		try {
 			mCamera = Camera.open(currentCameraId);
 		} catch (Exception exception) {
 			Log.e(TAG, "Exception " + exception.getLocalizedMessage());
-			showErrorMessage("Camera", "Could not open the camera");
+			// show a retry
+			showRetry();
 		}
 		switchImageView.setOnClickListener(new OnClickListener() {
 
@@ -136,27 +148,51 @@ public class RegisterPhoto extends ActionBarActivity implements
 		});
 
 		IMAGE_MAX_SIZE = getScreenSize()[1];
-
-		// // get data if passed
-		// Bundle bundle = getIntent().getExtras();
-		// if (bundle != null) {
-		// // for the phone number
-		// phoneNumber = bundle.getString("phone");
-		// countryCode = bundle.getString("code");
-		// firstName = bundle.getString("firstName");
-		// lastName = bundle.getString("lastName");
-		// otherName = bundle.getString("otherName");
-		// country = bundle.getString("country");
-		// places = bundle.getStringArrayList("places");
-		// placesIds = bundle.getStringArrayList("placesIds");
-		// }
 	}
 
+	// show a retry dialog for opening the camera
+	public void showRetry() {
+		// show only if there are no other dialogs already showing
+		if (dialog == null || !dialog.isShowing()) {
+			dialog = new MaterialDialog.Builder(this)
+					.title(R.string.camera_error)
+					.content(R.string.camera_message)
+					.positiveText(R.string.yes).negativeText(R.string.cancel)
+					.callback(new MaterialDialog.ButtonCallback() {
+						@Override
+						public void onPositive(MaterialDialog dialog) {
+							try {
+								mCamera = Camera.open(currentCameraId);
+							} catch (Exception exception) {
+								Log.e(TAG,
+										"Exception "
+												+ exception
+														.getLocalizedMessage());
+								// show a retry
+								showRetry();
+							}
+						}
+
+						@Override
+						public void onNegative(MaterialDialog dialog) {
+							Intent originIntent = new Intent(RegisterPhoto.this,
+									RegisterOrigin.class);
+							startActivity(originIntent);
+							finish();
+						}
+					}).build();
+			dialog.setCancelable(false);
+			dialog.show();
+		}
+	}
+
+	// does the camera possess flash capability
 	private boolean hasFlash() {
 		Camera.Parameters p = mCamera.getParameters();
 		return p.getFlashMode() == null ? false : true;
 	}
 
+	// show the flash imageview
 	private void showFlash(boolean flash) {
 		if (flashImageView != null) {
 			if (flash) {
@@ -242,6 +278,9 @@ public class RegisterPhoto extends ActionBarActivity implements
 	public void onShutter() {
 	}
 
+	/**
+	 * Get the photo taken and save it
+	 */
 	@Override
 	public void onPictureTaken(byte[] data, Camera camera) {
 		try {
@@ -253,16 +292,17 @@ public class RegisterPhoto extends ActionBarActivity implements
 				return;
 			}
 			try {
+				// decode the data
 				Bitmap realImage = BitmapFactory.decodeByteArray(data, 0,
 						data.length);
 				Camera.CameraInfo info = new android.hardware.Camera.CameraInfo();
 				Camera.getCameraInfo(currentCameraId, info);
 				bitmap = rotate(realImage, info.orientation);
-
+				// save image
 				FileOutputStream fos = new FileOutputStream(photoFile);
 				bitmap.compress(Bitmap.CompressFormat.JPEG, 100, fos);
 				fos.close();
-
+				// show the image
 				bitmap = decodeFile(photoFile);
 				showImageFragment(bitmap);
 			} catch (Exception e) {
@@ -274,6 +314,7 @@ public class RegisterPhoto extends ActionBarActivity implements
 		camera.startPreview();
 	}
 
+	// Rotation
 	public static Bitmap rotate(Bitmap bitmap, int degree) {
 		int w = bitmap.getWidth();
 		int h = bitmap.getHeight();
@@ -282,6 +323,13 @@ public class RegisterPhoto extends ActionBarActivity implements
 		return Bitmap.createBitmap(bitmap, 0, 0, w, h, mtx, true);
 	}
 
+	/**
+	 * Decoding the file image
+	 * 
+	 * @param f
+	 * @return
+	 * @throws Exception
+	 */
 	private Bitmap decodeFile(File f) throws Exception {
 		Bitmap bitmap = null;
 		// Decode image size
@@ -293,12 +341,6 @@ public class RegisterPhoto extends ActionBarActivity implements
 		int scale = 1;
 		if (options.outHeight > IMAGE_MAX_SIZE
 				|| options.outWidth > IMAGE_MAX_SIZE) {
-			// scale = (int) Math.pow(
-			// 2,
-			// (int) Math.ceil(Math.log(IMAGE_MAX_SIZE
-			// / (double) Math.max(options.outHeight,
-			// options.outWidth))
-			// / Math.log(0.5)));
 			scale = Math.max(
 					Integer.highestOneBit((Math.max(options.outHeight,
 							options.outWidth) - 1) / IMAGE_MAX_SIZE) << 1, 1);
@@ -312,6 +354,11 @@ public class RegisterPhoto extends ActionBarActivity implements
 		return bitmap;
 	}
 
+	/**
+	 * show the fragment having the photo taken
+	 * 
+	 * @param bitmapImage
+	 */
 	private void showImageFragment(Bitmap bitmapImage) {
 		MaterialDialog dialog = new MaterialDialog.Builder(this)
 				.title(R.string.taken_photo)
@@ -342,19 +389,9 @@ public class RegisterPhoto extends ActionBarActivity implements
 	}
 
 	protected void goNext() {
-		// Bundle bundle = new Bundle();
-		// bundle.putString("phone", phoneNumber);
-		// bundle.putString("code", countryCode);
-		// bundle.putString("firstName", firstName);
-		// bundle.putString("lastName", lastName);
-		// bundle.putString("otherName", otherName);
-		// bundle.putString("country", country);
-		// bundle.putStringArrayList("places", places);
-		// bundle.putStringArrayList("placesIds", placesIds);
+		// Start the summary activity
 		Intent nameIntent = new Intent(RegisterPhoto.this,
 				RegisterSummary.class);
-		// nameIntent.putExtras(bundle);
-
 		application.setPhotoFile(photoFile);
 
 		startActivity(nameIntent);
@@ -464,10 +501,7 @@ public class RegisterPhoto extends ActionBarActivity implements
 					+ "IMG_" + timeStamp + ".jpg");
 		} else if (Environment.MEDIA_MOUNTED_READ_ONLY.equals(state)) {
 			// We can only read the media
-			// Toast.makeText(activity, errorMessage, Toast.LENGTH_LONG).show();
 		} else {
-			// Something else is wrong.We can neither read nor write
-			// Toast.makeText(activity, errorMessage, Toast.LENGTH_LONG).show();
 		}
 		return mediaFile;
 	}

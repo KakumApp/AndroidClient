@@ -29,14 +29,14 @@ public class Registered extends ActionBarActivity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_register_success);
-
+		// app
 		application = (KakumaApplication) getApplication();
-
+		// views
 		nameTextView = (TextView) findViewById(R.id.textView_name);
 		textView_desc = (TextView) findViewById(R.id.textView_desc);
 		circularImageView = (CircularImageView) findViewById(R.id.image_view_photo);
 		continueButton = (Button) findViewById(R.id.button_continue);
-
+		// fonts
 		typeface = new Utils(this).getFont("Ubuntu-L");
 		nameTextView.setTypeface(typeface);
 		textView_desc.setTypeface(typeface);
@@ -44,11 +44,11 @@ public class Registered extends ActionBarActivity {
 		BitmapFactory.Options options = new BitmapFactory.Options();
 		bitmap = BitmapFactory.decodeFile(application.getPhotoFile()
 				.getAbsolutePath(), options);
-
+		// get the application data
 		firstName = application.getFirstName();
 		lastName = application.getLastName();
 		otherName = application.getOtherName();
-
+		// display photo and name
 		if (firstName != null && lastName != null) {
 			nameTextView.setText(firstName + " " + lastName);
 			if (otherName != null) {
@@ -66,7 +66,8 @@ public class Registered extends ActionBarActivity {
 
 			@Override
 			public void onClick(View v) {
-				Intent homeIntent = new Intent(Registered.this, MeetingPoints.class);
+				Intent homeIntent = new Intent(Registered.this,
+						MeetingPoints.class);
 				startActivity(homeIntent);
 				finish();
 			}

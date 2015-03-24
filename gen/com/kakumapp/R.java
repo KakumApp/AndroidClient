@@ -3064,6 +3064,8 @@ containing a value of this type.
         public static final int app_name=0x7f050000;
         public static final int app_name_caps=0x7f050013;
         public static final int bs_more=0x7f050012;
+        public static final int camera_error=0x7f05004f;
+        public static final int camera_message=0x7f050050;
         public static final int cancel=0x7f05002e;
         public static final int confirm_pass=0x7f050022;
         public static final int connect_error=0x7f05004c;

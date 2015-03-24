@@ -43,7 +43,7 @@
             android:layout_centerHorizontal="true"
             android:layout_marginTop="90dp"
             android:gravity="center"
-            android:padding="8dp"
+            android:padding="16dp"
             android:text="@string/app_desc"
             android:textColor="@color/white"
             android:textSize="20sp" />
@@ -55,8 +55,8 @@
             android:layout_above="@+id/textView_how_to_use"
             android:layout_marginBottom="80dp"
             android:orientation="horizontal"
-            android:paddingLeft="15dp"
-            android:paddingRight="15dp"
+            android:paddingLeft="20dp"
+            android:paddingRight="20dp"
             android:weightSum="100" >
 
             <Button

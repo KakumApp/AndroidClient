@@ -43,6 +43,11 @@ import com.kakumapp.utils.Utils;
 import com.kakumapp.views.CircularImageView;
 import com.pnikosis.materialishprogress.ProgressWheel;
 
+/**
+ * 
+ * @author paul
+ * 
+ */
 public class RegisterSummary extends ActionBarActivity {
 
 	public static final String TAG = "RegisterSummary";
@@ -69,9 +74,9 @@ public class RegisterSummary extends ActionBarActivity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_register_summary);
-
+		// app
 		application = (KakumaApplication) getApplication();
-
+		// get the views
 		nameTextView = (TextView) findViewById(R.id.textView_name);
 		phoneTextView = (TextView) findViewById(R.id.textView_phone);
 		textView_desc = (TextView) findViewById(R.id.textView_desc);
@@ -82,7 +87,7 @@ public class RegisterSummary extends ActionBarActivity {
 		placesEditText = (TextView) findViewById(R.id.edittext_origin);
 		registerButton = (Button) findViewById(R.id.button_register);
 		progressBar = (ProgressWheel) findViewById(R.id.progressBar);
-
+		// fonts
 		typeface = new Utils(this).getFont("Ubuntu-L");
 		nameTextView.setTypeface(typeface);
 		phoneTextView.setTypeface(typeface);
@@ -91,7 +96,7 @@ public class RegisterSummary extends ActionBarActivity {
 
 		places = new ArrayList<>();
 		placesIds = new ArrayList<>();
-
+		// get the data in the application
 		firstName = application.getFirstName();
 		lastName = application.getLastName();
 		otherName = application.getOtherName();
@@ -103,9 +108,7 @@ public class RegisterSummary extends ActionBarActivity {
 
 		BitmapFactory.Options options = new BitmapFactory.Options();
 		bitmap = BitmapFactory.decodeFile(photoFile.getAbsolutePath(), options);
-		// bitmap = Bitmap.createScaledBitmap(bitmap, parent.getWidth(),
-		// parent.getHeight(), true);
-
+		// set the data on the views
 		if (firstName != null && lastName != null) {
 			nameEditText.setText(firstName + " " + lastName);
 			if (otherName != null) {
@@ -143,9 +146,12 @@ public class RegisterSummary extends ActionBarActivity {
 		});
 	}
 
+	/**
+	 * send the data to the server
+	 */
+
 	private void registerUser() {
-		RegisterTask registerTask = new RegisterTask(
-				RegisterTask.POST_TASK);
+		RegisterTask registerTask = new RegisterTask(RegisterTask.POST_TASK);
 		JSONObject jsonObject = new JSONObject();
 		try {
 			jsonObject.put("first_name", firstName);
@@ -267,8 +273,6 @@ public class RegisterSummary extends ActionBarActivity {
 					}
 				} catch (JSONException e) {
 					showRetry();
-					// showErrorMessage("Internet connection",
-					// "Connection could not be established.Check your internet settings.");
 				}
 			}
 		}

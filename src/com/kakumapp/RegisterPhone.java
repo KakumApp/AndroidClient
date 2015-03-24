@@ -38,21 +38,21 @@ public class RegisterPhone extends ActionBarActivity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_phone);
-
+		// app
 		application = (KakumaApplication) getApplication();
-
+		// get views
 		continueButton = (Button) findViewById(R.id.button_register_continue);
 		descTextView = (TextView) findViewById(R.id.textView_phone_desc);
 		findPersonTextView = (TextView) findViewById(R.id.textView_register_find_person);
 		phoneEditText = (EditText) findViewById(R.id.edittext_phone);
-
+		// font
 		typeface = new Utils(this).getFont("Ubuntu-L");
 		findPersonTextView.setTypeface(typeface);
 		descTextView.setTypeface(typeface);
-
+		// hint text color
 		int hintTextColor = getResources().getColor(R.color.half_white);
 		phoneEditText.setHintTextColor(hintTextColor);
-
+		// move to next screen if data is valid
 		continueButton.setOnClickListener(new OnClickListener() {
 
 			@Override
@@ -60,13 +60,8 @@ public class RegisterPhone extends ActionBarActivity {
 				if (isValidData()) {
 					application.setPhoneNumber(phoneNumber);
 					application.setCountryCode(countryCode);
-
-					// Bundle bundle = new Bundle();
-					// bundle.putString("phone", phoneNumber);
-					// bundle.putString("code", countryCode);
 					Intent nameIntent = new Intent(RegisterPhone.this,
 							RegisterOrigin.class);
-					// nameIntent.putExtras(bundle);
 					startActivity(nameIntent);
 					finish();
 				}
@@ -82,7 +77,7 @@ public class RegisterPhone extends ActionBarActivity {
 				startActivity(findPersonIntent);
 			}
 		});
-
+		// countries being supported currently
 		countriesSpinner = (Spinner) findViewById(R.id.spinner_phone_countries);
 		String[] list = { "SS +211", "SD +249", "SO +252", "ET +251",
 				"CD +243", "BI +257", "RW +250", "ER +291", "UG +256" };
@@ -114,7 +109,7 @@ public class RegisterPhone extends ActionBarActivity {
 					public void onNothingSelected(AdapterView<?> arg0) {
 					}
 				});
-
+		// get the default data
 		phoneNumber = application.getPhoneNumber();
 		countryCode = application.getCountryCode();
 
@@ -126,24 +121,13 @@ public class RegisterPhone extends ActionBarActivity {
 			countriesSpinner.setSelection(countriesCodesAdapter
 					.getPosition(countryCode));
 		}
-
-		// // set data if passed
-		// Bundle bundle = getIntent().getExtras();
-		// if (bundle != null) {
-		// phoneNumber = bundle.getString("phone");
-		// countryCode = bundle.getString("code");
-		//
-		// if (phoneNumber != null) {
-		// phoneEditText.setText(phoneNumber);
-		// }
-		//
-		// if (countryCode != null) {
-		// countriesSpinner.setSelection(countriesCodesAdapter
-		// .getPosition(countryCode));
-		// }
-		// }
 	}
 
+	/**
+	 * validate the data
+	 * 
+	 * @return
+	 */
 	protected boolean isValidData() {
 		boolean valid = false;
 		phoneNumber = phoneEditText.getText().toString().trim();
