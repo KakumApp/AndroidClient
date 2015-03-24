@@ -3064,8 +3064,8 @@ containing a value of this type.
         public static final int app_name=0x7f050000;
         public static final int app_name_caps=0x7f050013;
         public static final int bs_more=0x7f050012;
-        public static final int camera_error=0x7f05004f;
-        public static final int camera_message=0x7f050050;
+        public static final int camera_error=0x7f050050;
+        public static final int camera_message=0x7f050051;
         public static final int cancel=0x7f05002e;
         public static final int confirm_pass=0x7f050022;
         public static final int connect_error=0x7f05004c;
@@ -3110,7 +3110,8 @@ containing a value of this type.
         public static final int register=0x7f050026;
         public static final int register_instr=0x7f05003e;
         public static final int register_summ_instr=0x7f05004b;
-        public static final int registered_info=0x7f05004e;
+        public static final int registered_confirm=0x7f05004e;
+        public static final int registered_info=0x7f05004f;
         public static final int search=0x7f050035;
         public static final int select=0x7f050033;
         public static final int select_place=0x7f050047;

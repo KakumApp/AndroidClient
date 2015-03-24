@@ -991,8 +991,8 @@ int string app_desc 0x7f050014
 int string app_name 0x7f050000
 int string app_name_caps 0x7f050013
 int string bs_more 0x7f050012
-int string camera_error 0x7f05004f
-int string camera_message 0x7f050050
+int string camera_error 0x7f050050
+int string camera_message 0x7f050051
 int string cancel 0x7f05002e
 int string confirm_pass 0x7f050022
 int string connect_error 0x7f05004c
@@ -1037,7 +1037,8 @@ int string place_of_origin 0x7f050038
 int string register 0x7f050026
 int string register_instr 0x7f05003e
 int string register_summ_instr 0x7f05004b
-int string registered_info 0x7f05004e
+int string registered_confirm 0x7f05004e
+int string registered_info 0x7f05004f
 int string search 0x7f050035
 int string select 0x7f050033
 int string select_place 0x7f050047

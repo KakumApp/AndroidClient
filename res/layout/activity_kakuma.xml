@@ -43,7 +43,7 @@
             android:layout_centerHorizontal="true"
             android:layout_marginTop="90dp"
             android:gravity="center"
-            android:padding="16dp"
+            android:padding="10dp"
             android:text="@string/app_desc"
             android:textColor="@color/white"
             android:textSize="20sp" />

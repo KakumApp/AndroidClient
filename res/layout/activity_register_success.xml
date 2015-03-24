@@ -21,12 +21,12 @@
             android:layout_marginTop="40dp"
             android:text="@string/registered_info"
             android:textColor="@color/white"
-            android:textSize="30sp" />
+            android:textSize="26sp" />
 
         <com.kakumapp.views.CircularImageView
             android:id="@+id/image_view_photo"
-            android:layout_width="120dp"
-            android:layout_height="120dp"
+            android:layout_width="200dp"
+            android:layout_height="200dp"
             android:layout_below="@+id/textView_desc"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="20dp"
@@ -46,7 +46,6 @@
             android:layout_weight="30"
             android:gravity="center"
             android:padding="8dp"
-            android:text="@string/name2"
             android:textColor="@color/white"
             android:textSize="18sp" />
 

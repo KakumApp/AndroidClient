@@ -58,7 +58,7 @@ public class RegisterSummary extends ActionBarActivity {
 	private String firstName, lastName, otherName, phoneNumber, countryCode;
 	private ArrayList<String> places, placesIds;
 	private Typeface typeface;
-	private TextView nameTextView, phoneTextView, placeTextView, textView_desc;
+	private TextView nameTextView, phoneTextView, placeTextView;
 	private TextView nameEditText, phoneEditText, placesEditText;
 	private CircularImageView circularImageView;
 	private BottomSheet bottomSheet;
@@ -79,7 +79,6 @@ public class RegisterSummary extends ActionBarActivity {
 		// get the views
 		nameTextView = (TextView) findViewById(R.id.textView_name);
 		phoneTextView = (TextView) findViewById(R.id.textView_phone);
-		textView_desc = (TextView) findViewById(R.id.textView_desc);
 		placeTextView = (TextView) findViewById(R.id.textView_origin);
 		circularImageView = (CircularImageView) findViewById(R.id.image_view_photo);
 		nameEditText = (TextView) findViewById(R.id.edittext_name);
@@ -91,7 +90,6 @@ public class RegisterSummary extends ActionBarActivity {
 		typeface = new Utils(this).getFont("Ubuntu-L");
 		nameTextView.setTypeface(typeface);
 		phoneTextView.setTypeface(typeface);
-		textView_desc.setTypeface(typeface);
 		placeTextView.setTypeface(typeface);
 
 		places = new ArrayList<>();
