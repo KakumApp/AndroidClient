@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
@@ -15,6 +16,7 @@ import com.kakumapp.adapters.MeetingPointsListAdapter;
 public class MeetingPoints extends ActionBarActivity {
 
 	private Toolbar toolbar;
+	private ActionBar actionBar;
 	private MeetingPointsListAdapter dataAdapter;
 	private ListView listView;
 
@@ -24,6 +26,9 @@ public class MeetingPoints extends ActionBarActivity {
 		setContentView(R.layout.activity_meeting_points);
 		toolbar = (Toolbar) findViewById(R.id.toolbar);
 		setSupportActionBar(toolbar);
+		actionBar=getSupportActionBar();
+		actionBar.setHomeButtonEnabled(true);
+		actionBar.setDisplayHomeAsUpEnabled(true);
 
 		listView = (ListView) findViewById(R.id.listView1);
 
