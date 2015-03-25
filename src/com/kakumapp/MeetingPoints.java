@@ -2,6 +2,7 @@ package com.kakumapp;
 
 import java.util.ArrayList;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.widget.Toolbar;
@@ -24,8 +25,8 @@ public class MeetingPoints extends ActionBarActivity {
 		toolbar = (Toolbar) findViewById(R.id.toolbar);
 		setSupportActionBar(toolbar);
 
-		listView=(ListView) findViewById(R.id.listView1);
-		
+		listView = (ListView) findViewById(R.id.listView1);
+
 		ArrayList<MeetingPoint> meetingPoints = new ArrayList<>();
 		ArrayList<String> meetingtimes = new ArrayList<>();
 		meetingtimes.add("Mondays 14:00 to 17:00");
@@ -51,9 +52,8 @@ public class MeetingPoints extends ActionBarActivity {
 
 	@Override
 	public void onBackPressed() {
-		// new Utils(this).quit();
+		Intent homeIntent = new Intent(MeetingPoints.this, Kakuma.class);
+		startActivity(homeIntent);
 		finish();
-		moveTaskToBack(true);
 	}
-
 }
