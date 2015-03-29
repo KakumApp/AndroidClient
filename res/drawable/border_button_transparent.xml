@@ -1,16 +1,37 @@
 <?xml version="1.0" encoding="utf-8"?>
-<shape xmlns:android="http://schemas.android.com/apk/res/android"
-    android:shape="rectangle" >
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <gradient
-        android:angle="270"
-        android:endColor="@android:color/transparent"
-        android:startColor="@android:color/transparent" />
+    <!-- disabled -->
+    <item android:state_enabled="false"><shape xmlns:android="http://schemas.android.com/apk/res/android" android:shape="rectangle">
+            <gradient android:angle="270" android:endColor="@android:color/transparent" android:startColor="@android:color/transparent" />
 
-    <corners android:radius="8dp" />
+            <corners android:radius="8dp" />
 
-    <stroke
-        android:width="5px"
-        android:color="#FFFFFF" />
+            <stroke android:width="5px" android:color="@android:color/white" />
+        </shape></item>
+    <!-- pressed -->
+    <item android:state_enabled="true" android:state_pressed="true"><shape xmlns:android="http://schemas.android.com/apk/res/android" android:shape="rectangle">
+            <gradient android:angle="270" android:endColor="@android:color/transparent" android:startColor="@android:color/transparent" />
 
-</shape>
+            <corners android:radius="8dp" />
+
+            <stroke android:width="5px" android:color="@color/primary" />
+        </shape></item>
+    <!-- focused -->
+    <item android:state_focused="true"><shape xmlns:android="http://schemas.android.com/apk/res/android" android:shape="rectangle">
+            <gradient android:angle="270" android:endColor="@android:color/transparent" android:startColor="@android:color/transparent" />
+
+            <corners android:radius="8dp" />
+
+            <stroke android:width="5px" android:color="@color/primary" />
+        </shape></item>
+    <!-- default -->
+    <item><shape xmlns:android="http://schemas.android.com/apk/res/android" android:shape="rectangle">
+            <gradient android:angle="270" android:endColor="@android:color/transparent" android:startColor="@android:color/transparent" />
+
+            <corners android:radius="8dp" />
+
+            <stroke android:width="5px" android:color="@android:color/white" />
+        </shape></item>
+
+</selector>

@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!-- Generated with http://android-holo-colors.com -->
+<resources xmlns:android="http://schemas.android.com/apk/res/android">
+
+  <style name="EditTextehealth_white" parent="android:Widget.EditText">
+	  <item name="android:background">@drawable/ehealth_white_edit_text_holo_light</item>
+	  <item name="android:textColor">#000000</item>
+  </style>
+
+  <style name="AutoCompleteTextViewehealth_white" parent="android:Widget.AutoCompleteTextView">
+      <item name="android:dropDownSelector">@drawable/ehealth_white_list_selector_holo_light</item>
+	  <item name="android:background">@drawable/ehealth_white_edit_text_holo_light</item>
+	  <item name="android:textColor">#000000</item>
+  </style>
+
+  <style name="CheckBoxehealth_white" parent="android:Widget.CompoundButton.CheckBox">
+      <item name="android:button">@drawable/ehealth_white_btn_check_holo_light</item>
+  </style>
+
+  <style name="RadioButtonehealth_white" parent="android:Widget.CompoundButton.RadioButton">
+      <item name="android:button">@drawable/ehealth_white_btn_radio_holo_light</item>
+  </style>
+
+  <style name="Buttonehealth_white" parent="android:Widget.Button">
+	  <item name="android:background">@drawable/ehealth_white_btn_default_holo_light</item>
+	  <item name="android:minHeight">48dip</item>
+	  <item name="android:minWidth">64dip</item>
+	  <item name="android:textColor">#000000</item>
+  </style>
+
+  <style name="ImageButtonehealth_white" parent="android:Widget.ImageButton">
+	  <item name="android:background">@drawable/ehealth_white_btn_default_holo_light</item>
+  </style>
+
+  <style name="Spinnerehealth_white" parent="android:Widget.Spinner">
+      <item name="android:background">@drawable/ehealth_white_spinner_background_holo_light</item>
+      <item name="android:dropDownSelector">@drawable/ehealth_white_list_selector_holo_light</item>
+  </style>
+
+  <style name="SpinnerDropDownItemehealth_white" parent="android:Widget.DropDownItem.Spinner">
+      <item name="android:checkMark">@drawable/ehealth_white_btn_radio_holo_light</item>
+  </style>
+  <style name="Tabehealth_white">
+      <item name="android:gravity">center_horizontal</item>
+      <item name="android:paddingLeft">16dip</item>
+      <item name="android:paddingRight">16dip</item>
+      <item name="android:background">@drawable/ehealth_white_tab_indicator_holo</item>
+      <item name="android:layout_width">0dip</item>
+      <item name="android:layout_weight">1</item>
+      <item name="android:minWidth">80dip</item>
+  </style>
+
+  <style name="TabTextehealth_white">
+	  <item name="android:textColor">#000000</item>
+      <item name="android:textSize">12sp</item>
+      <item name="android:textStyle">bold</item>
+      <!-- v14 <item name="android:textAllCaps">true</item> -->
+      <item name="android:ellipsize">marquee</item>
+      <item name="android:maxLines">2</item>
+      <item name="android:maxWidth">180dip</item>
+  </style>
+
+  <style name="ProgressBarehealth_white" parent="android:Widget.ProgressBar.Horizontal">
+      <item name="android:progressDrawable">@drawable/ehealth_white_progress_horizontal_holo_light</item>
+      <item name="android:indeterminateDrawable">@drawable/ehealth_white_progress_indeterminate_horizontal_holo_light</item>
+      <item name="android:minHeight">16dip</item>
+      <item name="android:maxHeight">16dip</item>
+  </style>
+
+  <style name="SeekBarehealth_white" parent="android:Widget.SeekBar">
+      <item name="android:progressDrawable">@drawable/ehealth_white_scrubber_progress_horizontal_holo_light</item>
+      <item name="android:indeterminateDrawable">@drawable/ehealth_white_scrubber_progress_horizontal_holo_light</item>
+      <item name="android:minHeight">13dip</item>
+      <item name="android:maxHeight">13dip</item>
+      <item name="android:thumb">@drawable/ehealth_white_scrubber_control_selector_holo_light</item>
+      <item name="android:thumbOffset">16dip</item>
+      <item name="android:paddingLeft">16dip</item>
+      <item name="android:paddingRight">16dip</item>
+  </style>
+
+  <style name="RatingBarehealth_white" parent="android:Widget.RatingBar">
+      <item name="android:progressDrawable">@drawable/ehealth_white_ratingbar_full_holo_light</item>
+      <item name="android:indeterminateDrawable">@drawable/ehealth_white_ratingbar_full_holo_light</item>
+  </style>
+
+  <style name="RatingBarBigehealth_white" parent="android:Widget.RatingBar">
+      <item name="android:progressDrawable">@drawable/ehealth_white_ratingbar_holo_light</item>
+      <item name="android:indeterminateDrawable">@drawable/ehealth_white_ratingbar_holo_light</item>
+      <item name="android:minHeight">35dip</item>
+      <item name="android:maxHeight">35dip</item>
+  </style>
+
+  <style name="RatingBarSmallehealth_white" parent="android:Widget.RatingBar">
+      <item name="android:progressDrawable">@drawable/ehealth_white_ratingbar_small_holo_light</item>
+      <item name="android:indeterminateDrawable">@drawable/ehealth_white_ratingbar_small_holo_light</item>
+      <item name="android:minHeight">16dip</item>
+      <item name="android:maxHeight">16dip</item>
+  </style>
+
+  <style name="Toggleehealth_white" parent="android:Widget.Button.Toggle">
+      <item name="android:background">@drawable/ehealth_white_btn_toggle_holo_light</item>
+      <item name="android:minHeight">48dip</item>
+	  <item name="android:textColor">#000000</item>
+  </style>
+
+  <style name="ListViewehealth_white" parent="android:Widget.ListView">
+      <item name="android:listSelector">@drawable/ehealth_white_list_selector_holo_light</item>
+  </style>
+
+  <style name="ListViewehealth_white.White" parent="android:Widget.ListView.White">
+      <item name="android:listSelector">@drawable/ehealth_white_list_selector_holo_light</item>
+  </style>
+
+  <style name="SpinnerItemehealth_white" parent="android:TextAppearance.Widget.TextView.SpinnerItem">
+      <item name="android:textColor">#000000</item>
+  </style>
+
+</resources>

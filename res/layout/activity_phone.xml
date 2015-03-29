@@ -34,63 +34,39 @@
             android:textColor="@color/white"
             android:textSize="20sp" />
 
-        <LinearLayout
-            android:id="@+id/phone_no_layout"
+        <com.rengwuxian.materialedittext.MaterialEditText
+            android:id="@+id/edittext_phone"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@+id/textView_phone_desc"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"
             android:layout_marginTop="40dp"
-            android:orientation="horizontal"
-            android:paddingLeft="15dp"
-            android:paddingRight="15dp"
-            android:weightSum="100" >
-
-            <Spinner
-                android:id="@+id/spinner_phone_countries"
-                style="@style/Spinnerkakumapp_white"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_gravity="bottom"
-                android:layout_marginRight="8dp"
-                android:layout_weight="40"
-                android:paddingLeft="5dp"
-                android:paddingRight="5dp" />
-
-            <com.rengwuxian.materialedittext.MaterialEditText
-                android:id="@+id/edittext_phone"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
-                android:layout_marginLeft="8dp"
-                android:layout_weight="60"
-                android:hint="@string/phone"
-                android:inputType="phone"
-                android:paddingLeft="5dp"
-                android:paddingRight="5dp"
-                android:singleLine="true"
-                android:textColor="@color/white"
-                android:textCursorDrawable="@drawable/white_cursor"
-                app:baseColor="@color/white"
-                app:errorColor="@color/red_error"
-                app:floatingLabel="highlight"
-                app:primaryColorEdittext="@color/white" >
-
-                <requestFocus />
-            </com.rengwuxian.materialedittext.MaterialEditText>
-        </LinearLayout>
+            android:layout_weight="60"
+            android:hint="@string/phone"
+            android:inputType="phone"
+            android:singleLine="true"
+            android:textColor="@color/white"
+            android:textCursorDrawable="@drawable/white_cursor"
+            app:baseColor="@color/white"
+            app:errorColor="@color/red_error"
+            app:floatingLabel="highlight"
+            app:primaryColorEdittext="@color/white" >
+        </com.rengwuxian.materialedittext.MaterialEditText>
 
         <Button
             android:id="@+id/button_register_continue"
             style="@style/Buttonkakuma"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/phone_no_layout"
+            android:layout_below="@+id/edittext_phone"
             android:layout_centerHorizontal="true"
             android:layout_marginRight="8dp"
             android:layout_marginTop="40dp"
             android:background="@drawable/border_button_transparent"
-            android:paddingLeft="5dp"
-            android:paddingRight="5dp"
+            android:paddingLeft="8dp"
+            android:paddingRight="8dp"
             android:text="@string/continue_text"
             android:textColor="@color/white"
             android:textStyle="bold" />

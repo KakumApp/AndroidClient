@@ -55,7 +55,7 @@ public class RegisterSummary extends ActionBarActivity {
 	public static final String USERNAME = "admin";
 	public static final String PASSWORD = "admin";
 	public static int FETCH_TYPE = 1;
-	private String firstName, lastName, otherName, phoneNumber, countryCode;
+	private String firstName, lastName, otherName, phoneNumber;
 	private ArrayList<String> places, placesIds;
 	private Typeface typeface;
 	private TextView nameTextView, phoneTextView, placeTextView;
@@ -99,7 +99,6 @@ public class RegisterSummary extends ActionBarActivity {
 		lastName = application.getLastName();
 		otherName = application.getOtherName();
 		phoneNumber = application.getPhoneNumber();
-		countryCode = application.getCountryCode();
 		places = application.getSelectedPlaces();
 		placesIds = application.getSelectedPlacesIds();
 		photoFile = application.getPhotoFile();
@@ -120,7 +119,7 @@ public class RegisterSummary extends ActionBarActivity {
 			if (phoneNumber.startsWith("0") && phoneNumber.length() > 1) {
 				phoneNumber = phoneNumber.substring(1);
 			}
-			phoneEditText.setText(countryCode + phoneNumber);
+			phoneEditText.setText(phoneNumber);
 		}
 
 		if (places != null) {

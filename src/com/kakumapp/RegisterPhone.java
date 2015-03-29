@@ -1,18 +1,13 @@
 package com.kakumapp;
 
 import android.content.Intent;
-import android.graphics.Color;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.widget.AdapterView;
-import android.widget.AdapterView.OnItemSelectedListener;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.kakumapp.utils.Utils;
@@ -28,10 +23,8 @@ public class RegisterPhone extends ActionBarActivity {
 	private Button continueButton;
 	private TextView descTextView, findPersonTextView;
 	private Typeface typeface;
-	private Spinner countriesSpinner;
 	private EditText phoneEditText;
-	private String phoneNumber, countryCode;
-	private ArrayAdapter<String> countriesCodesAdapter;
+	private String phoneNumber;
 	private KakumaApplication application;
 
 	@Override
@@ -59,7 +52,6 @@ public class RegisterPhone extends ActionBarActivity {
 			public void onClick(View v) {
 				if (isValidData()) {
 					application.setPhoneNumber(phoneNumber);
-					application.setCountryCode(countryCode);
 					Intent nameIntent = new Intent(RegisterPhone.this,
 							RegisterOrigin.class);
 					startActivity(nameIntent);
@@ -77,49 +69,12 @@ public class RegisterPhone extends ActionBarActivity {
 				startActivity(findPersonIntent);
 			}
 		});
-		// countries being supported currently
-		countriesSpinner = (Spinner) findViewById(R.id.spinner_phone_countries);
-		String[] list = { "SS +211", "SD +249", "SO +252", "ET +251",
-				"CD +243", "BI +257", "RW +250", "ER +291", "UG +256" };
-		countriesCodesAdapter = new ArrayAdapter<String>(this,
-				android.R.layout.simple_spinner_item, list);
-		countriesCodesAdapter
-				.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-		countriesSpinner.setAdapter(countriesCodesAdapter);
-
-		countriesSpinner
-				.setOnItemSelectedListener(new OnItemSelectedListener() {
-
-					@Override
-					public void onItemSelected(AdapterView<?> parent,
-							View arg1, int position, long arg3) {
-						TextView textView = ((TextView) parent.getChildAt(0));
-						if (textView != null) {
-							textView.setTextColor(Color.WHITE);
-						}
-						String selected = (String) parent
-								.getItemAtPosition(position);
-						if (selected != null) {
-							countryCode = selected.substring(selected
-									.indexOf("+"));
-						}
-					}
-
-					@Override
-					public void onNothingSelected(AdapterView<?> arg0) {
-					}
-				});
+		
 		// get the default data
 		phoneNumber = application.getPhoneNumber();
-		countryCode = application.getCountryCode();
 
 		if (phoneNumber != null) {
 			phoneEditText.setText(phoneNumber);
-		}
-
-		if (countryCode != null) {
-			countriesSpinner.setSelection(countriesCodesAdapter
-					.getPosition(countryCode));
 		}
 	}
 

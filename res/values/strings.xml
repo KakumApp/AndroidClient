@@ -50,6 +50,8 @@
     <string name="name_desc">Using your real name make it easier for other people to recognize you</string>
     <string name="first_name">First name</string>
     <string name="last_name">Last name</string>
+    <string name="father_name">Father\'s name</string>
+    <string name="grandfather_name">Grandfather\'s name</string>
     <string name="other_name">Other name</string>
     <string name="take_picture">Take picture</string>
     <string name="take_photo">Take photo</string>
@@ -57,7 +59,7 @@
     <string name="select_place">Place</string>
     <string name="taken_photo">Taken photo</string>
     <string name="take_another">Take another</string>
-    <string name="ok_photo">This is ok</string>
+    <string name="ok_photo">This is OK</string>
     <string name="register_summ_instr">Tap on a field to edit it</string>
     <string name="connect_error">Connection error</string>
     <string name="connection_error_message">A connection error has occurred.Retry?</string>

@@ -9,7 +9,7 @@ import android.app.Application;
 
 public class KakumaApplication extends Application {
 
-	private String firstName, lastName, otherName, countryCode, phoneNumber,
+	private String firstName, lastName, otherName, phoneNumber,
 			selectedCountryName;
 	private ArrayList<String> selectedPlaces, selectedPlacesIds;
 	private Country country;
@@ -58,21 +58,6 @@ public class KakumaApplication extends Application {
 	 */
 	public void setOtherName(String otherName) {
 		this.otherName = otherName;
-	}
-
-	/**
-	 * @return the countryCode
-	 */
-	public String getCountryCode() {
-		return countryCode;
-	}
-
-	/**
-	 * @param countryCode
-	 *            the countryCode to set
-	 */
-	public void setCountryCode(String countryCode) {
-		this.countryCode = countryCode;
 	}
 
 	/**
