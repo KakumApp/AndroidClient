@@ -60,7 +60,8 @@
         <activity
             android:name=".RegisterPhone"
             android:label="@string/register"
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar.FullScreen" >
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar.FullScreen"
+            android:windowSoftInputMode="stateHidden" >
             <intent-filter>
                 <action android:name="com.kakumapp.RegisterPhone" />
 
@@ -70,7 +71,8 @@
         <activity
             android:name=".RegisterName"
             android:label="@string/register"
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar.FullScreen" >
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar.FullScreen"
+            android:windowSoftInputMode="stateHidden" >
             <intent-filter>
                 <action android:name="com.kakumapp.RegisterName" />
 
@@ -80,28 +82,35 @@
         <activity
             android:name=".RegisterOrigin"
             android:label="@string/register"
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar.FullScreen" >
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar.FullScreen"
+            android:windowSoftInputMode="stateHidden" >
             <intent-filter>
                 <action android:name="com.kakumapp.RegisterOrigin" />
 
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
-        <activity android:name=".RegisterPhoto" >
+        <activity
+            android:name=".RegisterPhoto"
+            android:windowSoftInputMode="stateHidden" >
             <intent-filter>
                 <action android:name="com.kakumapp.RegisterPhoto" />
 
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
-        <activity android:name=".RegisterSummary" >
+        <activity
+            android:name=".RegisterSummary"
+            android:windowSoftInputMode="stateHidden" >
             <intent-filter>
                 <action android:name="com.kakumapp.RegisterSummary" />
 
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
-        <activity android:name=".Registered" >
+        <activity
+            android:name=".Registered"
+            android:windowSoftInputMode="stateHidden" >
             <intent-filter>
                 <action android:name="com.kakumapp.Registered" />
 

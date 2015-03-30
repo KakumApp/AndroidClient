@@ -23,15 +23,29 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentTop="true"
                 android:layout_centerHorizontal="true"
+                android:layout_marginTop="20dp"
                 android:contentDescription="@string/image_desc"
                 android:src="@drawable/ic_origin" />
+
+            <TextView
+                android:id="@+id/textView_origin_desc"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/imageView_register_name"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="20dp"
+                android:gravity="center"
+                android:padding="8dp"
+                android:text="@string/origin_desc"
+                android:textColor="@color/white"
+                android:textSize="18sp" />
 
             <Spinner
                 android:id="@+id/spinner_origin_countries"
                 style="@style/Spinnerkakumapp_white"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/imageView_register_name"
+                android:layout_below="@+id/textView_origin_desc"
                 android:layout_centerHorizontal="true"
                 android:layout_gravity="center"
                 android:layout_marginTop="20dp"
@@ -39,15 +53,18 @@
 
             <MultiAutoCompleteTextView
                 android:id="@+id/autocomplete_origin_places"
+                style="@style/AutoCompleteTextViewehealth_white"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/spinner_origin_countries"
                 android:layout_centerHorizontal="true"
                 android:layout_gravity="center"
-                android:layout_marginTop="20dp"
+                android:layout_marginTop="10dp"
+                android:cursorVisible="false"
                 android:hint="@string/select_place"
                 android:padding="8dp"
                 android:textColor="@color/white"
+                android:textCursorDrawable="@drawable/white_cursor"
                 android:textSize="16sp" />
 
             <com.pnikosis.materialishprogress.ProgressWheel
@@ -68,12 +85,11 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/autocomplete_origin_places"
                 android:layout_centerHorizontal="true"
-                android:layout_marginRight="8dp"
+                android:layout_marginLeft="30dp"
+                android:layout_marginRight="30dp"
                 android:layout_marginTop="40dp"
-                android:alpha="0.7"
                 android:background="@drawable/border_button_transparent"
-                android:paddingLeft="5dp"
-                android:paddingRight="5dp"
+                android:padding="16dp"
                 android:text="@string/continue_text"
                 android:textColor="@color/white"
                 android:textStyle="bold" />
@@ -84,12 +100,12 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:layout_marginTop="30dp"
+            android:layout_marginTop="10dp"
             android:gravity="center"
             android:padding="8dp"
             android:text="@string/find_a_person"
             android:textColor="@color/white"
-            android:textSize="14sp" />
+            android:textSize="16sp" />
     </LinearLayout>
 
 </ScrollView>

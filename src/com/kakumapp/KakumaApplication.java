@@ -15,6 +15,19 @@ public class KakumaApplication extends Application {
 	private Country country;
 	private File photoFile;
 
+	public void clearData() {
+		firstName = null;
+		lastName = null;
+		otherName = null;
+		phoneNumber = null;
+		selectedCountryName = null;
+		selectedPlaces = null;
+		selectedPlacesIds = null;
+		country = null;
+		photoFile = null;
+
+	}
+
 	/**
 	 * @return the firstName
 	 */

@@ -47,7 +47,8 @@
     <string name="image_desc">Image</string>
     <string name="register_instr">Register in a few easy steps</string>
     <string name="phone_desc">Your phone number will make it easier for people to find you</string>
-    <string name="name_desc">Using your real name make it easier for other people to recognize you</string>
+    <string name="name_desc">Using your real name makes it easier for other people to recognize you</string>
+    <string name="origin_desc">Selecting a country first makes it easier to find a place</string>
     <string name="first_name">First name</string>
     <string name="last_name">Last name</string>
     <string name="father_name">Father\'s name</string>
@@ -56,15 +57,15 @@
     <string name="take_picture">Take picture</string>
     <string name="take_photo">Take photo</string>
     <string name="how_help">How it works I am not sure yet :)</string>
-    <string name="select_place">Place</string>
+    <string name="select_place">Places (Use commas to separate places)</string>
     <string name="taken_photo">Taken photo</string>
     <string name="take_another">Take another</string>
     <string name="ok_photo">This is OK</string>
     <string name="register_summ_instr">Tap on a field to edit it</string>
     <string name="connect_error">Connection error</string>
     <string name="connection_error_message">A connection error has occurred.Retry?</string>
-    <string name="registered_confirm">CONFIRM YOUR DETAILS</string>
-    <string name="registered_info">YOU ARE REGISTERED!</string>
+    <string name="registered_confirm">Confirm your details</string>
+    <string name="registered_info">You are Registered!</string>
     <string name="camera_error">Camera error</string>
     <string name="camera_message">The camera could not be accessed.Try again?</string>
 

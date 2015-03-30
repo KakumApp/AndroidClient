@@ -33,8 +33,13 @@ public class Register extends ActionBarActivity {
 		descTextView.setTypeface(typeface);
 		policyTextView.setTypeface(typeface);
 
-		String policy = "By registering, you agree to use our <b>Terms</b> and that you have read our <b>Privacy Policy</b>, "
-				+ "including our <b>Cookie Use</b>. You may recieve Email notifications and can opt-out at any time";
+		String policy = "<font color='#C1C1C1'>By registering, you agree to use our </font>"
+				+ "<font color='#ffffff'><b><u>Terms</u></b> </font>"
+				+ "<font color='#C1C1C1'>and that you have read our </font>"
+				+ "<font color='#ffffff'><b><u>Privacy Policy</u></b></font>"
+				+ "<font color='#C1C1C1'>,including our </font>"
+				+ "<font color='#ffffff'><b><u>Cookie Use</u></b></font>"
+				+ "<font color='#C1C1C1'>. You may recieve Email notifications and can opt-out at any time</font>";
 		policyTextView.setText(Html.fromHtml(policy));
 
 		continueButton.setOnClickListener(new OnClickListener() {

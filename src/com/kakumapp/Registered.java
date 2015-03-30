@@ -20,7 +20,7 @@ public class Registered extends ActionBarActivity {
 	private TextView nameTextView;
 	private TextView textView_desc;
 	private CircularImageView circularImageView;
-	private Button continueButton;
+	private Button continueButton, registerButton;
 	private Typeface typeface;
 	private Bitmap bitmap;
 	private String firstName, lastName, otherName;
@@ -35,7 +35,9 @@ public class Registered extends ActionBarActivity {
 		nameTextView = (TextView) findViewById(R.id.textView_name);
 		textView_desc = (TextView) findViewById(R.id.textView_desc);
 		circularImageView = (CircularImageView) findViewById(R.id.image_view_photo);
-		continueButton = (Button) findViewById(R.id.button_continue);
+		continueButton = (Button) findViewById(R.id.button_find_a_person);
+		registerButton = (Button) findViewById(R.id.button_register);
+
 		// fonts
 		typeface = new Utils(this).getFont("Ubuntu-L");
 		nameTextView.setTypeface(typeface);
@@ -66,9 +68,22 @@ public class Registered extends ActionBarActivity {
 
 			@Override
 			public void onClick(View v) {
+				application.clearData();
 				Intent homeIntent = new Intent(Registered.this,
 						MeetingPoints.class);
 				startActivity(homeIntent);
+				finish();
+			}
+		});
+
+		registerButton.setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				application.clearData();
+				Intent registerIntent = new Intent(Registered.this,
+						Register.class);
+				startActivity(registerIntent);
 				finish();
 			}
 		});
@@ -76,6 +91,7 @@ public class Registered extends ActionBarActivity {
 
 	@Override
 	public void onBackPressed() {
+		application.clearData();
 		Intent homeIntent = new Intent(Registered.this, MeetingPoints.class);
 		startActivity(homeIntent);
 		finish();

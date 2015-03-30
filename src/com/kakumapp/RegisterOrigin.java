@@ -63,7 +63,7 @@ public class RegisterOrigin extends ActionBarActivity {
 	public static final String PASSWORD = "admin";
 	public static int FETCH_TYPE, indexOfPlace;
 	private Button continueButton;
-	private TextView findPersonTextView;
+	private TextView findPersonTextView, descTextView;
 	private Typeface typeface;
 	private Spinner countriesSpinner;
 	private MultiAutoCompleteTextView placesAutoCompleteTextView;
@@ -92,12 +92,16 @@ public class RegisterOrigin extends ActionBarActivity {
 		// get the views
 		continueButton = (Button) findViewById(R.id.button_register_continue);
 		findPersonTextView = (TextView) findViewById(R.id.textView_register_find_person);
+		descTextView = (TextView) findViewById(R.id.textView_origin_desc);
 		countriesSpinner = (Spinner) findViewById(R.id.spinner_origin_countries);
 		placesAutoCompleteTextView = (MultiAutoCompleteTextView) findViewById(R.id.autocomplete_origin_places);
 		progressBar = (ProgressWheel) findViewById(R.id.progressBar);
+		
 		// fonts
 		typeface = new Utils(this).getFont("Ubuntu-L");
 		findPersonTextView.setTypeface(typeface);
+		descTextView.setTypeface(typeface);
+		
 		// hints color
 		int hintTextColor = getResources().getColor(R.color.half_white);
 		placesAutoCompleteTextView.setHintTextColor(hintTextColor);

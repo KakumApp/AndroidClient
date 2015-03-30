@@ -32,128 +32,125 @@
             android:layout_marginTop="20dp"
             android:clickable="true"
             android:contentDescription="@string/image_desc"
+            app:civ_border="true"
+            app:civ_borderColor="@color/white"
+            app:civ_borderWidth="2dp"
             app:civ_shadow="true" >
         </com.kakumapp.views.CircularImageView>
 
-        <LinearLayout
+        <RelativeLayout
             android:id="@+id/name_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@+id/image_view_photo"
             android:layout_centerHorizontal="true"
-            android:layout_marginTop="20dp"
-            android:gravity="center"
-            android:weightSum="100" >
+            android:layout_marginTop="10dp"
+            android:gravity="center" >
 
             <TextView
                 android:id="@+id/textView_name"
-                android:layout_width="0dip"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
                 android:layout_gravity="center_vertical|right"
                 android:layout_marginRight="8dp"
-                android:layout_weight="40"
                 android:gravity="right"
                 android:padding="8dp"
                 android:text="@string/name2"
                 android:textColor="@color/white"
-                android:textSize="18sp" />
+                android:textSize="18sp"
+                android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/edittext_name"
-                android:layout_width="0dip"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
                 android:layout_gravity="center_vertical|left"
                 android:layout_marginLeft="8dp"
                 android:layout_toRightOf="@+id/textView_name"
-                android:layout_weight="60"
                 android:gravity="left"
                 android:paddingLeft="8dp"
                 android:singleLine="true"
                 android:textColor="@color/white"
                 android:textSize="18sp" />
-        </LinearLayout>
+        </RelativeLayout>
 
-        <LinearLayout
+        <RelativeLayout
             android:id="@+id/phone_no_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@+id/name_layout"
             android:layout_centerHorizontal="true"
-            android:layout_marginTop="20dp"
-            android:gravity="center"
-            android:weightSum="100" >
+            android:layout_marginTop="5dp"
+            android:gravity="center" >
 
             <TextView
                 android:id="@+id/textView_phone"
-                android:layout_width="0dip"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
                 android:layout_gravity="center_vertical|right"
                 android:layout_marginRight="8dp"
-                android:layout_weight="40"
                 android:gravity="right"
                 android:padding="8dp"
                 android:text="@string/mobile"
                 android:textColor="@color/white"
-                android:textSize="18sp" />
+                android:textSize="18sp"
+                android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/edittext_phone"
-                android:layout_width="0dip"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
                 android:layout_gravity="center_vertical|left"
                 android:layout_marginLeft="8dp"
                 android:layout_toRightOf="@+id/textView_phone"
-                android:layout_weight="60"
                 android:gravity="left"
                 android:paddingLeft="8dp"
                 android:singleLine="true"
                 android:textColor="@color/white"
                 android:textSize="18sp" />
-        </LinearLayout>
+        </RelativeLayout>
 
-        <LinearLayout
+        <RelativeLayout
             android:id="@+id/origin_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@+id/phone_no_layout"
             android:layout_centerHorizontal="true"
-            android:layout_marginTop="20dp"
-            android:gravity="center"
-            android:weightSum="100" >
+            android:layout_marginTop="5dp"
+            android:gravity="center" >
 
             <TextView
                 android:id="@+id/textView_origin"
-                android:layout_width="0dip"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
                 android:layout_gravity="center_vertical|right"
                 android:layout_marginRight="8dp"
-                android:layout_weight="40"
                 android:gravity="right"
                 android:padding="8dp"
                 android:text="@string/origin2"
                 android:textColor="@color/white"
-                android:textSize="18sp" />
+                android:textSize="18sp"
+                android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/edittext_origin"
-                android:layout_width="0dip"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
                 android:layout_gravity="center_vertical|left"
                 android:layout_marginLeft="8dp"
-                android:layout_toRightOf="@+id/textView_phone"
-                android:layout_weight="60"
+                android:layout_toRightOf="@+id/textView_origin"
                 android:gravity="left"
                 android:paddingLeft="8dp"
                 android:singleLine="true"
                 android:textColor="@color/white"
                 android:textSize="16sp" />
-        </LinearLayout>
+        </RelativeLayout>
 
         <com.pnikosis.materialishprogress.ProgressWheel
             android:id="@+id/progressBar"
@@ -174,10 +171,11 @@
             android:layout_below="@+id/origin_layout"
             android:layout_centerHorizontal="true"
             android:layout_gravity="right"
-            android:layout_marginLeft="16dp"
-            android:layout_marginRight="16dp"
+            android:layout_marginLeft="30dp"
+            android:layout_marginRight="30dp"
             android:layout_marginTop="30dp"
             android:background="@drawable/border_button_transparent"
+            android:padding="16dp"
             android:text="@string/register"
             android:textColor="@color/white" />
     </RelativeLayout>
