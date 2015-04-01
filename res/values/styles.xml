@@ -2,7 +2,7 @@
 
     <style name="Theme.Kakuma" parent="Theme.AppCompat.Light.NoActionBar">
         <item name="colorPrimary">@color/primary</item>
-        <item name="colorPrimaryDark">@color/primary</item>
+        <item name="colorPrimaryDark">@color/primary_dark</item>
         <item name="colorAccent">@color/primary</item>
         <item name="windowActionBar">false</item>
         <item name="android:textColorSecondary">@android:color/white</item>

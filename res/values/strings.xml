@@ -68,5 +68,6 @@
     <string name="registered_info">You are Registered!</string>
     <string name="camera_error">Camera error</string>
     <string name="camera_message">The camera could not be accessed.Try again?</string>
+    <string name="skip">Skip</string>
 
 </resources>

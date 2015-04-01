@@ -51,7 +51,7 @@ public class Kakuma extends ActionBarActivity implements SwipeGestureListener {
 			@Override
 			public void onClick(View v) {
 				Intent findPersonIntent = new Intent(Kakuma.this,
-						MeetingPoints.class);
+						FindPerson.class);
 				startActivity(findPersonIntent);
 			}
 		});

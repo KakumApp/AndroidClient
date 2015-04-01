@@ -96,12 +96,12 @@ public class RegisterOrigin extends ActionBarActivity {
 		countriesSpinner = (Spinner) findViewById(R.id.spinner_origin_countries);
 		placesAutoCompleteTextView = (MultiAutoCompleteTextView) findViewById(R.id.autocomplete_origin_places);
 		progressBar = (ProgressWheel) findViewById(R.id.progressBar);
-		
+
 		// fonts
 		typeface = new Utils(this).getFont("Ubuntu-L");
 		findPersonTextView.setTypeface(typeface);
 		descTextView.setTypeface(typeface);
-		
+
 		// hints color
 		int hintTextColor = getResources().getColor(R.color.half_white);
 		placesAutoCompleteTextView.setHintTextColor(hintTextColor);
@@ -120,7 +120,7 @@ public class RegisterOrigin extends ActionBarActivity {
 			public void onClick(View v) {
 				// meeting activity
 				Intent findPersonIntent = new Intent(RegisterOrigin.this,
-						MeetingPoints.class);
+						FindPerson.class);
 				startActivity(findPersonIntent);
 			}
 		});
@@ -262,7 +262,7 @@ public class RegisterOrigin extends ActionBarActivity {
 			application.setSelectedPlacesIds(selectedPlacesIds);
 
 			Intent nameIntent = new Intent(RegisterOrigin.this,
-					RegisterPhoto.class);
+					RegisterChoosePhoto.class);
 			startActivity(nameIntent);
 			finish();
 		}

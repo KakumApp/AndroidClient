@@ -26,20 +26,20 @@ public class MeetingPoints extends ActionBarActivity {
 		setContentView(R.layout.activity_meeting_points);
 		toolbar = (Toolbar) findViewById(R.id.toolbar);
 		setSupportActionBar(toolbar);
-		actionBar=getSupportActionBar();
+		actionBar = getSupportActionBar();
 		actionBar.setHomeButtonEnabled(true);
 		actionBar.setDisplayHomeAsUpEnabled(true);
 
 		listView = (ListView) findViewById(R.id.listView1);
 
 		ArrayList<MeetingPoint> meetingPoints = new ArrayList<>();
-		ArrayList<String> meetingtimes = new ArrayList<>();
-		meetingtimes.add("Mondays 14:00 to 17:00");
-		meetingtimes.add("Thursdays 10:00 to 12:00");
-		meetingtimes.add("Sundays 14:00 to 1700");
-
-		meetingPoints.add(new MeetingPoint("Meeting point A",
-				"Location: North Horr, Marsabit", meetingtimes));
+		// ArrayList<String> meetingtimes = new ArrayList<>();
+		// meetingtimes.add("Mondays 14:00 to 17:00");
+		// meetingtimes.add("Thursdays 10:00 to 12:00");
+		// meetingtimes.add("Sundays 14:00 to 1700");
+		//
+		// meetingPoints.add(new MeetingPoint("Meeting point A",
+		// "Location: North Horr, Marsabit", meetingtimes));
 		dataAdapter = new MeetingPointsListAdapter(this,
 				R.layout.meeting_point_item, meetingPoints);
 		listView.setAdapter(dataAdapter);

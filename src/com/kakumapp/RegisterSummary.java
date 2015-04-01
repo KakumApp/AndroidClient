@@ -103,8 +103,11 @@ public class RegisterSummary extends ActionBarActivity {
 		placesIds = application.getSelectedPlacesIds();
 		photoFile = application.getPhotoFile();
 
-		BitmapFactory.Options options = new BitmapFactory.Options();
-		bitmap = BitmapFactory.decodeFile(photoFile.getAbsolutePath(), options);
+		if (photoFile != null) {
+			BitmapFactory.Options options = new BitmapFactory.Options();
+			bitmap = BitmapFactory.decodeFile(photoFile.getAbsolutePath(),
+					options);
+		}
 		// set the data on the views
 		if (firstName != null && lastName != null) {
 			nameEditText.setText(firstName + " " + lastName);
@@ -132,6 +135,8 @@ public class RegisterSummary extends ActionBarActivity {
 
 		if (bitmap != null) {
 			circularImageView.setImageBitmap(bitmap);
+		} else {
+			circularImageView.setImageResource(R.drawable.bck_landing);
 		}
 
 		registerButton.setOnClickListener(new OnClickListener() {

@@ -45,11 +45,11 @@ public final class R {
 		public static final int bs_list_selector = 0x7f020046;
 	}
 	public static final class id {
-		public static final int bottom_sheet_gridview = 0x7f0a006e;
-		public static final int bottom_sheet_title = 0x7f0a006d;
-		public static final int bottom_sheet_title_image = 0x7f0a006c;
-		public static final int bs_list_image = 0x7f0a006f;
-		public static final int bs_list_title = 0x7f0a0070;
+		public static final int bottom_sheet_gridview = 0x7f0a0071;
+		public static final int bottom_sheet_title = 0x7f0a0070;
+		public static final int bottom_sheet_title_image = 0x7f0a006f;
+		public static final int bs_list_image = 0x7f0a0072;
+		public static final int bs_list_title = 0x7f0a0073;
 		public static final int bs_more = 0x7f0a0009;
 	}
 	public static final class integer {
@@ -59,10 +59,10 @@ public final class R {
 		public static final int bs_initial_list_row = 0x7f090003;
 	}
 	public static final class layout {
-		public static final int bottom_sheet_dialog = 0x7f030021;
-		public static final int bs_grid_entry = 0x7f030022;
-		public static final int bs_list_divider = 0x7f030023;
-		public static final int bs_list_entry = 0x7f030024;
+		public static final int bottom_sheet_dialog = 0x7f030023;
+		public static final int bs_grid_entry = 0x7f030024;
+		public static final int bs_list_divider = 0x7f030025;
+		public static final int bs_list_entry = 0x7f030026;
 	}
 	public static final class string {
 		public static final int bs_more = 0x7f050012;

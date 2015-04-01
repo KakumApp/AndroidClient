@@ -1,5 +1,7 @@
 package com.kakumapp;
 
+import java.io.File;
+
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -42,10 +44,13 @@ public class Registered extends ActionBarActivity {
 		typeface = new Utils(this).getFont("Ubuntu-L");
 		nameTextView.setTypeface(typeface);
 		textView_desc.setTypeface(typeface);
+		File photoFile = application.getPhotoFile();
 
-		BitmapFactory.Options options = new BitmapFactory.Options();
-		bitmap = BitmapFactory.decodeFile(application.getPhotoFile()
-				.getAbsolutePath(), options);
+		if (photoFile != null) {
+			BitmapFactory.Options options = new BitmapFactory.Options();
+			bitmap = BitmapFactory.decodeFile(photoFile.getAbsolutePath(),
+					options);
+		}
 		// get the application data
 		firstName = application.getFirstName();
 		lastName = application.getLastName();
@@ -62,15 +67,17 @@ public class Registered extends ActionBarActivity {
 
 		if (bitmap != null) {
 			circularImageView.setImageBitmap(bitmap);
+		} else {
+			circularImageView.setImageResource(R.drawable.bck_landing);
 		}
-
+		
 		continueButton.setOnClickListener(new OnClickListener() {
 
 			@Override
 			public void onClick(View v) {
 				application.clearData();
 				Intent homeIntent = new Intent(Registered.this,
-						MeetingPoints.class);
+						FindPerson.class);
 				startActivity(homeIntent);
 				finish();
 			}
@@ -92,7 +99,7 @@ public class Registered extends ActionBarActivity {
 	@Override
 	public void onBackPressed() {
 		application.clearData();
-		Intent homeIntent = new Intent(Registered.this, MeetingPoints.class);
+		Intent homeIntent = new Intent(Registered.this, FindPerson.class);
 		startActivity(homeIntent);
 		finish();
 	}

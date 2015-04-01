@@ -6,7 +6,7 @@
 
     <uses-sdk
         android:minSdkVersion="8"
-        android:targetSdkVersion="21" />
+        android:targetSdkVersion="22" />
 
     <!-- Take user photo -->
     <uses-permission android:name="android.permission.CAMERA" />
@@ -58,17 +58,6 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".RegisterPhone"
-            android:label="@string/register"
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar.FullScreen"
-            android:windowSoftInputMode="stateHidden" >
-            <intent-filter>
-                <action android:name="com.kakumapp.RegisterPhone" />
-
-                <category android:name="android.intent.category.DEFAULT" />
-            </intent-filter>
-        </activity>
-        <activity
             android:name=".RegisterName"
             android:label="@string/register"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar.FullScreen"
@@ -80,12 +69,32 @@
             </intent-filter>
         </activity>
         <activity
+            android:name=".RegisterPhone"
+            android:label="@string/register"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar.FullScreen"
+            android:windowSoftInputMode="stateHidden" >
+            <intent-filter>
+                <action android:name="com.kakumapp.RegisterPhone" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        <activity
             android:name=".RegisterOrigin"
             android:label="@string/register"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar.FullScreen"
             android:windowSoftInputMode="stateHidden" >
             <intent-filter>
                 <action android:name="com.kakumapp.RegisterOrigin" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".RegisterChoosePhoto"
+            android:windowSoftInputMode="stateHidden" >
+            <intent-filter>
+                <action android:name="com.kakumapp.RegisterChoosePhoto" />
 
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
@@ -127,6 +136,15 @@
             </intent-filter>
         </activity>
         <activity
+            android:name=".FindPerson"
+            android:label="@string/find_a_person" >
+            <intent-filter>
+                <action android:name="com.kakumapp.FindPerson" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+         <activity
             android:name=".MeetingPoints"
             android:label="@string/meetingPoints" >
             <intent-filter>

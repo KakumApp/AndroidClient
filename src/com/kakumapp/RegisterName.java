@@ -76,7 +76,7 @@ public class RegisterName extends ActionBarActivity {
 			@Override
 			public void onClick(View v) {
 				Intent findPersonIntent = new Intent(RegisterName.this,
-						MeetingPoints.class);
+						FindPerson.class);
 				startActivity(findPersonIntent);
 			}
 		});
