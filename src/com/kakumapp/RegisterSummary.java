@@ -7,6 +7,7 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 
+import org.apache.commons.io.FilenameUtils;
 import org.apache.http.Header;
 import org.apache.http.HttpResponse;
 import org.apache.http.auth.UsernamePasswordCredentials;
@@ -38,6 +39,10 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.afollestad.materialdialogs.MaterialDialog;
+import com.amazonaws.auth.CognitoCachingCredentialsProvider;
+import com.amazonaws.mobileconnectors.s3.transfermanager.TransferManager;
+import com.amazonaws.mobileconnectors.s3.transfermanager.Upload;
+import com.amazonaws.regions.Regions;
 import com.cocosw.bottomsheet.BottomSheet;
 import com.kakumapp.utils.Utils;
 import com.kakumapp.views.CircularImageView;
@@ -54,6 +59,7 @@ public class RegisterSummary extends ActionBarActivity {
 	private static final String URL = "http://kakumapp-api.herokuapp.com/";
 	public static final String USERNAME = "admin";
 	public static final String PASSWORD = "admin";
+	private static String PHOTO = "URL";
 	public static int FETCH_TYPE = 1;
 	private String firstName, lastName, otherName, phoneNumber;
 	private ArrayList<String> places, placesIds;
@@ -69,6 +75,7 @@ public class RegisterSummary extends ActionBarActivity {
 	private Bitmap bitmap;
 	private ProgressWheel progressBar;
 	private MaterialDialog dialog;
+	private String identityPoolId;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -143,9 +150,43 @@ public class RegisterSummary extends ActionBarActivity {
 
 			@Override
 			public void onClick(View v) {
-				registerUser();
+				registerUserPhoto();
 			}
 		});
+		identityPoolId = getIdentityPoolId();
+	}
+
+	private String getIdentityPoolId() {
+		String identityPoolId = null;
+		BufferedReader reader = null;
+		try {
+			reader = new BufferedReader(new InputStreamReader(getAssets().open(
+					"identityPoolId.txt")));
+			identityPoolId = reader.readLine();
+		} catch (IOException e) {
+			Log.e(TAG, "Exception " + e.getLocalizedMessage());
+		} finally {
+			if (reader != null) {
+				try {
+					reader.close();
+				} catch (IOException e) {
+					Log.e(TAG, "Exception " + e.getLocalizedMessage());
+				}
+			}
+		}
+		return identityPoolId;
+	}
+
+	/**
+	 * send the data to the server
+	 */
+
+	private void registerUserPhoto() {
+		if (photoFile != null) {
+			new UploadFile().execute();
+		} else {
+			registerUser();
+		}
 	}
 
 	/**
@@ -160,7 +201,7 @@ public class RegisterSummary extends ActionBarActivity {
 			jsonObject.put("last_name", lastName);
 			jsonObject.put("other_name", otherName);
 			jsonObject.put("phone_no", phoneNumber);
-			jsonObject.put("photo", "URL");
+			jsonObject.put("photo", PHOTO);
 			JSONArray placesArray = new JSONArray();
 			for (String id : placesIds) {
 				placesArray.put(id);
@@ -203,6 +244,27 @@ public class RegisterSummary extends ActionBarActivity {
 		}
 	}
 
+	public void showPhotoRetry() {
+		hideprogress();
+		if (dialog == null || !dialog.isShowing()) {
+			dialog = new MaterialDialog.Builder(this)
+					.title(R.string.connect_error)
+					.content(R.string.connection_error_message)
+					.positiveText(R.string.yes).negativeText(R.string.cancel)
+					.callback(new MaterialDialog.ButtonCallback() {
+						@Override
+						public void onPositive(MaterialDialog dialog) {
+							registerUserPhoto();
+						}
+
+						@Override
+						public void onNegative(MaterialDialog dialog) {
+						}
+					}).build();
+			dialog.show();
+		}
+	}
+
 	public void showRetry() {
 		hideprogress();
 		if (dialog == null || !dialog.isShowing()) {
@@ -221,6 +283,51 @@ public class RegisterSummary extends ActionBarActivity {
 						}
 					}).build();
 			dialog.show();
+		}
+	}
+
+	private class UploadFile extends AsyncTask<Void, Void, Boolean> {
+
+		@Override
+		protected void onPreExecute() {
+			super.onPreExecute();
+			showProgress();
+		}
+
+		@Override
+		protected Boolean doInBackground(Void... params) {
+			boolean uploaded = false;
+			// Initialize the Amazon Cognito credentials provider
+			CognitoCachingCredentialsProvider credentialsProvider = new CognitoCachingCredentialsProvider(
+					RegisterSummary.this, identityPoolId, Regions.US_EAST_1);
+			// Get a TransferManager for upload
+			TransferManager transferManager = new TransferManager(
+					credentialsProvider);
+			// Build the name of the file to be unique
+			// pic.png will be turned to pic_1427991238526_.png
+			String fileName = photoFile.getName();
+			PHOTO = FilenameUtils.removeExtension(fileName) + "_"
+					+ System.currentTimeMillis() + "."
+					+ FilenameUtils.getExtension(fileName);
+
+			Upload upload = transferManager
+					.upload("kakumapp", PHOTO, photoFile);
+			while (!upload.isDone()) {
+				uploaded = false;
+			}
+			uploaded = true;
+			return uploaded;
+		}
+
+		@Override
+		protected void onPostExecute(Boolean result) {
+			super.onPostExecute(result);
+			if (result) {
+				Log.e(TAG, "File uploaded");
+				registerUser();
+			} else {
+				showPhotoRetry();
+			}
 		}
 	}
 

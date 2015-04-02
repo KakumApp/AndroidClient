@@ -413,9 +413,7 @@ public class RegisterOrigin extends ActionBarActivity {
 				try {
 					result = inputStreamToString(response.getEntity()
 							.getContent());
-				} catch (IllegalStateException e) {
-					Log.e(TAG, e.getLocalizedMessage(), e);
-				} catch (IOException e) {
+				} catch (Exception e) {
 					Log.e(TAG, e.getLocalizedMessage(), e);
 				}
 			}
