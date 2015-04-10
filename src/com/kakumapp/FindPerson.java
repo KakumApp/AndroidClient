@@ -11,11 +11,8 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 
-import com.kakumapp.adapters.DividerItemDecoration;
 import com.kakumapp.adapters.RegisteredPerson;
 import com.kakumapp.adapters.RegisteredPersonsAdapter;
-import com.kakumapp.adapters.SimpleDividerItemDecoration;
-import com.kakumapp.adapters.SpacesItemDecoration;
 
 public class FindPerson extends ActionBarActivity {
 
@@ -41,12 +38,6 @@ public class FindPerson extends ActionBarActivity {
 					+ (i + 1), "Wajir, Kenya", "071X XXX XXX", null));
 		}
 		recyclerView = (RecyclerView) findViewById(R.id.recycler_view);
-		// recyclerView.addItemDecoration(new DividerItemDecoration(this,
-		// null));
-		// recyclerView.addItemDecoration(new SpacesItemDecoration(0));
-		// recyclerView
-		// .addItemDecoration(new SimpleDividerItemDecoration(this, 0));
-
 		// use this setting to improve performance if you know that changes
 		// in content do not change the layout size of the RecyclerView
 		recyclerView.setHasFixedSize(true);
