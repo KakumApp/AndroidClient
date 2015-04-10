@@ -12,6 +12,7 @@
     <string name="meetingPoints">MeetingPoints</string>
     <string name="meeting_point">Meeting point</string>
     <string name="search_person">Search for person</string>
+    <string name="search_name_desc">Enter at least one name of the person you are looking for</string>
     <string name="meeting_times">Meeting times</string>
     <string name="username">Username</string>
     <string name="name">Name</string>
@@ -49,9 +50,12 @@
     <string name="recently_registered">Recently registered</string>
     <string name="image_desc">Image</string>
     <string name="register_instr">Register in a few easy steps</string>
+    <string name="search_desc">What you would like to use to search?</string>
     <string name="phone_desc">Your phone number will make it easier for people to find you</string>
+    <string name="phone_search_desc">Enter the phone number of the person you are looking for</string>
     <string name="name_desc">Using your real name makes it easier for other people to recognize you</string>
     <string name="origin_desc">Selecting a country first makes it easier to find a place</string>
+    <string name="origin_search_desc">Enter the place of origin of the person you are looking for.</string>
     <string name="first_name">First name</string>
     <string name="last_name">Last name</string>
     <string name="father_name">Father\'s name</string>

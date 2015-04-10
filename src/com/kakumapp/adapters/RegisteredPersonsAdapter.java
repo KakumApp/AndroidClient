@@ -50,11 +50,11 @@ public class RegisteredPersonsAdapter extends
 		}
 
 		if (location != null) {
-			viewHolder.locationTextView.setText(name);
+			viewHolder.locationTextView.setText(location);
 		}
 
 		if (phone != null) {
-			viewHolder.phoneTextView.setText(name);
+			viewHolder.phoneTextView.setText(phone);
 		}
 
 		if (photo != null) {

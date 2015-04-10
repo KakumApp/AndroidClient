@@ -113,6 +113,7 @@
             style="@style/Buttonkakuma"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_alignRight="@+id/name_layout"
             android:layout_below="@+id/phone_layout"
             android:layout_marginTop="8dp"
             android:background="@drawable/border_button"

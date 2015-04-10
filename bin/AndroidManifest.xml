@@ -144,6 +144,42 @@
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".SearchOptions"
+            android:label="@string/search" >
+            <intent-filter>
+                <action android:name="com.kakumapp.SearchOptions" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".SearchOrigin"
+            android:label="@string/search" >
+            <intent-filter>
+                <action android:name="com.kakumapp.SearchOrigin" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".SearchName"
+            android:label="@string/search" >
+            <intent-filter>
+                <action android:name="com.kakumapp.SearchName" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+         <activity
+            android:name=".SearchPhone"
+            android:label="@string/search" >
+            <intent-filter>
+                <action android:name="com.kakumapp.SearchPhone" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
          <activity
             android:name=".MeetingPoints"
             android:label="@string/meetingPoints" >

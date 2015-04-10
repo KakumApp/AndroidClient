@@ -10,6 +10,9 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.widget.Button;
 
 import com.kakumapp.adapters.RegisteredPerson;
 import com.kakumapp.adapters.RegisteredPersonsAdapter;
@@ -22,6 +25,7 @@ public class FindPerson extends ActionBarActivity {
 	private RecyclerView.Adapter mAdapter;
 	private RecyclerView.LayoutManager mLayoutManager;
 	private ArrayList<RegisteredPerson> registeredPersons = new ArrayList<>();
+	private Button searchButton;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -38,6 +42,8 @@ public class FindPerson extends ActionBarActivity {
 					+ (i + 1), "Wajir, Kenya", "071X XXX XXX", null));
 		}
 		recyclerView = (RecyclerView) findViewById(R.id.recycler_view);
+		searchButton = (Button) findViewById(R.id.button_search);
+
 		// use this setting to improve performance if you know that changes
 		// in content do not change the layout size of the RecyclerView
 		recyclerView.setHasFixedSize(true);
@@ -47,6 +53,15 @@ public class FindPerson extends ActionBarActivity {
 		// specify an adapter
 		mAdapter = new RegisteredPersonsAdapter(registeredPersons);
 		recyclerView.setAdapter(mAdapter);
+		
+		searchButton.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				Intent searchOptions=new Intent(FindPerson.this,SearchOptions.class);
+				startActivity(searchOptions);
+			}
+		});
 	}
 
 	@Override
