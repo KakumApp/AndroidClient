@@ -10,6 +10,8 @@
     <string name="help">Help</string>
     <string name="home">Home</string>
     <string name="meetingPoints">MeetingPoints</string>
+    <string name="meeting_point">Meeting point</string>
+    <string name="search_person">Search for person</string>
     <string name="meeting_times">Meeting times</string>
     <string name="username">Username</string>
     <string name="name">Name</string>
@@ -44,6 +46,7 @@
     <string name="hello_world">Hello world!</string>
     <string name="how_to_use">How to use kakumapp</string>
     <string name="find_a_person">Find a person</string>
+    <string name="recently_registered">Recently registered</string>
     <string name="image_desc">Image</string>
     <string name="register_instr">Register in a few easy steps</string>
     <string name="phone_desc">Your phone number will make it easier for people to find you</string>

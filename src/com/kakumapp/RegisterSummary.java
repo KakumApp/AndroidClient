@@ -40,6 +40,8 @@ import android.widget.TextView;
 
 import com.afollestad.materialdialogs.MaterialDialog;
 import com.amazonaws.auth.CognitoCachingCredentialsProvider;
+import com.amazonaws.event.ProgressEvent;
+import com.amazonaws.event.ProgressListener;
 import com.amazonaws.mobileconnectors.s3.transfermanager.TransferManager;
 import com.amazonaws.mobileconnectors.s3.transfermanager.Upload;
 import com.amazonaws.regions.Regions;
@@ -312,6 +314,13 @@ public class RegisterSummary extends ActionBarActivity {
 
 			Upload upload = transferManager
 					.upload("kakumapp", PHOTO, photoFile);
+			upload.addProgressListener(new ProgressListener() {
+				
+				@Override
+				public void progressChanged(ProgressEvent arg0) {
+					
+				}
+			});
 			while (!upload.isDone()) {
 				uploaded = false;
 			}
