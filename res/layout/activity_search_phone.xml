@@ -29,7 +29,7 @@
                 android:layout_centerHorizontal="true"
                 android:layout_marginTop="20dp"
                 android:contentDescription="@string/image_desc"
-                android:src="@drawable/ic_phone" />
+                android:src="@drawable/ic_search_phone" />
 
             <TextView
                 android:id="@+id/textView_phone_desc"

@@ -14,6 +14,9 @@
     <string name="search_person">Search for person</string>
     <string name="search_name_desc">Enter at least one name of the person you are looking for</string>
     <string name="meeting_times">Meeting times</string>
+    <string name="search__origin">Search - Origin</string>
+    <string name="search__name">Search - Name</string>
+    <string name="search__phone">Search - Phone</string>
     <string name="username">Username</string>
     <string name="name">Name</string>
     <string name="name2">Name:</string>

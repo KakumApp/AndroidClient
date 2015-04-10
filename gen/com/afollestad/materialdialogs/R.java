@@ -396,17 +396,17 @@ public final class R {
 		public static final int abc_textfield_search_activated_mtrl_alpha = 0x7f020030;
 		public static final int abc_textfield_search_default_mtrl_alpha = 0x7f020031;
 		public static final int abc_textfield_search_material = 0x7f020032;
-		public static final int md_btn_selected = 0x7f02017a;
-		public static final int md_btn_selected_dark = 0x7f02017b;
-		public static final int md_btn_selector = 0x7f02017c;
-		public static final int md_btn_selector_dark = 0x7f02017d;
-		public static final int md_btn_selector_ripple = 0x7f02017e;
-		public static final int md_btn_selector_ripple_dark = 0x7f02017f;
-		public static final int md_item_selected = 0x7f020180;
-		public static final int md_item_selected_dark = 0x7f020181;
-		public static final int md_selector = 0x7f020182;
-		public static final int md_selector_dark = 0x7f020183;
-		public static final int md_transparent = 0x7f020184;
+		public static final int md_btn_selected = 0x7f02017f;
+		public static final int md_btn_selected_dark = 0x7f020180;
+		public static final int md_btn_selector = 0x7f020181;
+		public static final int md_btn_selector_dark = 0x7f020182;
+		public static final int md_btn_selector_ripple = 0x7f020183;
+		public static final int md_btn_selector_ripple_dark = 0x7f020184;
+		public static final int md_item_selected = 0x7f020185;
+		public static final int md_item_selected_dark = 0x7f020186;
+		public static final int md_selector = 0x7f020187;
+		public static final int md_selector_dark = 0x7f020188;
+		public static final int md_transparent = 0x7f020189;
 	}
 	public static final class id {
 		public static final int action_bar = 0x7f0b0033;

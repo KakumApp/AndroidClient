@@ -89,6 +89,7 @@ public class RegisterOrigin extends ActionBarActivity {
 		setContentView(R.layout.activity_origin);
 		// global app
 		application = (KakumaApplication) getApplication();
+		
 		// get the views
 		continueButton = (Button) findViewById(R.id.button_register_continue);
 		findPersonTextView = (TextView) findViewById(R.id.textView_register_find_person);
@@ -124,6 +125,7 @@ public class RegisterOrigin extends ActionBarActivity {
 				startActivity(findPersonIntent);
 			}
 		});
+		
 		// create the spinners adapters
 		defaultCountry = new Country(0, SELECT_COUNTRY, "");
 		countries.add(defaultCountry);
@@ -170,6 +172,7 @@ public class RegisterOrigin extends ActionBarActivity {
 		// comma to separate the different places
 		placesAutoCompleteTextView
 				.setTokenizer(new MultiAutoCompleteTextView.CommaTokenizer());
+		
 		// set global data if available
 		selectedCountryName = application.getSelectedCountryName();
 		selectedPlaces = application.getSelectedPlaces();
@@ -188,6 +191,7 @@ public class RegisterOrigin extends ActionBarActivity {
 		if (selectedPlacesIds == null) {
 			selectedPlacesIds = new ArrayList<>();
 		}
+		
 		// get the countries
 		FETCH_TYPE = 1;
 		FetchTask fetchTask = new FetchTask(FetchTask.GET_TASK);

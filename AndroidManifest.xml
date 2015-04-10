@@ -155,7 +155,7 @@
         </activity>
         <activity
             android:name=".SearchOrigin"
-            android:label="@string/search" >
+            android:label="@string/search__origin" >
             <intent-filter>
                 <action android:name="com.kakumapp.SearchOrigin" />
 
@@ -164,7 +164,7 @@
         </activity>
         <activity
             android:name=".SearchName"
-            android:label="@string/search" >
+            android:label="@string/search__name" >
             <intent-filter>
                 <action android:name="com.kakumapp.SearchName" />
 
@@ -173,7 +173,7 @@
         </activity>
          <activity
             android:name=".SearchPhone"
-            android:label="@string/search" >
+            android:label="@string/search__phone" >
             <intent-filter>
                 <action android:name="com.kakumapp.SearchPhone" />
 
