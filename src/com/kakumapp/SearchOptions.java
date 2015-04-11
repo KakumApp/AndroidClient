@@ -9,6 +9,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.ArrayAdapter;
@@ -51,8 +52,32 @@ public class SearchOptions extends ActionBarActivity {
 
 		// create the spinners adapters
 		String[] options = { ORIGIN_OPTION, NAME_OPTION, PHONE_OPTION };
-		dataAdapterSearchOptions = new ArrayAdapter<String>(this,
-				android.R.layout.simple_spinner_item, options);
+		// dataAdapterSearchOptions = new ArrayAdapter<String>(this,
+		// android.R.layout.simple_spinner_dropdown_item, options);
+		dataAdapterSearchOptions = new ArrayAdapter<String>(
+				getApplicationContext(),
+				android.R.layout.simple_spinner_dropdown_item, options) {
+
+			@Override
+			public View getDropDownView(int position, View convertView,
+					ViewGroup parent) {
+				View view = super.getView(position, convertView, parent);
+				TextView text = (TextView) view
+						.findViewById(android.R.id.text1);
+				text.setTextColor(getResources().getColor(R.color.dark_grey));
+				return view;
+			}
+
+			@Override
+			public View getView(int position, View convertView, ViewGroup parent) {
+				View view = super.getView(position, convertView, parent);
+				TextView text = (TextView) view
+						.findViewById(android.R.id.text1);
+				text.setTextColor(getResources().getColor(R.color.dark_grey));
+				return view;
+			}
+		};
+
 		dataAdapterSearchOptions
 				.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 		searchOptionsSpinner.setAdapter(dataAdapterSearchOptions);

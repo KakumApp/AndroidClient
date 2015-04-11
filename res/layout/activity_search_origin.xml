@@ -53,8 +53,7 @@
                 android:layout_centerHorizontal="true"
                 android:layout_gravity="center"
                 android:layout_marginTop="20dp"
-                android:layout_weight="40"
-                android:popupBackground="@color/primary_accent" />
+                android:layout_weight="40" />
 
             <MultiAutoCompleteTextView
                 android:id="@+id/autocomplete_origin_places"
@@ -68,7 +67,6 @@
                 android:cursorVisible="false"
                 android:hint="@string/select_place"
                 android:padding="8dp"
-                android:popupBackground="@color/primary_accent"
                 android:textColor="@color/primary"
                 android:textSize="16sp" />
 

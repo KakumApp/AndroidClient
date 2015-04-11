@@ -52,8 +52,7 @@
                 android:layout_below="@+id/textView_search_desc"
                 android:layout_centerHorizontal="true"
                 android:layout_gravity="center"
-                android:layout_marginTop="20dp"
-                android:popupBackground="@color/primary_accent" />
+                android:layout_marginTop="20dp" />
 
             <Button
                 android:id="@+id/button_continue"

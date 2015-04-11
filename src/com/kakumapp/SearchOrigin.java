@@ -30,6 +30,7 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.View.OnClickListener;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemSelectedListener;
@@ -119,11 +120,9 @@ public class SearchOrigin extends ActionBarActivity {
 		// create the spinners adapters
 		defaultCountry = new Country(0, SELECT_COUNTRY, "");
 		countries.add(defaultCountry);
-
-		dataAdapterCountries = new ArrayAdapter<Country>(this,
-				android.R.layout.simple_spinner_item, countries);
-		dataAdapterCountries
-				.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+		// dataAdapterCountries = new ArrayAdapter<Country>(this,
+		// android.R.layout.simple_spinner_item, countries);
+		dataAdapterCountries = createDataAdapterCountries(countries);
 		countriesSpinner.setAdapter(dataAdapterCountries);
 		// when a country is selected,get the places under that country
 		countriesSpinner
@@ -153,9 +152,9 @@ public class SearchOrigin extends ActionBarActivity {
 				});
 
 		// places spinner adatapter
-		dataAdapterPlaces = new ArrayAdapter<Place>(this,
-				android.R.layout.simple_list_item_1, places);
-		dataAdapterPlaces.setDropDownViewResource(R.layout.spinner_dropdown);
+		// dataAdapterPlaces = new ArrayAdapter<Place>(this,
+		// android.R.layout.simple_list_item_1, places);
+		dataAdapterPlaces = createDataAdapterPlaces(places);
 		placesAutoCompleteTextView.setAdapter(dataAdapterPlaces);
 		// specify the minimum type of characters before drop-down list is shown
 		placesAutoCompleteTextView.setThreshold(1);
@@ -167,6 +166,72 @@ public class SearchOrigin extends ActionBarActivity {
 		FETCH_TYPE = 1;
 		FetchTask fetchTask = new FetchTask();
 		fetchTask.execute(new String[] { URL + "countries/" });
+	}
+
+	/**
+	 * 
+	 * @param places
+	 * @return
+	 */
+	private ArrayAdapter<Place> createDataAdapterPlaces(ArrayList<Place> places) {
+		ArrayAdapter<Place> dataAdapterPlaces = new ArrayAdapter<Place>(this,
+				android.R.layout.simple_list_item_1, places) {
+
+			@Override
+			public View getDropDownView(int position, View convertView,
+					ViewGroup parent) {
+				View view = super.getView(position, convertView, parent);
+				TextView text = (TextView) view
+						.findViewById(android.R.id.text1);
+				text.setTextColor(getResources().getColor(R.color.dark_grey));
+				return view;
+			}
+
+			@Override
+			public View getView(int position, View convertView, ViewGroup parent) {
+				View view = super.getView(position, convertView, parent);
+				TextView text = (TextView) view
+						.findViewById(android.R.id.text1);
+				text.setTextColor(getResources().getColor(R.color.dark_grey));
+				return view;
+			}
+		};
+		dataAdapterPlaces.setDropDownViewResource(R.layout.spinner_dropdown);
+		return dataAdapterPlaces;
+	}
+
+	/**
+	 * 
+	 * @param countries
+	 * @return
+	 */
+	private ArrayAdapter<Country> createDataAdapterCountries(
+			ArrayList<Country> countries) {
+		ArrayAdapter<Country> dataAdapterCountries = new ArrayAdapter<Country>(
+				this, android.R.layout.simple_spinner_dropdown_item, countries) {
+
+			@Override
+			public View getDropDownView(int position, View convertView,
+					ViewGroup parent) {
+				View view = super.getView(position, convertView, parent);
+				TextView text = (TextView) view
+						.findViewById(android.R.id.text1);
+				text.setTextColor(getResources().getColor(R.color.dark_grey));
+				return view;
+			}
+
+			@Override
+			public View getView(int position, View convertView, ViewGroup parent) {
+				View view = super.getView(position, convertView, parent);
+				TextView text = (TextView) view
+						.findViewById(android.R.id.text1);
+				text.setTextColor(getResources().getColor(R.color.dark_grey));
+				return view;
+			}
+		};
+		dataAdapterCountries
+				.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+		return dataAdapterCountries;
 	}
 
 	// show progress bar and hide button
@@ -327,11 +392,10 @@ public class SearchOrigin extends ActionBarActivity {
 									.getString("name"), countryJsonObject
 									.getString("url")));
 						}
-						dataAdapterCountries = new ArrayAdapter<Country>(
-								SearchOrigin.this,
-								android.R.layout.simple_spinner_item, countries);
-						dataAdapterCountries
-								.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+						// dataAdapterCountries = new ArrayAdapter<Country>(
+						// SearchOrigin.this,
+						// android.R.layout.simple_spinner_item, countries);
+						dataAdapterCountries = createDataAdapterCountries(countries);
 						countriesSpinner.setAdapter(dataAdapterCountries);
 					}
 				} catch (JSONException e) {
@@ -354,11 +418,12 @@ public class SearchOrigin extends ActionBarActivity {
 									placeJsonObject.getString("url")));
 							placeNames.add(placeJsonObject.getString("name"));
 						}
-						dataAdapterPlaces = new ArrayAdapter<Place>(
-								SearchOrigin.this,
-								android.R.layout.simple_list_item_1, places);
-						dataAdapterPlaces
-								.setDropDownViewResource(R.layout.spinner_dropdown);
+						// dataAdapterPlaces = new ArrayAdapter<Place>(
+						// SearchOrigin.this,
+						// android.R.layout.simple_list_item_1, places);
+						// dataAdapterPlaces
+						// .setDropDownViewResource(R.layout.spinner_dropdown);
+						dataAdapterPlaces = createDataAdapterPlaces(places);
 						placesAutoCompleteTextView
 								.setAdapter(dataAdapterPlaces);
 					}
