@@ -68,6 +68,7 @@
                 android:cursorVisible="false"
                 android:hint="@string/select_place"
                 android:padding="8dp"
+                android:popupBackground="@color/primary_accent"
                 android:textColor="@color/primary"
                 android:textSize="16sp" />
 

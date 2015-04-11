@@ -1,5 +1,6 @@
 package com.kakumapp;
 
+import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.v7.app.ActionBar;
@@ -47,7 +48,13 @@ public class SearchPhone extends ActionBarActivity {
 			@Override
 			public void onClick(View v) {
 				if (isValidInput()) {
-
+					Bundle bundle = new Bundle();
+					bundle.putString("searchType", "Phone");
+					bundle.putString("phone", phoneNumber);
+					Intent intent = new Intent(SearchPhone.this,
+							SearchResults.class);
+					intent.putExtras(bundle);
+					startActivity(intent);
 				}
 			}
 		});

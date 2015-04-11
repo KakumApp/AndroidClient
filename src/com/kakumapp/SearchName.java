@@ -1,5 +1,6 @@
 package com.kakumapp;
 
+import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.v7.app.ActionBar;
@@ -37,7 +38,7 @@ public class SearchName extends ActionBarActivity {
 		actionBar.setHomeButtonEnabled(true);
 		actionBar.setDisplayHomeAsUpEnabled(true);
 
-		firstNameEditText = (MaterialEditText) findViewById(R.id.edittext_last_name);
+		firstNameEditText = (MaterialEditText) findViewById(R.id.edittext_first_name);
 		fatherNameEditText = (MaterialEditText) findViewById(R.id.edittext_last_name);
 		grandFatherNameEditText = (MaterialEditText) findViewById(R.id.edittext_other_name);
 		continueButton = (Button) findViewById(R.id.button_continue);
@@ -52,7 +53,21 @@ public class SearchName extends ActionBarActivity {
 			@Override
 			public void onClick(View v) {
 				if (isValidInput()) {
-					
+					Bundle bundle = new Bundle();
+					bundle.putString("searchType", "Name");
+					if (firstName != null) {
+						bundle.putString("firstName", firstName);
+					}
+					if (fatherName != null) {
+						bundle.putString("fatherName", fatherName);
+					}
+					if (grandFatherName != null) {
+						bundle.putString("grandFatherName", grandFatherName);
+					}
+					Intent intent = new Intent(SearchName.this,
+							SearchResults.class);
+					intent.putExtras(bundle);
+					startActivity(intent);
 				}
 			}
 		});
@@ -104,4 +119,5 @@ public class SearchName extends ActionBarActivity {
 			bottomSheet.show();
 		}
 	}
+
 }

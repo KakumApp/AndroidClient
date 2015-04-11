@@ -146,7 +146,8 @@
         </activity>
         <activity
             android:name=".SearchOptions"
-            android:label="@string/search" >
+            android:label="@string/search"
+            android:windowSoftInputMode="stateHidden" >
             <intent-filter>
                 <action android:name="com.kakumapp.SearchOptions" />
 
@@ -155,7 +156,8 @@
         </activity>
         <activity
             android:name=".SearchOrigin"
-            android:label="@string/search__origin" >
+            android:label="@string/search__origin"
+            android:windowSoftInputMode="stateHidden" >
             <intent-filter>
                 <action android:name="com.kakumapp.SearchOrigin" />
 
@@ -164,23 +166,35 @@
         </activity>
         <activity
             android:name=".SearchName"
-            android:label="@string/search__name" >
+            android:label="@string/search__name"
+            android:windowSoftInputMode="stateHidden" >
             <intent-filter>
                 <action android:name="com.kakumapp.SearchName" />
 
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
-         <activity
+        <activity
             android:name=".SearchPhone"
-            android:label="@string/search__phone" >
+            android:label="@string/search__phone"
+            android:windowSoftInputMode="stateHidden" >
             <intent-filter>
                 <action android:name="com.kakumapp.SearchPhone" />
 
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
-         <activity
+        <activity
+            android:name=".SearchResults"
+            android:label="@string/results"
+            android:windowSoftInputMode="stateHidden" >
+            <intent-filter>
+                <action android:name="com.kakumapp.SearchResults" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        <activity
             android:name=".MeetingPoints"
             android:label="@string/meetingPoints" >
             <intent-filter>

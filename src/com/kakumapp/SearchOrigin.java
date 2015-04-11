@@ -5,18 +5,15 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
+import java.util.Arrays;
 
 import org.apache.http.Header;
 import org.apache.http.HttpResponse;
-import org.apache.http.NameValuePair;
 import org.apache.http.auth.UsernamePasswordCredentials;
 import org.apache.http.client.HttpClient;
-import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.HttpGet;
-import org.apache.http.client.methods.HttpPost;
 import org.apache.http.impl.auth.BasicScheme;
 import org.apache.http.impl.client.DefaultHttpClient;
-import org.apache.http.message.BasicNameValuePair;
 import org.apache.http.params.BasicHttpParams;
 import org.apache.http.params.HttpConnectionParams;
 import org.apache.http.params.HttpParams;
@@ -24,7 +21,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import android.graphics.Color;
+import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -52,7 +49,7 @@ import com.pnikosis.materialishprogress.ProgressWheel;
 
 public class SearchOrigin extends ActionBarActivity {
 
-	public static final String TAG = "RegisterOrigin";
+	public static final String TAG = "SearchOrigin";
 	private static final String SELECT_COUNTRY = "Select country";
 	private static final String URL = "http://kakumapp-api.herokuapp.com/";
 	public static final String USERNAME = "admin";
@@ -60,17 +57,14 @@ public class SearchOrigin extends ActionBarActivity {
 	public static int FETCH_TYPE, indexOfPlace;
 	private Spinner countriesSpinner;
 	private MultiAutoCompleteTextView placesAutoCompleteTextView;
-	private String selectedCountryName;
 	public static Country country;
 	private Country defaultCountry;
-	private ArrayList<String> selectedPlaces;
+	private ArrayList<String> selectedPlaces = new ArrayList<>();
 	private ArrayAdapter<Country> dataAdapterCountries;
 	private ArrayAdapter<Place> dataAdapterPlaces;
 	private ArrayList<Country> countries = new ArrayList<>();
 	private ArrayList<Place> places = new ArrayList<>();
-	private ArrayList<String> selectedPlacesIds = new ArrayList<>();
 	private ArrayList<String> placeNames = new ArrayList<>();
-	private ArrayList<String> placesToRegister = new ArrayList<>();
 	private BottomSheet bottomSheet;
 	private ProgressWheel progressBar;
 	private MaterialDialog dialog;
@@ -101,14 +95,25 @@ public class SearchOrigin extends ActionBarActivity {
 		searchDescrTextView.setTypeface(typeface);
 
 		// hints color
-		int hintTextColor = getResources().getColor(R.color.half_white);
+		int hintTextColor = getResources().getColor(R.color.primary);
 		placesAutoCompleteTextView.setHintTextColor(hintTextColor);
 
 		continueButton.setOnClickListener(new OnClickListener() {
 
 			@Override
 			public void onClick(View v) {
-				goNext();
+				if (isValidInput()) {
+					Bundle bundle = new Bundle();
+					bundle.putString("searchType", "Origin");
+					if (!country.getName().equals(SELECT_COUNTRY)) {
+						bundle.putString("country", country.getName());
+					}
+					bundle.putStringArrayList("places", selectedPlaces);
+					Intent intent = new Intent(SearchOrigin.this,
+							SearchResults.class);
+					intent.putExtras(bundle);
+					startActivity(intent);
+				}
 			}
 		});
 
@@ -130,14 +135,14 @@ public class SearchOrigin extends ActionBarActivity {
 							View arg1, int position, long arg3) {
 						TextView textView = ((TextView) parent.getChildAt(0));
 						if (textView != null) {
-							textView.setTextColor(Color.WHITE);
+							textView.setTextColor(getResources().getColor(
+									R.color.primary));
 						}
 						country = (Country) parent.getItemAtPosition(position);
 						if (!country.getName().equals(SELECT_COUNTRY)) {
 							// get the places
 							FETCH_TYPE = 2;
-							FetchTask fetchTask = new FetchTask(
-									FetchTask.GET_TASK);
+							FetchTask fetchTask = new FetchTask();
 							fetchTask.execute(new String[] { URL + "countries/"
 									+ country.getId() });
 						}
@@ -147,10 +152,10 @@ public class SearchOrigin extends ActionBarActivity {
 					public void onNothingSelected(AdapterView<?> arg0) {
 					}
 				});
+
 		// places spinner adatapter
 		dataAdapterPlaces = new ArrayAdapter<Place>(this,
 				android.R.layout.simple_list_item_1, places);
-
 		dataAdapterPlaces.setDropDownViewResource(R.layout.spinner_dropdown);
 		placesAutoCompleteTextView.setAdapter(dataAdapterPlaces);
 		// specify the minimum type of characters before drop-down list is shown
@@ -161,7 +166,7 @@ public class SearchOrigin extends ActionBarActivity {
 
 		// get the countries
 		FETCH_TYPE = 1;
-		FetchTask fetchTask = new FetchTask(FetchTask.GET_TASK);
+		FetchTask fetchTask = new FetchTask();
 		fetchTask.execute(new String[] { URL + "countries/" });
 	}
 
@@ -181,8 +186,16 @@ public class SearchOrigin extends ActionBarActivity {
 		}
 	}
 
-	protected void goNext() {
-		// if there are any places that the user has entered,register them first
+	/**
+	 * validate input
+	 * 
+	 * check if there are any places that the user has entered
+	 * 
+	 * @return
+	 */
+	protected boolean isValidInput() {
+		boolean valid = false;
+		// check if there are any places that the user has entered
 		selectedPlaces.clear();
 		String placesEntered = placesAutoCompleteTextView.getText().toString()
 				.trim();
@@ -194,61 +207,11 @@ public class SearchOrigin extends ActionBarActivity {
 				}
 			}
 		}
-		// check the places not registered(user generated)
-		for (String selectedPlace : selectedPlaces) {
-			if (!placeNames.contains(selectedPlace)) {
-				placesToRegister.add(selectedPlace);
-			}
-		}
-		// register places(user generated)
-		if (placesToRegister.size() > 0) {
-			for (indexOfPlace = 0; indexOfPlace < placesToRegister.size(); indexOfPlace++) {
-				// register a place
-				FETCH_TYPE = 3;
-				FetchTask fetchTask = new FetchTask(FetchTask.POST_TASK);
-				fetchTask.addNameValuePair("country", country.getId() + "");
-				fetchTask.addNameValuePair("name",
-						placesToRegister.get(indexOfPlace).trim());
-				fetchTask.execute(new String[] { URL + "places/" });
-			}
+		if (selectedPlaces.size() > 0) {
+			valid = true;
 		} else {
-			moveToNextScreen();
-		}
-	}
-
-	public void moveToNextScreen() {
-		// if data is valid
-		if (isValidData()) {
-			// get the ids of the places selected
-			for (String selectedPlace : selectedPlaces) {
-				for (Place place : places) {
-					if (place.getName().equals(selectedPlace)) {
-						selectedPlacesIds.add(place.getId() + "");
-					}
-				}
-			}
-
-		}
-	}
-
-	/**
-	 * validate the data entered
-	 * 
-	 * @return true if valid,false otherwise
-	 */
-	protected boolean isValidData() {
-		boolean valid = false;
-		// validate
-		if (country != null && !country.getName().equals(SELECT_COUNTRY)) {
-			if (!selectedPlaces.isEmpty()) {
-				valid = true;
-			} else {
-				showErrorMessage("Place required",
-						"You need to enter at least one of the places");
-			}
-		} else {
-			showErrorMessage("Country required",
-					"You need to select one of the countries");
+			showErrorMessage("Place required",
+					"You need to enter at least one of the places");
 		}
 		return valid;
 	}
@@ -285,31 +248,14 @@ public class SearchOrigin extends ActionBarActivity {
 							FetchTask fetchTask = null;
 							switch (FETCH_TYPE) {
 							case 1:
-								fetchTask = new FetchTask(FetchTask.GET_TASK);
+								fetchTask = new FetchTask();
 								fetchTask.execute(new String[] { URL
 										+ "countries/" });
 								break;
 							case 2:
-								fetchTask = new FetchTask(FetchTask.GET_TASK);
+								fetchTask = new FetchTask();
 								fetchTask.execute(new String[] { URL
 										+ "countries/" + country.getId() });
-								break;
-							case 3:
-								if (placesToRegister.size() > 0) {
-									for (indexOfPlace = 0; indexOfPlace < placesToRegister
-											.size(); indexOfPlace++) {
-										fetchTask = new FetchTask(
-												FetchTask.POST_TASK);
-										fetchTask.addNameValuePair("country",
-												country.getId() + "");
-										fetchTask.addNameValuePair(
-												"name",
-												placesToRegister.get(
-														indexOfPlace).trim());
-										fetchTask.execute(new String[] { URL
-												+ "places/" });
-									}
-								}
 								break;
 							default:
 								break;
@@ -318,9 +264,6 @@ public class SearchOrigin extends ActionBarActivity {
 
 						@Override
 						public void onNegative(MaterialDialog dialog) {
-							if (FETCH_TYPE == 1) {
-								onBackPressed();
-							}
 						}
 					}).build();
 			dialog.setCancelable(false);
@@ -329,28 +272,16 @@ public class SearchOrigin extends ActionBarActivity {
 	}
 
 	/**
-	 * This class does pulling/pushing some data
+	 * This class does pulling some data
 	 * 
 	 * @author paul
 	 * 
 	 */
 	private class FetchTask extends AsyncTask<String, Integer, String> {
-		public static final int POST_TASK = 1;
-		public static final int GET_TASK = 2;
 		// connection timeout, in milliseconds-waiting to connect
 		private static final int CONN_TIMEOUT = 60000;
 		// socket timeout, in milliseconds-waiting for data
 		private static final int SOCKET_TIMEOUT = 60000;
-		private ArrayList<NameValuePair> params = new ArrayList<NameValuePair>();
-		private int TASK_TYPE;
-
-		public FetchTask(int TASK_TYPE) {
-			this.TASK_TYPE = TASK_TYPE;
-		}
-
-		public void addNameValuePair(String name, String value) {
-			params.add(new BasicNameValuePair(name, value));
-		}
 
 		@Override
 		protected void onPreExecute() {
@@ -436,39 +367,6 @@ public class SearchOrigin extends ActionBarActivity {
 					showRetry();
 				}
 			}
-			// registering places
-			else if (FETCH_TYPE == 3) {
-				try {
-					JSONObject placeJsonObject = new JSONObject(response);
-					places.add(new Place(placeJsonObject.getLong("id"),
-							placeJsonObject.getLong("country"), placeJsonObject
-									.getString("name"), placeJsonObject
-									.getString("url")));
-					placeNames.add(placeJsonObject.getString("name"));
-					dataAdapterPlaces = new ArrayAdapter<Place>(
-							SearchOrigin.this,
-							android.R.layout.simple_list_item_1, places);
-					dataAdapterPlaces
-							.setDropDownViewResource(R.layout.spinner_dropdown);
-					placesAutoCompleteTextView.setAdapter(dataAdapterPlaces);
-
-					if (indexOfPlace >= placesToRegister.size()) {
-						moveToNextScreen();
-					}
-				} catch (JSONException e) {
-					try {
-						JSONObject placeJsonObject = new JSONObject(response);
-						if (placeJsonObject.getString("name").contains(
-								"This field must be unique")) {
-							if (indexOfPlace >= placesToRegister.size()) {
-								moveToNextScreen();
-							}
-						}
-					} catch (JSONException e1) {
-						showRetry();
-					}
-				}
-			}
 		}
 
 		/**
@@ -498,24 +396,10 @@ public class SearchOrigin extends ActionBarActivity {
 						USERNAME, PASSWORD);
 				BasicScheme scheme = new BasicScheme();
 				Header authorizationHeader;
-				switch (TASK_TYPE) {
-				case POST_TASK:
-					HttpPost httppost = new HttpPost(url);
-					httppost.setEntity(new UrlEncodedFormEntity(params));
-					authorizationHeader = scheme.authenticate(credentials,
-							httppost);
-					httppost.addHeader(authorizationHeader);
-					response = httpclient.execute(httppost);
-					break;
-				case GET_TASK:
-					HttpGet request = new HttpGet(url);
-					authorizationHeader = scheme.authenticate(credentials,
-							request);
-					request.addHeader(authorizationHeader);
-					response = httpclient.execute(request);
-					break;
-				}
-
+				HttpGet request = new HttpGet(url);
+				authorizationHeader = scheme.authenticate(credentials, request);
+				request.addHeader(authorizationHeader);
+				response = httpclient.execute(request);
 			} catch (Exception e) {
 				Log.e(TAG, e.getLocalizedMessage(), e);
 			}
