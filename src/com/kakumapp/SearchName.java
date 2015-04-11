@@ -55,13 +55,13 @@ public class SearchName extends ActionBarActivity {
 				if (isValidInput()) {
 					Bundle bundle = new Bundle();
 					bundle.putString("searchType", "Name");
-					if (firstName != null) {
+					if (firstName != null && !firstName.equals("")) {
 						bundle.putString("firstName", firstName);
 					}
-					if (fatherName != null) {
+					if (fatherName != null && !fatherName.equals("")) {
 						bundle.putString("fatherName", fatherName);
 					}
-					if (grandFatherName != null) {
+					if (grandFatherName != null && !grandFatherName.equals("")) {
 						bundle.putString("grandFatherName", grandFatherName);
 					}
 					Intent intent = new Intent(SearchName.this,

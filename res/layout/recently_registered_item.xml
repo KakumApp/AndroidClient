@@ -41,13 +41,11 @@
 
             <TextView
                 android:id="@+id/textView_name"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
                 android:layout_marginLeft="8dp"
                 android:layout_toRightOf="@+id/imageview_name"
-                android:gravity="center"
-                android:text="John Doe Aden"
                 android:textColor="@color/dark_grey"
                 android:textStyle="bold" />
         </RelativeLayout>
@@ -70,13 +68,11 @@
 
             <TextView
                 android:id="@+id/textView_origin"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
                 android:layout_marginLeft="8dp"
                 android:layout_toRightOf="@+id/imageview_origin"
-                android:gravity="center"
-                android:text="Wajir, Kenya"
                 android:textColor="@color/dark_grey" />
         </RelativeLayout>
 
@@ -98,13 +94,11 @@
 
             <TextView
                 android:id="@+id/textView_phone"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
                 android:layout_marginLeft="8dp"
                 android:layout_toRightOf="@+id/imageview_phone"
-                android:gravity="center"
-                android:text="071X XXX XXX"
                 android:textColor="@color/dark_grey" />
         </RelativeLayout>
 

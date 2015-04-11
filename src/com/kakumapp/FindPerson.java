@@ -38,7 +38,7 @@ public class FindPerson extends ActionBarActivity {
 		actionBar.setDisplayHomeAsUpEnabled(true);
 
 		for (int i = 0; i < 10; i++) {
-			registeredPersons.add(new RegisteredPerson((i + 1), "John Doe Aden"
+			registeredPersons.add(new RegisteredPerson("URL", "John Doe Aden"
 					+ (i + 1), "Wajir, Kenya", "071X XXX XXX", null));
 		}
 		recyclerView = (RecyclerView) findViewById(R.id.recycler_view);
@@ -51,14 +51,15 @@ public class FindPerson extends ActionBarActivity {
 		mLayoutManager = new LinearLayoutManager(this);
 		recyclerView.setLayoutManager(mLayoutManager);
 		// specify an adapter
-		mAdapter = new RegisteredPersonsAdapter(registeredPersons);
+		mAdapter = new RegisteredPersonsAdapter(registeredPersons, this);
 		recyclerView.setAdapter(mAdapter);
-		
+
 		searchButton.setOnClickListener(new OnClickListener() {
-			
+
 			@Override
 			public void onClick(View v) {
-				Intent searchOptions=new Intent(FindPerson.this,SearchOptions.class);
+				Intent searchOptions = new Intent(FindPerson.this,
+						SearchOptions.class);
 				startActivity(searchOptions);
 			}
 		});

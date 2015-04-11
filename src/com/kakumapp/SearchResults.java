@@ -1,8 +1,29 @@
 package com.kakumapp;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
 import java.util.ArrayList;
 
+import org.apache.http.Header;
+import org.apache.http.HttpResponse;
+import org.apache.http.auth.UsernamePasswordCredentials;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.methods.HttpGet;
+import org.apache.http.impl.auth.BasicScheme;
+import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.params.BasicHttpParams;
+import org.apache.http.params.HttpConnectionParams;
+import org.apache.http.params.HttpParams;
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
@@ -15,6 +36,7 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 
+import com.afollestad.materialdialogs.MaterialDialog;
 import com.kakumapp.adapters.RegisteredPerson;
 import com.kakumapp.adapters.RegisteredPersonsAdapter;
 import com.pnikosis.materialishprogress.ProgressWheel;
@@ -23,7 +45,7 @@ public class SearchResults extends ActionBarActivity {
 
 	public static final String TAG = "SearchResults";
 	private static String URL = "http://kakumapp-api.herokuapp.com/targets?",
-			SEARCH_URL;
+			SEARCH_URL = "";
 	public static final String USERNAME = "admin";
 	public static final String PASSWORD = "admin";
 	private Toolbar toolbar;
@@ -35,11 +57,7 @@ public class SearchResults extends ActionBarActivity {
 	private Button searchButton;
 	private String searchType;
 	private ProgressWheel progressWheel;
-
-	// private String phoneNumber;
-	// private ArrayList<String> selectedPlaces = new ArrayList<>();
-	// private String countryName;
-	// private String firstName, fatherName, grandFatherName;
+	private MaterialDialog dialog;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -62,7 +80,7 @@ public class SearchResults extends ActionBarActivity {
 		mLayoutManager = new LinearLayoutManager(this);
 		recyclerView.setLayoutManager(mLayoutManager);
 		// specify an adapter
-		mAdapter = new RegisteredPersonsAdapter(registeredPersons);
+		mAdapter = new RegisteredPersonsAdapter(registeredPersons, this);
 		recyclerView.setAdapter(mAdapter);
 
 		searchButton.setOnClickListener(new OnClickListener() {
@@ -80,7 +98,7 @@ public class SearchResults extends ActionBarActivity {
 		searchType = extras.getString("searchType");
 		if (searchType != null) {
 			actionBar.setTitle("Results - " + searchType);
-			SEARCH_URL = URL;
+			SEARCH_URL = "";
 			/**
 			 * form URL of the form search=param1&search=param2&...search=paramn
 			 */
@@ -114,7 +132,17 @@ public class SearchResults extends ActionBarActivity {
 					SEARCH_URL += "search=" + place + "&";
 				}
 			}
+			try {
+				SEARCH_URL = URLEncoder.encode(SEARCH_URL, "utf-8");
+				SEARCH_URL = URL + SEARCH_URL;
+			} catch (UnsupportedEncodingException e) {
+				Log.e(TAG,
+						"UnsupportedEncodingException "
+								+ e.getLocalizedMessage());
+			}
 			Log.e(TAG, SEARCH_URL);
+			SearchTask searchTask = new SearchTask();
+			searchTask.execute(new String[] { SEARCH_URL });
 		}
 	}
 
@@ -147,4 +175,175 @@ public class SearchResults extends ActionBarActivity {
 		}
 	}
 
+	/**
+	 * This class does search based on the filters provided
+	 * 
+	 * @author paul
+	 * 
+	 */
+	private class SearchTask extends AsyncTask<String, Integer, String> {
+		// connection timeout, in milliseconds-waiting to connect
+		private static final int CONN_TIMEOUT = 60000;
+		// socket timeout, in milliseconds-waiting for data
+		private static final int SOCKET_TIMEOUT = 60000;
+
+		@Override
+		protected void onPreExecute() {
+			super.onPreExecute();
+			showProgress();
+		}
+
+		/**
+		 * fetch data
+		 */
+		protected String doInBackground(String... urls) {
+			String url = urls[0];
+			String result = "";
+			HttpResponse response = doResponse(url);
+			if (response == null) {
+				return result;
+			} else {
+				try {
+					result = inputStreamToString(response.getEntity()
+							.getContent());
+				} catch (Exception e) {
+					Log.e(TAG, e.getLocalizedMessage(), e);
+				}
+			}
+			return result;
+		}
+
+		@Override
+		protected void onPostExecute(String response) {
+			Log.e(TAG, " response is " + response);
+			hideprogress();
+			try {
+				JSONArray resultsArray = new JSONObject(response)
+						.getJSONArray("results");
+				if (resultsArray.length() > 0) {
+					registeredPersons.clear();
+					for (int j = 0; j < resultsArray.length(); j++) {
+						JSONObject personJsonObject = resultsArray
+								.getJSONObject(j);
+						String url = personJsonObject.getString("url");
+						String name = "";
+						String firstName = personJsonObject
+								.getString("first_name");
+						String fatherName = personJsonObject
+								.getString("last_name");
+						String grandFatherName = personJsonObject
+								.getString("other_name");
+						name = firstName + " " + fatherName;
+						if (grandFatherName != null
+								&& !grandFatherName.equals("null")) {
+							name += " " + grandFatherName;
+						}
+						String places = "";
+						JSONArray placesArray = personJsonObject
+								.getJSONArray("places");
+						if (placesArray.length() > 0) {
+							for (int i = 0; i < placesArray.length(); i++) {
+								places += placesArray.get(i).toString() + ",";
+							}
+						}
+						String phone = personJsonObject.getString("phone_no");
+						registeredPersons.add(new RegisteredPerson(url, name,
+								places, phone, null));
+					}
+					// specify an adapter
+					mAdapter = new RegisteredPersonsAdapter(registeredPersons,
+							SearchResults.this);
+					recyclerView.setAdapter(mAdapter);
+				}
+			} catch (JSONException e) {
+				Log.e(TAG, "Exception " + e.getLocalizedMessage());
+				showRetry();
+			}
+		}
+
+		/**
+		 * Establish connection and socket (data retrieval) timeouts
+		 * 
+		 * @return
+		 */
+		private HttpParams getHttpParams() {
+			HttpParams htpp = new BasicHttpParams();
+			HttpConnectionParams.setConnectionTimeout(htpp, CONN_TIMEOUT);
+			HttpConnectionParams.setSoTimeout(htpp, SOCKET_TIMEOUT);
+			return htpp;
+		}
+
+		/**
+		 * Use our connection and data timeouts as parameters for our
+		 * DefaultHttpClient
+		 * 
+		 * @param url
+		 * @return
+		 */
+		private HttpResponse doResponse(String url) {
+			HttpClient httpclient = new DefaultHttpClient(getHttpParams());
+			HttpResponse response = null;
+			try {
+				UsernamePasswordCredentials credentials = new UsernamePasswordCredentials(
+						USERNAME, PASSWORD);
+				BasicScheme scheme = new BasicScheme();
+				Header authorizationHeader;
+				HttpGet request = new HttpGet(url);
+				authorizationHeader = scheme.authenticate(credentials, request);
+				request.addHeader(authorizationHeader);
+				response = httpclient.execute(request);
+			} catch (Exception e) {
+				Log.e(TAG, e.getLocalizedMessage(), e);
+			}
+			return response;
+		}
+
+		/**
+		 * 
+		 * @param is
+		 * @return
+		 */
+		private String inputStreamToString(InputStream is) {
+			String line = "";
+			StringBuilder total = new StringBuilder();
+			// Wrap a BufferedReader around the InputStream
+			BufferedReader bufferedReader = new BufferedReader(
+					new InputStreamReader(is));
+			try {
+				// Read response until the end
+				while ((line = bufferedReader.readLine()) != null) {
+					total.append(line);
+				}
+			} catch (IOException e) {
+				Log.e(TAG, e.getLocalizedMessage(), e);
+			}
+			// Return full string
+			return total.toString();
+		}
+	}
+
+	// show a retry dialog for poor/no internet connection
+	public void showRetry() {
+		hideprogress();
+		// show only if there are no other dialogs already showing
+		if (dialog == null || !dialog.isShowing()) {
+			dialog = new MaterialDialog.Builder(this)
+					.title(R.string.connect_error)
+					.content(R.string.connection_error_message)
+					.positiveText(R.string.yes).negativeText(R.string.cancel)
+					.callback(new MaterialDialog.ButtonCallback() {
+						@Override
+						public void onPositive(MaterialDialog dialog) {
+							SearchTask searchTask = new SearchTask();
+							searchTask.execute(new String[] { SEARCH_URL });
+						}
+
+						@Override
+						public void onNegative(MaterialDialog dialog) {
+						}
+					}).build();
+			dialog.setCancelable(false);
+			dialog.show();
+		}
+	}
 }

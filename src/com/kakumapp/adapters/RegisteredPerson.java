@@ -10,7 +10,7 @@ import android.graphics.Bitmap;
  */
 public class RegisteredPerson {
 
-	private long id;
+	private String url;
 	private String name;
 	private String location;
 	private String phone;
@@ -18,15 +18,15 @@ public class RegisteredPerson {
 
 	/**
 	 * 
-	 * @param id
+	 * @param url
 	 * @param name
 	 * @param location
 	 * @param phone
 	 * @param photo
 	 */
-	public RegisteredPerson(long id, String name, String location,
+	public RegisteredPerson(String url, String name, String location,
 			String phone, Bitmap photo) {
-		setId(id);
+		setUrl(url);
 		setName(name);
 		setLocation(location);
 		setPhone(phone);
@@ -34,18 +34,18 @@ public class RegisteredPerson {
 	}
 
 	/**
-	 * @return the id
+	 * @return the url
 	 */
-	public long getId() {
-		return id;
+	public String getUrl() {
+		return url;
 	}
 
 	/**
-	 * @param id
-	 *            the id to set
+	 * @param url
+	 *            the url to set
 	 */
-	public void setId(long id) {
-		this.id = id;
+	public void setUrl(String url) {
+		this.url = url;
 	}
 
 	/**

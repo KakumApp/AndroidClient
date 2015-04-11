@@ -57,8 +57,9 @@ public class MeetingPoints extends ActionBarActivity {
 
 	@Override
 	public void onBackPressed() {
-		Intent homeIntent = new Intent(MeetingPoints.this, Kakuma.class);
-		startActivity(homeIntent);
-		finish();
+		super.onBackPressed();
+		// Intent homeIntent = new Intent(MeetingPoints.this, Kakuma.class);
+		// startActivity(homeIntent);
+		// finish();
 	}
 }

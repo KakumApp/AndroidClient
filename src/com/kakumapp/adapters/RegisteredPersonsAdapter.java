@@ -2,11 +2,15 @@ package com.kakumapp.adapters;
 
 import java.util.ArrayList;
 
+import android.content.Context;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -15,11 +19,13 @@ import com.kakumapp.R;
 public class RegisteredPersonsAdapter extends
 		RecyclerView.Adapter<RegisteredPersonsAdapter.ViewHolder> {
 	private ArrayList<RegisteredPerson> registeredPersons;
+	private Context context;
 
 	// constructor
 	public RegisteredPersonsAdapter(
-			ArrayList<RegisteredPerson> registeredPersons) {
+			ArrayList<RegisteredPerson> registeredPersons, Context context) {
 		this.registeredPersons = registeredPersons;
+		this.context = context;
 	}
 
 	// Create new views (invoked by the layout manager)
@@ -63,6 +69,14 @@ public class RegisteredPersonsAdapter extends
 			viewHolder.photoImageView
 					.setImageResource(R.drawable.default_profile);
 		}
+		viewHolder.meetingButton.setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				Intent intent = new Intent("com.kakumapp.MeetingPoints");
+				context.startActivity(intent);
+			}
+		});
 	}
 
 	// Return the size of your dataset (invoked by the layout manager)
@@ -75,6 +89,7 @@ public class RegisteredPersonsAdapter extends
 	public static class ViewHolder extends RecyclerView.ViewHolder {
 		public TextView nameTextView, locationTextView, phoneTextView;
 		private ImageView photoImageView;
+		private Button meetingButton;
 
 		public ViewHolder(View itemLayoutView) {
 			super(itemLayoutView);
@@ -87,7 +102,8 @@ public class RegisteredPersonsAdapter extends
 					.findViewById(R.id.textView_phone);
 			photoImageView = (ImageView) itemLayoutView
 					.findViewById(R.id.image_view_photo);
-
+			meetingButton = (Button) itemLayoutView
+					.findViewById(R.id.button_meeting_point);
 		}
 	}
 
