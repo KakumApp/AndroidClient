@@ -65,7 +65,7 @@ public class SearchName extends ActionBarActivity {
 						bundle.putString("grandFatherName", grandFatherName);
 					}
 					Intent intent = new Intent(SearchName.this,
-							SearchResults.class);
+							FindPerson.class);
 					intent.putExtras(bundle);
 					startActivity(intent);
 				}

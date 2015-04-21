@@ -110,7 +110,7 @@ public class SearchOrigin extends ActionBarActivity {
 					}
 					bundle.putStringArrayList("places", selectedPlaces);
 					Intent intent = new Intent(SearchOrigin.this,
-							SearchResults.class);
+							FindPerson.class);
 					intent.putExtras(bundle);
 					startActivity(intent);
 				}

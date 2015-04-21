@@ -58,9 +58,7 @@ public class RegisterOrigin extends ActionBarActivity {
 
 	public static final String TAG = "RegisterOrigin";
 	private static final String SELECT_COUNTRY = "Select country";
-	private static final String URL = "http://kakumapp-api.herokuapp.com/";
-	public static final String USERNAME = "admin";
-	public static final String PASSWORD = "admin";
+	private static String URL;
 	public static int FETCH_TYPE, indexOfPlace;
 	private Button continueButton;
 	private TextView findPersonTextView, descTextView;
@@ -89,7 +87,7 @@ public class RegisterOrigin extends ActionBarActivity {
 		setContentView(R.layout.activity_origin);
 		// global app
 		application = (KakumaApplication) getApplication();
-		
+		URL = KakumaApplication.APIURL;
 		// get the views
 		continueButton = (Button) findViewById(R.id.button_register_continue);
 		findPersonTextView = (TextView) findViewById(R.id.textView_register_find_person);
@@ -125,7 +123,7 @@ public class RegisterOrigin extends ActionBarActivity {
 				startActivity(findPersonIntent);
 			}
 		});
-		
+
 		// create the spinners adapters
 		defaultCountry = new Country(0, SELECT_COUNTRY, "");
 		countries.add(defaultCountry);
@@ -172,7 +170,7 @@ public class RegisterOrigin extends ActionBarActivity {
 		// comma to separate the different places
 		placesAutoCompleteTextView
 				.setTokenizer(new MultiAutoCompleteTextView.CommaTokenizer());
-		
+
 		// set global data if available
 		selectedCountryName = application.getSelectedCountryName();
 		selectedPlaces = application.getSelectedPlaces();
@@ -191,7 +189,7 @@ public class RegisterOrigin extends ActionBarActivity {
 		if (selectedPlacesIds == null) {
 			selectedPlacesIds = new ArrayList<>();
 		}
-		
+
 		// get the countries
 		FETCH_TYPE = 1;
 		FetchTask fetchTask = new FetchTask(FetchTask.GET_TASK);
@@ -546,7 +544,8 @@ public class RegisterOrigin extends ActionBarActivity {
 			HttpResponse response = null;
 			try {
 				UsernamePasswordCredentials credentials = new UsernamePasswordCredentials(
-						USERNAME, PASSWORD);
+						application.getApiUsername(),
+						application.getApiPassword());
 				BasicScheme scheme = new BasicScheme();
 				Header authorizationHeader;
 				switch (TASK_TYPE) {

@@ -52,7 +52,7 @@ public class SearchPhone extends ActionBarActivity {
 					bundle.putString("searchType", "Phone");
 					bundle.putString("phone", phoneNumber);
 					Intent intent = new Intent(SearchPhone.this,
-							SearchResults.class);
+							FindPerson.class);
 					intent.putExtras(bundle);
 					startActivity(intent);
 				}

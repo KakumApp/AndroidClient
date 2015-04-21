@@ -47,7 +47,11 @@ public class RegisteredPersonsAdapter extends
 		RegisteredPerson person = registeredPersons.get(position);
 
 		String name = person.getName();
-		String location = person.getLocation();
+		String location = "";
+		ArrayList<Place> places = person.getPlaces();
+		for (Place place : places) {
+			location += place.getName() + ",";
+		}
 		String phone = person.getPhone();
 		Bitmap photo = person.getPhoto();
 

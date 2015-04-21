@@ -1,9 +1,13 @@
 package com.kakumapp;
 
+import java.io.IOException;
+import java.util.Scanner;
+
 import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
+import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
@@ -14,7 +18,7 @@ import com.kakumapp.utils.Utils;
 
 public class Kakuma extends ActionBarActivity implements SwipeGestureListener {
 
-	// private static final String TAG = "Kakuma";
+	private static final String TAG = "Kakuma";
 	private Button registerButton, findAPersonButton;
 	private TextView titleTextView, descTextView, howToUseTextView;
 	private Typeface typeface, typeface2;
@@ -64,6 +68,33 @@ public class Kakuma extends ActionBarActivity implements SwipeGestureListener {
 				startActivity(howIntent);
 			}
 		});
+
+		readCredentials();
+	}
+
+	private void readCredentials() {
+		// instance of the global application
+		KakumaApplication application = (KakumaApplication) getApplication();
+		Scanner reader = null;
+		try {
+			reader = new Scanner(getAssets().open("credentials.txt"));
+			String identityPoolId = reader.nextLine();
+			String bucket = reader.nextLine();
+			String apiUsername = reader.nextLine();
+			String apiPassword = reader.nextLine();
+
+			application.setIdentityPoolId(identityPoolId);
+			application.setBucket(bucket);
+			application.setApiUsername(apiUsername);
+			application.setApiPassword(apiPassword);
+			application.setAWSURL("https://s3.amazonaws.com/" + bucket + "/");
+		} catch (IOException e) {
+			Log.e(TAG, "Exception " + e.getLocalizedMessage());
+		} finally {
+			if (reader != null) {
+				reader.close();
+			}
+		}
 	}
 
 	@Override

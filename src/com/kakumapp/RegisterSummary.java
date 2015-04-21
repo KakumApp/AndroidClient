@@ -58,9 +58,8 @@ import com.pnikosis.materialishprogress.ProgressWheel;
 public class RegisterSummary extends ActionBarActivity {
 
 	public static final String TAG = "RegisterSummary";
-	private static final String URL = "http://kakumapp-api.herokuapp.com/";
-	public static final String USERNAME = "admin";
-	public static final String PASSWORD = "admin";
+	private static String URL;
+	private static String PHOTO_URL;
 	private static String PHOTO = "URL";
 	public static int FETCH_TYPE = 1;
 	private String firstName, lastName, otherName, phoneNumber;
@@ -77,7 +76,6 @@ public class RegisterSummary extends ActionBarActivity {
 	private Bitmap bitmap;
 	private ProgressWheel progressBar;
 	private MaterialDialog dialog;
-	private String identityPoolId;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -85,6 +83,7 @@ public class RegisterSummary extends ActionBarActivity {
 		setContentView(R.layout.activity_register_summary);
 		// app
 		application = (KakumaApplication) getApplication();
+		URL = KakumaApplication.APIURL;
 		// get the views
 		nameTextView = (TextView) findViewById(R.id.textView_name);
 		phoneTextView = (TextView) findViewById(R.id.textView_phone);
@@ -155,28 +154,6 @@ public class RegisterSummary extends ActionBarActivity {
 				registerUserPhoto();
 			}
 		});
-		identityPoolId = getIdentityPoolId();
-	}
-
-	private String getIdentityPoolId() {
-		String identityPoolId = null;
-		BufferedReader reader = null;
-		try {
-			reader = new BufferedReader(new InputStreamReader(getAssets().open(
-					"identityPoolId.txt")));
-			identityPoolId = reader.readLine();
-		} catch (IOException e) {
-			Log.e(TAG, "Exception " + e.getLocalizedMessage());
-		} finally {
-			if (reader != null) {
-				try {
-					reader.close();
-				} catch (IOException e) {
-					Log.e(TAG, "Exception " + e.getLocalizedMessage());
-				}
-			}
-		}
-		return identityPoolId;
 	}
 
 	/**
@@ -203,7 +180,7 @@ public class RegisterSummary extends ActionBarActivity {
 			jsonObject.put("last_name", lastName);
 			jsonObject.put("other_name", otherName);
 			jsonObject.put("phone_no", phoneNumber);
-			jsonObject.put("photo", PHOTO);
+			jsonObject.put("photo", PHOTO_URL);
 			JSONArray placesArray = new JSONArray();
 			for (String id : placesIds) {
 				placesArray.put(id);
@@ -301,7 +278,8 @@ public class RegisterSummary extends ActionBarActivity {
 			boolean uploaded = false;
 			// Initialize the Amazon Cognito credentials provider
 			CognitoCachingCredentialsProvider credentialsProvider = new CognitoCachingCredentialsProvider(
-					RegisterSummary.this, identityPoolId, Regions.US_EAST_1);
+					RegisterSummary.this, application.getIdentityPoolId(),
+					Regions.US_EAST_1);
 			// Get a TransferManager for upload
 			TransferManager transferManager = new TransferManager(
 					credentialsProvider);
@@ -311,14 +289,15 @@ public class RegisterSummary extends ActionBarActivity {
 			PHOTO = FilenameUtils.removeExtension(fileName) + "_"
 					+ System.currentTimeMillis() + "."
 					+ FilenameUtils.getExtension(fileName);
+			PHOTO_URL = application.getAWSURL() + PHOTO;
 
-			Upload upload = transferManager
-					.upload("kakumapp", PHOTO, photoFile);
+			Upload upload = transferManager.upload(application.getBucket(),
+					PHOTO, photoFile);
 			upload.addProgressListener(new ProgressListener() {
-				
+
 				@Override
 				public void progressChanged(ProgressEvent arg0) {
-					
+
 				}
 			});
 			while (!upload.isDone()) {
@@ -419,7 +398,8 @@ public class RegisterSummary extends ActionBarActivity {
 			HttpResponse response = null;
 			try {
 				UsernamePasswordCredentials credentials = new UsernamePasswordCredentials(
-						USERNAME, PASSWORD);
+						application.getApiUsername(),
+						application.getApiPassword());
 				BasicScheme scheme = new BasicScheme();
 				Header authorizationHeader;
 				switch (TASK_TYPE) {

@@ -185,16 +185,6 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".SearchResults"
-            android:label="@string/results"
-            android:windowSoftInputMode="stateHidden" >
-            <intent-filter>
-                <action android:name="com.kakumapp.SearchResults" />
-
-                <category android:name="android.intent.category.DEFAULT" />
-            </intent-filter>
-        </activity>
-        <activity
             android:name=".MeetingPoints"
             android:label="@string/meetingPoints" >
             <intent-filter>
