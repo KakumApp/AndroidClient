@@ -249,6 +249,7 @@ public class FindPerson extends ActionBarActivity {
 								.getString("last_name");
 						String grandFatherName = personJsonObject
 								.getString("other_name");
+						String photoURL = personJsonObject.getString("photo");
 						name = firstName + " " + fatherName;
 						if (grandFatherName != null
 								&& !grandFatherName.equals("null")) {
@@ -270,7 +271,7 @@ public class FindPerson extends ActionBarActivity {
 						}
 						String phone = personJsonObject.getString("phone_no");
 						registeredPersons.add(new RegisteredPerson(url, name,
-								places, phone, null));
+								places, phone, photoURL));
 					}
 					// specify an adapter
 					mAdapter = new RegisteredPersonsAdapter(registeredPersons,

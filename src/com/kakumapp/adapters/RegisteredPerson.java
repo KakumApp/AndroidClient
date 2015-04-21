@@ -2,8 +2,6 @@ package com.kakumapp.adapters;
 
 import java.util.ArrayList;
 
-import android.graphics.Bitmap;
-
 /**
  * RegisteredPerson
  * 
@@ -16,7 +14,7 @@ public class RegisteredPerson {
 	private String name;
 	private ArrayList<Place> places;
 	private String phone;
-	private Bitmap photo;
+	private String photoURL;
 
 	/**
 	 * 
@@ -27,12 +25,12 @@ public class RegisteredPerson {
 	 * @param photo
 	 */
 	public RegisteredPerson(String url, String name, ArrayList<Place> places,
-			String phone, Bitmap photo) {
+			String phone, String photoURL) {
 		setUrl(url);
 		setName(name);
 		setPlaces(places);
 		setPhone(phone);
-		setPhoto(photo);
+		setPhotoURL(photoURL);
 	}
 
 	/**
@@ -96,18 +94,17 @@ public class RegisteredPerson {
 	}
 
 	/**
-	 * @return the photo
+	 * @return the photoURL
 	 */
-	public Bitmap getPhoto() {
-		return photo;
+	public String getPhotoURL() {
+		return photoURL;
 	}
 
 	/**
-	 * @param photo
-	 *            the photo to set
+	 * @param photoURL the photoURL to set
 	 */
-	public void setPhoto(Bitmap photo) {
-		this.photo = photo;
+	public void setPhotoURL(String photoURL) {
+		this.photoURL = photoURL;
 	}
 
 }
