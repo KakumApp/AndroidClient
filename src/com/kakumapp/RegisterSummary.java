@@ -115,6 +115,8 @@ public class RegisterSummary extends ActionBarActivity {
 			BitmapFactory.Options options = new BitmapFactory.Options();
 			bitmap = BitmapFactory.decodeFile(photoFile.getAbsolutePath(),
 					options);
+		} else {
+			PHOTO_URL = "URL";
 		}
 		// set the data on the views
 		if (firstName != null && lastName != null) {
@@ -173,6 +175,8 @@ public class RegisterSummary extends ActionBarActivity {
 	 */
 
 	private void registerUser() {
+		Log.e(TAG, PHOTO_URL);
+
 		RegisterTask registerTask = new RegisterTask(RegisterTask.POST_TASK);
 		JSONObject jsonObject = new JSONObject();
 		try {

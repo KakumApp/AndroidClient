@@ -230,8 +230,7 @@ public class FindPerson extends ActionBarActivity {
 			Log.e(TAG, " response is " + response);
 			hideprogress();
 			try {
-				JSONArray resultsArray = new JSONObject(response)
-						.getJSONArray("results");
+				JSONArray resultsArray = new JSONArray(response);
 				if (resultsArray.length() > 0) {
 					registeredPersons.clear();
 					int length = resultsArray.length();
