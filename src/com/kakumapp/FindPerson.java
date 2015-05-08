@@ -80,7 +80,7 @@ public class FindPerson extends ActionBarActivity {
 		recyclerView = (RecyclerView) findViewById(R.id.recycler_view);
 		searchButton = (Button) findViewById(R.id.button_search);
 		progressWheel = (ProgressWheel) findViewById(R.id.progressWheel);
-		noResultsTextView = (Button) findViewById(R.id.textView_no_results);
+		noResultsTextView = (TextView) findViewById(R.id.textView_no_results);
 
 		// fonts
 		typeface = new Utils(this).getFont("Ubuntu-L");
