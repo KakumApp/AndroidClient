@@ -80,5 +80,6 @@
     <string name="camera_error">Camera error</string>
     <string name="camera_message">The camera could not be accessed.Try again?</string>
     <string name="skip">Skip</string>
+    <string name="no_results">Could not find a person matching the details provided.Try again.</string>
 
 </resources>

@@ -21,6 +21,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.ActionBar;
@@ -33,11 +34,13 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
+import android.widget.TextView;
 
 import com.afollestad.materialdialogs.MaterialDialog;
 import com.kakumapp.adapters.Place;
 import com.kakumapp.adapters.RegisteredPerson;
 import com.kakumapp.adapters.RegisteredPersonsAdapter;
+import com.kakumapp.utils.Utils;
 import com.pnikosis.materialishprogress.ProgressWheel;
 
 public class FindPerson extends ActionBarActivity {
@@ -57,6 +60,8 @@ public class FindPerson extends ActionBarActivity {
 	private MaterialDialog dialog;
 	private boolean search;
 	private KakumaApplication application;
+	private TextView noResultsTextView;
+	private Typeface typeface;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -75,7 +80,12 @@ public class FindPerson extends ActionBarActivity {
 		recyclerView = (RecyclerView) findViewById(R.id.recycler_view);
 		searchButton = (Button) findViewById(R.id.button_search);
 		progressWheel = (ProgressWheel) findViewById(R.id.progressWheel);
+		noResultsTextView = (Button) findViewById(R.id.textView_no_results);
 
+		// fonts
+		typeface = new Utils(this).getFont("Ubuntu-L");
+		noResultsTextView.setTypeface(typeface);
+		
 		// use this setting to improve performance if you know that changes
 		// in content do not change the layout size of the RecyclerView
 		recyclerView.setHasFixedSize(true);
@@ -146,16 +156,6 @@ public class FindPerson extends ActionBarActivity {
 					}
 				}
 				SEARCH_URL = URL + SEARCH_URL;
-				// try {
-				// SEARCH_URL = URLEncoder.encode(SEARCH_URL, "utf-8");
-				// SEARCH_URL = URL + SEARCH_URL;
-				// } catch (UnsupportedEncodingException e) {
-				// Log.e(TAG,
-				// "UnsupportedEncodingException "
-				// + e.getLocalizedMessage());
-				// }
-				Log.e(TAG, "SEARCH_URL " + SEARCH_URL);
-				Log.e(TAG, "SEARCH_URL index 54 " + SEARCH_URL.charAt(54));
 				SearchTask searchTask = new SearchTask();
 				searchTask.execute(new String[] { SEARCH_URL });
 			}
@@ -283,6 +283,8 @@ public class FindPerson extends ActionBarActivity {
 					mAdapter = new RegisteredPersonsAdapter(registeredPersons,
 							FindPerson.this);
 					recyclerView.setAdapter(mAdapter);
+				}else{
+					noResultsTextView.setVisibility(View.VISIBLE);
 				}
 			} catch (JSONException e) {
 				Log.e(TAG, "Exception " + e.getLocalizedMessage());
