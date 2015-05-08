@@ -463,9 +463,13 @@ public class RegisterSummary extends ActionBarActivity {
 	@Override
 	public void onBackPressed() {
 		super.onBackPressed();
-		Intent nameIntent = new Intent(RegisterSummary.this,
-				RegisterPhoto.class);
-		startActivity(nameIntent);
+		// if the user had opted to take a photo take him back to the
+		// camera,else to to choose photo actrivity
+		Intent intent = new Intent(RegisterSummary.this, RegisterPhoto.class);
+		if (photoFile == null) {
+			intent = new Intent(RegisterSummary.this, RegisterChoosePhoto.class);
+		}
+		startActivity(intent);
 		finish();
 	}
 
