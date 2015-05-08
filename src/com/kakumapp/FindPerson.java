@@ -4,8 +4,6 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.io.UnsupportedEncodingException;
-import java.net.URLEncoder;
 import java.util.ArrayList;
 
 import org.apache.http.Header;
@@ -49,6 +47,7 @@ public class FindPerson extends ActionBarActivity {
 	private Toolbar toolbar;
 	private ActionBar actionBar;
 	private RecyclerView recyclerView;
+	@SuppressWarnings("rawtypes")
 	private RecyclerView.Adapter mAdapter;
 	private RecyclerView.LayoutManager mLayoutManager;
 	private ArrayList<RegisteredPerson> registeredPersons = new ArrayList<>();
@@ -140,15 +139,21 @@ public class FindPerson extends ActionBarActivity {
 					for (String place : places) {
 						SEARCH_URL += "search=" + place + "&";
 					}
+					if (SEARCH_URL.endsWith("&")) {
+						SEARCH_URL = SEARCH_URL.substring(0,
+								SEARCH_URL.length() - 1);
+					}
 				}
-				try {
-					SEARCH_URL = URLEncoder.encode(SEARCH_URL, "utf-8");
-					SEARCH_URL = URL + SEARCH_URL;
-				} catch (UnsupportedEncodingException e) {
-					Log.e(TAG,
-							"UnsupportedEncodingException "
-									+ e.getLocalizedMessage());
-				}
+				SEARCH_URL = URL + SEARCH_URL;
+				// try {
+				// SEARCH_URL = URLEncoder.encode(SEARCH_URL, "utf-8");
+				// SEARCH_URL = URL + SEARCH_URL;
+				// } catch (UnsupportedEncodingException e) {
+				// Log.e(TAG,
+				// "UnsupportedEncodingException "
+				// + e.getLocalizedMessage());
+				// }
+				Log.e(TAG, "SEARCH_URL " + SEARCH_URL);
 				SearchTask searchTask = new SearchTask();
 				searchTask.execute(new String[] { SEARCH_URL });
 			}

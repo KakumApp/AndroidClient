@@ -74,7 +74,7 @@
                 android:layout_below="@+id/autocomplete_origin_places"
                 android:layout_centerHorizontal="true"
                 android:layout_marginTop="35dp"
-                android:visibility="visible"
+                android:visibility="gone"
                 app:matProg_barColor="@color/white"
                 app:matProg_progressIndeterminate="true" />
 

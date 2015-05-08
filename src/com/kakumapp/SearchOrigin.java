@@ -118,8 +118,15 @@ public class SearchOrigin extends ActionBarActivity {
 		});
 
 		// create the spinners adapters
+		String[] countriesLocal = { "South Sudan", "Sudan", "Somalia",
+				"Ethiopia", "D.R. Congo", "Burundi", "Rwanda", "Eritrea",
+				"Uganda" };
 		defaultCountry = new Country(0, SELECT_COUNTRY, "");
 		countries.add(defaultCountry);
+		for (int i = 0; i < countriesLocal.length; i++) {
+			countries.add(new Country(i + 1, countriesLocal[i],
+					"http://kakumapp-api.herokuapp.com/countries/" + (i + 1)));
+		}
 		// dataAdapterCountries = new ArrayAdapter<Country>(this,
 		// android.R.layout.simple_spinner_item, countries);
 		dataAdapterCountries = createDataAdapterCountries(countries);
@@ -162,10 +169,14 @@ public class SearchOrigin extends ActionBarActivity {
 		placesAutoCompleteTextView
 				.setTokenizer(new MultiAutoCompleteTextView.CommaTokenizer());
 
-		// get the countries
-		FETCH_TYPE = 1;
-		FetchTask fetchTask = new FetchTask();
-		fetchTask.execute(new String[] { URL + "countries/" });
+		/**
+		 * In an effort to speed up the process of fetching countries,the
+		 * countries will be localized (hardcoded :) )
+		 */
+		// // get the countries
+		// FETCH_TYPE = 1;
+		// FetchTask fetchTask = new FetchTask();
+		// fetchTask.execute(new String[] { URL + "countries/" });
 	}
 
 	/**
@@ -311,11 +322,11 @@ public class SearchOrigin extends ActionBarActivity {
 							// refetch the data/retry to send some data
 							FetchTask fetchTask = null;
 							switch (FETCH_TYPE) {
-							case 1:
-								fetchTask = new FetchTask();
-								fetchTask.execute(new String[] { URL
-										+ "countries/" });
-								break;
+							// case 1:
+							// fetchTask = new FetchTask();
+							// fetchTask.execute(new String[] { URL
+							// + "countries/" });
+							// break;
 							case 2:
 								fetchTask = new FetchTask();
 								fetchTask.execute(new String[] { URL
