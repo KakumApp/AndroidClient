@@ -47,4 +47,16 @@ public class RegisterChoosePhoto extends ActionBarActivity {
 			}
 		});
 	}
+
+	/**
+	 * explicitly state where to go back to
+	 */
+	@Override
+	public void onBackPressed() {
+		super.onBackPressed();
+		Intent originIntent = new Intent(RegisterChoosePhoto.this,
+				RegisterOrigin.class);
+		startActivity(originIntent);
+		finish();
+	}
 }
