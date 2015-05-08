@@ -45,11 +45,11 @@ public final class R {
 		public static final int bs_list_selector = 0x7f02004b;
 	}
 	public static final class id {
-		public static final int bottom_sheet_gridview = 0x7f09007a;
-		public static final int bottom_sheet_title = 0x7f090079;
-		public static final int bottom_sheet_title_image = 0x7f090078;
-		public static final int bs_list_image = 0x7f09007b;
-		public static final int bs_list_title = 0x7f09007c;
+		public static final int bottom_sheet_gridview = 0x7f09007b;
+		public static final int bottom_sheet_title = 0x7f09007a;
+		public static final int bottom_sheet_title_image = 0x7f090079;
+		public static final int bs_list_image = 0x7f09007c;
+		public static final int bs_list_title = 0x7f09007d;
 		public static final int bs_more = 0x7f090009;
 	}
 	public static final class integer {

@@ -4,6 +4,8 @@ import java.io.IOException;
 import java.util.Scanner;
 
 import android.content.Intent;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager.NameNotFoundException;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
@@ -20,7 +22,8 @@ public class Kakuma extends ActionBarActivity implements SwipeGestureListener {
 
 	private static final String TAG = "Kakuma";
 	private Button registerButton, findAPersonButton;
-	private TextView titleTextView, descTextView, howToUseTextView;
+	private TextView titleTextView, descTextView, howToUseTextView,
+			versionTextView;
 	private Typeface typeface, typeface2;
 
 	@Override
@@ -33,6 +36,8 @@ public class Kakuma extends ActionBarActivity implements SwipeGestureListener {
 		titleTextView = (TextView) findViewById(R.id.textView_title);
 		descTextView = (TextView) findViewById(R.id.textView_desc);
 		howToUseTextView = (TextView) findViewById(R.id.textView_how_to_use);
+		versionTextView = (TextView) findViewById(R.id.textView_version);
+
 		// font
 		typeface = new Utils(this).getFont("Lato-Light");
 		typeface2 = new Utils(this).getFont("Ubuntu-L");
@@ -40,6 +45,16 @@ public class Kakuma extends ActionBarActivity implements SwipeGestureListener {
 		titleTextView.setTypeface(typeface);
 		descTextView.setTypeface(typeface2);
 		howToUseTextView.setTypeface(typeface2);
+		versionTextView.setTypeface(typeface2);
+
+		PackageInfo pInfo;
+		try {
+			pInfo = getPackageManager().getPackageInfo(getPackageName(), 0);
+			String version = pInfo.versionName;
+			versionTextView.setText("V " + version);
+		} catch (NameNotFoundException e) {
+			Log.e(TAG, "Exception  " + e.getLocalizedMessage());
+		}
 
 		registerButton.setOnClickListener(new OnClickListener() {
 
