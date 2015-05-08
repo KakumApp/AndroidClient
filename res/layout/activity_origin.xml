@@ -62,7 +62,9 @@
                 android:layout_marginTop="10dp"
                 android:cursorVisible="false"
                 android:hint="@string/select_place"
+                android:imeActionLabel="Done"
                 android:padding="8dp"
+                android:singleLine="true"
                 android:textColor="@color/white"
                 android:textCursorDrawable="@drawable/white_cursor"
                 android:textSize="16sp" />
