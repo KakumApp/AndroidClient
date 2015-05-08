@@ -102,7 +102,7 @@ public class Kakuma extends ActionBarActivity implements SwipeGestureListener {
 			application.setBucket(bucket);
 			application.setApiUsername(apiUsername);
 			application.setApiPassword(apiPassword);
-			application.setAWSURL("https://s3.amazonaws.com/" + bucket + "/");
+			application.setAWSURL("https://" + bucket + "s3.amazonaws.com/");
 		} catch (IOException e) {
 			Log.e(TAG, "Exception " + e.getLocalizedMessage());
 		} finally {

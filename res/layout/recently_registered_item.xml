@@ -11,6 +11,7 @@
         android:layout_height="160dp"
         android:clickable="true"
         android:contentDescription="@string/image_desc"
+        android:scaleType="fitCenter"
         app:civ_border="true"
         app:civ_borderColor="@color/white"
         app:civ_borderWidth="2dp"
