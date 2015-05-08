@@ -131,8 +131,9 @@ public class FindPerson extends ActionBarActivity {
 				// append country and places param
 				else if (searchType.equalsIgnoreCase("Origin")) {
 					if (extras.containsKey("country")) {
-						SEARCH_URL += "search=" + extras.getString("country")
-								+ "&";
+						String country = extras.getString("country");
+						country = country.replaceAll("\\s", "+");
+						SEARCH_URL += "search=" + country + "&";
 					}
 					ArrayList<String> places = extras
 							.getStringArrayList("places");
@@ -154,6 +155,7 @@ public class FindPerson extends ActionBarActivity {
 				// + e.getLocalizedMessage());
 				// }
 				Log.e(TAG, "SEARCH_URL " + SEARCH_URL);
+				Log.e(TAG, "SEARCH_URL index 54 " + SEARCH_URL.charAt(54));
 				SearchTask searchTask = new SearchTask();
 				searchTask.execute(new String[] { SEARCH_URL });
 			}
