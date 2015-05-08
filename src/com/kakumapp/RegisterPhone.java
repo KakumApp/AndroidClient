@@ -69,7 +69,7 @@ public class RegisterPhone extends ActionBarActivity {
 				startActivity(findPersonIntent);
 			}
 		});
-		
+
 		// get the default data
 		phoneNumber = application.getPhoneNumber();
 
@@ -86,10 +86,13 @@ public class RegisterPhone extends ActionBarActivity {
 	protected boolean isValidData() {
 		boolean valid = false;
 		phoneNumber = phoneEditText.getText().toString().trim();
-		// remove the starting zero if present
-		if (phoneNumber.startsWith("0")) {
-			phoneNumber = phoneNumber.substring(1);
-		}
+		/**
+		 * used when the country code was being appended at the front
+		 */
+		// // remove the starting zero if present
+		// if (phoneNumber.startsWith("0")) {
+		// phoneNumber = phoneNumber.substring(1);
+		// }
 		if (phoneNumber.matches("\\d+") && phoneNumber.length() <= 20) {
 			valid = true;
 		} else {

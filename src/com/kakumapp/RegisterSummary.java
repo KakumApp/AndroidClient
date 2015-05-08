@@ -129,9 +129,12 @@ public class RegisterSummary extends ActionBarActivity {
 		}
 
 		if (phoneNumber != null) {
-			if (phoneNumber.startsWith("0") && phoneNumber.length() > 1) {
-				phoneNumber = phoneNumber.substring(1);
-			}
+			/**
+			 * used when the country code was being appended at the front
+			 */
+			// if (phoneNumber.startsWith("0") && phoneNumber.length() > 1) {
+			// phoneNumber = phoneNumber.substring(1);
+			// }
 			phoneEditText.setText(phoneNumber);
 		}
 
