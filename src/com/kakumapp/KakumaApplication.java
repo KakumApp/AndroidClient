@@ -5,6 +5,7 @@ import java.util.ArrayList;
 
 import android.app.Application;
 
+import com.amazonaws.regions.Regions;
 import com.kakumapp.adapters.Country;
 
 public class KakumaApplication extends Application {
@@ -21,6 +22,7 @@ public class KakumaApplication extends Application {
 	private String bucket;
 	private String identityPoolId;
 	private String AWSURL;
+	private Regions region;
 
 	public void clearData() {
 		firstName = null;
@@ -235,6 +237,21 @@ public class KakumaApplication extends Application {
 	 */
 	public String getAWSURL() {
 		return AWSURL;
+	}
+
+	/**
+	 * @return the region
+	 */
+	public Regions getRegion() {
+		return region;
+	}
+
+	/**
+	 * @param region
+	 *            the region to set
+	 */
+	public void setRegion(Regions region) {
+		this.region = region;
 	}
 
 	/**

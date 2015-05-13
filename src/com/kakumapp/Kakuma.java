@@ -15,6 +15,7 @@ import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.amazonaws.regions.Regions;
 import com.kakumapp.utils.SwipeGestureFilter.SwipeGestureListener;
 import com.kakumapp.utils.Utils;
 
@@ -95,14 +96,17 @@ public class Kakuma extends ActionBarActivity implements SwipeGestureListener {
 			reader = new Scanner(getAssets().open("credentials.txt"));
 			String identityPoolId = reader.nextLine();
 			String bucket = reader.nextLine();
+			String region = reader.nextLine();
 			String apiUsername = reader.nextLine();
 			String apiPassword = reader.nextLine();
 
+			application.setRegion(Regions.fromName(region));
 			application.setIdentityPoolId(identityPoolId);
 			application.setBucket(bucket);
 			application.setApiUsername(apiUsername);
 			application.setApiPassword(apiPassword);
-			application.setAWSURL("https://" + bucket + "s3.amazonaws.com/");
+			application.setAWSURL("https://s3-" + region + ".amazonaws.com/"
+					+ bucket + "/");
 		} catch (IOException e) {
 			Log.e(TAG, "Exception " + e.getLocalizedMessage());
 		} finally {

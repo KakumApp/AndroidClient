@@ -100,6 +100,7 @@ public class RegisterPhoto extends ActionBarActivity implements
 
 			@Override
 			public void onClick(View v) {
+				// switch from back to front camera or the converse
 				switchCamera();
 			}
 		});
@@ -175,8 +176,8 @@ public class RegisterPhoto extends ActionBarActivity implements
 
 						@Override
 						public void onNegative(MaterialDialog dialog) {
-							Intent originIntent = new Intent(RegisterPhoto.this,
-									RegisterOrigin.class);
+							Intent originIntent = new Intent(
+									RegisterPhoto.this, RegisterOrigin.class);
 							startActivity(originIntent);
 							finish();
 						}

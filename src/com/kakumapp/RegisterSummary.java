@@ -42,9 +42,9 @@ import com.afollestad.materialdialogs.MaterialDialog;
 import com.amazonaws.auth.CognitoCachingCredentialsProvider;
 import com.amazonaws.event.ProgressEvent;
 import com.amazonaws.event.ProgressListener;
+import com.amazonaws.mobileconnectors.s3.transfermanager.Transfer.TransferState;
 import com.amazonaws.mobileconnectors.s3.transfermanager.TransferManager;
 import com.amazonaws.mobileconnectors.s3.transfermanager.Upload;
-import com.amazonaws.regions.Regions;
 import com.cocosw.bottomsheet.BottomSheet;
 import com.kakumapp.utils.Utils;
 import com.kakumapp.views.CircularImageView;
@@ -283,34 +283,44 @@ public class RegisterSummary extends ActionBarActivity {
 		@Override
 		protected Boolean doInBackground(Void... params) {
 			boolean uploaded = false;
-			// Initialize the Amazon Cognito credentials provider
-			CognitoCachingCredentialsProvider credentialsProvider = new CognitoCachingCredentialsProvider(
-					RegisterSummary.this, application.getIdentityPoolId(),
-					Regions.US_EAST_1);
-			// Get a TransferManager for upload
-			TransferManager transferManager = new TransferManager(
-					credentialsProvider);
-			// Build the name of the file to be unique
-			// pic.png will be turned to pic_1427991238526_.png
-			String fileName = photoFile.getName();
-			PHOTO = FilenameUtils.removeExtension(fileName) + "_"
-					+ System.currentTimeMillis() + "."
-					+ FilenameUtils.getExtension(fileName);
-			PHOTO_URL = application.getAWSURL() + PHOTO;
+			try {
+				// Initialize the Amazon Cognito credentials provider
+				CognitoCachingCredentialsProvider credentialsProvider = new CognitoCachingCredentialsProvider(
+						RegisterSummary.this, application.getIdentityPoolId(),
+						application.getRegion());
+				// Get a TransferManager for upload
+				TransferManager transferManager = new TransferManager(
+						credentialsProvider);
+				// Build the name of the file to be unique
+				// pic.png will be turned to pic_1427991238526_.png
+				String fileName = photoFile.getName();
+				PHOTO = FilenameUtils.removeExtension(fileName) + "_"
+						+ System.currentTimeMillis() + "."
+						+ FilenameUtils.getExtension(fileName);
+				PHOTO_URL = application.getAWSURL() + PHOTO;
 
-			Upload upload = transferManager.upload(application.getBucket(),
-					PHOTO, photoFile);
-			upload.addProgressListener(new ProgressListener() {
+				Upload upload = transferManager.upload(application.getBucket(),
+						PHOTO, photoFile);
+				upload.addProgressListener(new ProgressListener() {
 
-				@Override
-				public void progressChanged(ProgressEvent arg0) {
+					@Override
+					public void progressChanged(ProgressEvent arg0) {
 
+					}
+				});
+				while (!upload.isDone()) {
 				}
-			});
-			while (!upload.isDone()) {
-				uploaded = false;
+				if (upload.getState() == TransferState.Failed) {
+					Log.e(TAG, "Failed");
+					uploaded = false;
+				} else if (upload.getState() == TransferState.Completed) {
+					Log.e(TAG, "Complete");
+					uploaded = true;
+				}
+				
+			} catch (Exception e) {
+				Log.e(TAG, "Exception " + e.getLocalizedMessage());
 			}
-			uploaded = true;
 			return uploaded;
 		}
 
