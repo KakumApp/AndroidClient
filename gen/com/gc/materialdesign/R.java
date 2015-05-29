@@ -51,7 +51,6 @@ public final class R {
 		public static final int dialog_background = 0x7f02004e;
 		public static final int float_button1_shadowp = 0x7f0200c8;
 		public static final int float_button_shadow1 = 0x7f0200c9;
-		public static final int ic_launcher = 0x7f0200da;
 		public static final int ic_reloj_max = 0x7f0200e3;
 		public static final int shadow_down = 0x7f020190;
 		public static final int shadow_right = 0x7f020191;
