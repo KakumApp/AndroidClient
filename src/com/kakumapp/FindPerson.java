@@ -85,7 +85,7 @@ public class FindPerson extends ActionBarActivity {
 		// fonts
 		typeface = new Utils(this).getFont("Ubuntu-L");
 		noResultsTextView.setTypeface(typeface);
-		
+
 		// use this setting to improve performance if you know that changes
 		// in content do not change the layout size of the RecyclerView
 		recyclerView.setHasFixedSize(true);
@@ -163,6 +163,16 @@ public class FindPerson extends ActionBarActivity {
 			SearchTask searchTask = new SearchTask();
 			searchTask.execute(new String[] { URL });
 		}
+
+		findViewById(R.id.button_back).setOnClickListener(
+				new OnClickListener() {
+
+					@Override
+					public void onClick(View v) {
+						onBackPressed();
+					}
+				});
+
 	}
 
 	@Override
@@ -283,7 +293,7 @@ public class FindPerson extends ActionBarActivity {
 					mAdapter = new RegisteredPersonsAdapter(registeredPersons,
 							FindPerson.this);
 					recyclerView.setAdapter(mAdapter);
-				}else{
+				} else {
 					noResultsTextView.setVisibility(View.VISIBLE);
 				}
 			} catch (JSONException e) {

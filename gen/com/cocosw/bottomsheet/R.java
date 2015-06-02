@@ -37,12 +37,12 @@ public final class R {
 		public static final int bs_grid_top_padding = 0x7f070055;
 	}
 	public static final class drawable {
-		public static final int bs_ic_clear = 0x7f020046;
-		public static final int bs_ic_clear_light = 0x7f020047;
-		public static final int bs_ic_more = 0x7f020048;
-		public static final int bs_ic_more_light = 0x7f020049;
-		public static final int bs_list_dark_selector = 0x7f02004a;
-		public static final int bs_list_selector = 0x7f02004b;
+		public static final int bs_ic_clear = 0x7f020047;
+		public static final int bs_ic_clear_light = 0x7f020048;
+		public static final int bs_ic_more = 0x7f020049;
+		public static final int bs_ic_more_light = 0x7f02004a;
+		public static final int bs_list_dark_selector = 0x7f02004b;
+		public static final int bs_list_selector = 0x7f02004c;
 	}
 	public static final class id {
 		public static final int bottom_sheet_gridview = 0x7f090082;
