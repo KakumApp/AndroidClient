@@ -61,7 +61,8 @@
                     android:checked="true"
                     android:padding="8dp"
                     android:text="@string/origin"
-                    android:textColor="@color/primary" />
+                    android:textColor="@color/primary"
+                    android:textSize="16sp" />
 
                 <RadioButton
                     android:id="@+id/radio_name"
@@ -71,7 +72,8 @@
                     android:layout_gravity="center"
                     android:padding="8dp"
                     android:text="@string/name"
-                    android:textColor="@color/primary" />
+                    android:textColor="@color/primary"
+                    android:textSize="16sp" />
 
                 <RadioButton
                     android:id="@+id/radio_phone"
@@ -81,7 +83,8 @@
                     android:layout_gravity="center"
                     android:padding="8dp"
                     android:text="@string/phone"
-                    android:textColor="@color/primary" />
+                    android:textColor="@color/primary"
+                    android:textSize="16sp" />
             </RadioGroup>
 
             <LinearLayout

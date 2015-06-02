@@ -58,7 +58,15 @@ public class SearchPhone extends ActionBarActivity {
 				}
 			}
 		});
+		
+		findViewById(R.id.button_back).setOnClickListener(
+				new OnClickListener() {
 
+					@Override
+					public void onClick(View v) {
+						onBackPressed();
+					}
+				});
 	}
 
 	/**

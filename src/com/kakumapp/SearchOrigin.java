@@ -116,7 +116,16 @@ public class SearchOrigin extends ActionBarActivity {
 				}
 			}
 		});
+		
+		findViewById(R.id.button_back).setOnClickListener(
+				new OnClickListener() {
 
+					@Override
+					public void onClick(View v) {
+						onBackPressed();
+					}
+				});
+		
 		// create the spinners adapters
 		String[] countriesLocal = { "South Sudan", "Sudan", "Somalia",
 				"Ethiopia", "D.R. Congo", "Burundi", "Rwanda", "Eritrea",
