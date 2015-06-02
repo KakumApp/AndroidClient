@@ -76,6 +76,15 @@ public class RegisterPhone extends ActionBarActivity {
 		if (phoneNumber != null) {
 			phoneEditText.setText(phoneNumber);
 		}
+
+		findViewById(R.id.button_back).setOnClickListener(
+				new OnClickListener() {
+
+					@Override
+					public void onClick(View v) {
+						onBackPressed();
+					}
+				});
 	}
 
 	/**

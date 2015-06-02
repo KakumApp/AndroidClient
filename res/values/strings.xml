@@ -26,6 +26,7 @@
     <string name="password">Password</string>
     <string name="confirm_pass">Confirm password</string>
     <string name="continue_text">Continue</string>
+    <string name="back">Back</string>
     <string name="email">Email</string>
     <string name="login">Login</string>
     <string name="register">Register</string>
@@ -81,5 +82,6 @@
     <string name="camera_message">The camera could not be accessed.Try again?</string>
     <string name="skip">Skip</string>
     <string name="no_results">Could not find a person matching the details provided.Try again.</string>
-
+    <string name="registered_thanks">Thank you for registering</string>
+    
 </resources>

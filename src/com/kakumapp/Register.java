@@ -1,7 +1,5 @@
 package com.kakumapp;
 
-import com.kakumapp.utils.Utils;
-
 import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.Bundle;
@@ -11,6 +9,8 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.TextView;
+
+import com.kakumapp.utils.Utils;
 
 public class Register extends ActionBarActivity {
 
@@ -46,7 +46,8 @@ public class Register extends ActionBarActivity {
 
 			@Override
 			public void onClick(View v) {
-				Intent nameIntent=new Intent(Register.this,RegisterName.class);
+				Intent nameIntent = new Intent(Register.this,
+						RegisterName.class);
 				startActivity(nameIntent);
 				finish();
 			}
@@ -56,12 +57,22 @@ public class Register extends ActionBarActivity {
 
 			@Override
 			public void onClick(View v) {
-				Intent findPersonIntent = new Intent(Register.this, FindPerson.class);
+				Intent findPersonIntent = new Intent(Register.this,
+						FindPerson.class);
 				startActivity(findPersonIntent);
 			}
 		});
+
+		findViewById(R.id.button_back).setOnClickListener(
+				new OnClickListener() {
+
+					@Override
+					public void onClick(View v) {
+						onBackPressed();
+					}
+				});
 	}
-	
+
 	@Override
 	public void onBackPressed() {
 		super.onBackPressed();

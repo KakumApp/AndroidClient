@@ -163,21 +163,47 @@
             app:matProg_barColor="@color/white"
             app:matProg_progressIndeterminate="true" />
 
-        <Button
-            android:id="@+id/button_register"
-            style="@style/Buttonkakuma"
+        <LinearLayout
+            android:id="@+id/options_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@+id/origin_layout"
-            android:layout_centerHorizontal="true"
-            android:layout_gravity="right"
-            android:layout_marginLeft="30dp"
-            android:layout_marginRight="30dp"
             android:layout_marginTop="30dp"
-            android:background="@drawable/border_button_transparent"
-            android:padding="16dp"
-            android:text="@string/register"
-            android:textColor="@color/white" />
+            android:orientation="horizontal"
+            android:paddingLeft="20dp"
+            android:paddingRight="20dp"
+            android:weightSum="100" >
+
+            <Button
+                android:id="@+id/button_back"
+                style="@style/Buttonkakuma"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="left"
+                android:layout_marginRight="20dp"
+                android:layout_weight="50"
+                android:alpha="1.0"
+                android:background="@drawable/border_button_white"
+                android:paddingLeft="5dp"
+                android:paddingRight="5dp"
+                android:text="@string/back"
+                android:textColor="@color/primary" />
+
+            <Button
+                android:id="@+id/button_register"
+                style="@style/Buttonkakuma"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="right"
+                android:layout_marginLeft="20dp"
+                android:layout_weight="50"
+                android:alpha="1.0"
+                android:background="@drawable/border_button_transparent"
+                android:paddingLeft="5dp"
+                android:paddingRight="5dp"
+                android:text="@string/register"
+                android:textColor="@color/white" />
+        </LinearLayout>
     </RelativeLayout>
 
 </ScrollView>

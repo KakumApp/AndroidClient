@@ -37,6 +37,7 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.MultiAutoCompleteTextView;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -78,6 +79,7 @@ public class RegisterOrigin extends ActionBarActivity {
 	private ArrayList<String> placesToRegister = new ArrayList<>();
 	private BottomSheet bottomSheet;
 	private ProgressWheel progressBar;
+	private LinearLayout optionsLayout;
 	private MaterialDialog dialog;
 	private KakumaApplication application;
 
@@ -95,6 +97,7 @@ public class RegisterOrigin extends ActionBarActivity {
 		countriesSpinner = (Spinner) findViewById(R.id.spinner_origin_countries);
 		placesAutoCompleteTextView = (MultiAutoCompleteTextView) findViewById(R.id.autocomplete_origin_places);
 		progressBar = (ProgressWheel) findViewById(R.id.progressBar);
+		optionsLayout = (LinearLayout) findViewById(R.id.options_layout);
 
 		// fonts
 		typeface = new Utils(this).getFont("Ubuntu-L");
@@ -124,6 +127,15 @@ public class RegisterOrigin extends ActionBarActivity {
 			}
 		});
 
+		findViewById(R.id.button_back).setOnClickListener(
+				new OnClickListener() {
+
+					@Override
+					public void onClick(View v) {
+						onBackPressed();
+					}
+				});
+		
 		// create the spinners adapters
 		String[] countriesLocal = { "South Sudan", "Sudan", "Somalia",
 				"Ethiopia", "D.R. Congo", "Burundi", "Rwanda", "Eritrea",
@@ -207,17 +219,17 @@ public class RegisterOrigin extends ActionBarActivity {
 
 	// show progress bar and hide button
 	private void showProgress() {
-		if (progressBar != null && continueButton != null) {
+		if (progressBar != null && optionsLayout != null) {
 			progressBar.setVisibility(View.VISIBLE);
-			continueButton.setVisibility(View.GONE);
+			optionsLayout.setVisibility(View.GONE);
 		}
 	}
 
 	// hide progress bar and show button
 	private void hideprogress() {
-		if (progressBar != null && continueButton != null) {
+		if (progressBar != null && optionsLayout != null) {
 			progressBar.setVisibility(View.GONE);
-			continueButton.setVisibility(View.VISIBLE);
+			optionsLayout.setVisibility(View.VISIBLE);
 		}
 	}
 

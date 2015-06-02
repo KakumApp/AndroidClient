@@ -12,6 +12,7 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Matrix;
+import android.graphics.Typeface;
 import android.hardware.Camera;
 import android.os.Bundle;
 import android.os.Environment;
@@ -27,10 +28,12 @@ import android.view.View.OnClickListener;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.afollestad.materialdialogs.MaterialDialog;
 import com.cocosw.bottomsheet.BottomSheet;
+import com.kakumapp.utils.Utils;
 
 /**
  * The activity that displays a Camera view and allows the user to take his/her
@@ -61,6 +64,8 @@ public class RegisterPhoto extends ActionBarActivity implements
 	private BottomSheet bottomSheet;
 	private KakumaApplication application;
 	private MaterialDialog dialog;
+	private TextView backTextView;
+	private Typeface typeface;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -74,6 +79,11 @@ public class RegisterPhoto extends ActionBarActivity implements
 		switchImageView = (ImageView) findViewById(R.id.imageView_switch);
 		flashImageView = (ImageView) findViewById(R.id.imageView_flash);
 		flashImageView.setTag(R.drawable.ic_action_flash_automatic);
+		backTextView = (TextView) findViewById(R.id.textView_back);
+
+		typeface = new Utils(this).getFont("Ubuntu-L");
+		backTextView.setTypeface(typeface);
+		
 		// get the preview
 		mPreview.getHolder().addCallback(this);
 		mPreview.getHolder().setType(SurfaceHolder.SURFACE_TYPE_PUSH_BUFFERS);
@@ -149,6 +159,15 @@ public class RegisterPhoto extends ActionBarActivity implements
 		});
 
 		IMAGE_MAX_SIZE = getScreenSize()[1];
+
+	
+		backTextView.setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				onBackPressed();
+			}
+		});
 	}
 
 	// show a retry dialog for opening the camera

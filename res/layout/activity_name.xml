@@ -109,27 +109,53 @@
             app:primaryColorEdittext="@color/white" >
         </com.rengwuxian.materialedittext.MaterialEditText>
 
-        <Button
-            android:id="@+id/button_register_continue"
-            style="@style/Buttonkakuma"
+        <LinearLayout
+            android:id="@+id/options_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@+id/edittext_other_name"
-            android:layout_centerHorizontal="true"
-            android:layout_marginLeft="30dp"
-            android:layout_marginRight="30dp"
             android:layout_marginTop="40dp"
-            android:background="@drawable/border_button_transparent"
-            android:padding="16dp"
-            android:text="@string/continue_text"
-            android:textColor="@color/white"
-            android:textStyle="bold" />
+            android:orientation="horizontal"
+            android:paddingLeft="20dp"
+            android:paddingRight="20dp"
+            android:weightSum="100" >
+
+            <Button
+                android:id="@+id/button_back"
+                style="@style/Buttonkakuma"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="left"
+                android:layout_marginRight="20dp"
+                android:layout_weight="50"
+                android:alpha="1.0"
+                android:background="@drawable/border_button_white"
+                android:paddingLeft="5dp"
+                android:paddingRight="5dp"
+                android:text="@string/back"
+                android:textColor="@color/primary" />
+
+            <Button
+                android:id="@+id/button_register_continue"
+                style="@style/Buttonkakuma"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="right"
+                android:layout_marginLeft="20dp"
+                android:layout_weight="50"
+                android:alpha="1.0"
+                android:background="@drawable/border_button_transparent"
+                android:paddingLeft="5dp"
+                android:paddingRight="5dp"
+                android:text="@string/continue_text"
+                android:textColor="@color/white" />
+        </LinearLayout>
 
         <TextView
             android:id="@+id/textView_register_find_person"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/button_register_continue"
+            android:layout_below="@+id/options_layout"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="20dp"
             android:gravity="center"

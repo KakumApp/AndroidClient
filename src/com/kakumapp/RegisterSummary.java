@@ -36,6 +36,7 @@ import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.afollestad.materialdialogs.MaterialDialog;
@@ -75,6 +76,7 @@ public class RegisterSummary extends ActionBarActivity {
 	private File photoFile;
 	private Bitmap bitmap;
 	private ProgressWheel progressBar;
+	private LinearLayout optionsLayout;
 	private MaterialDialog dialog;
 
 	@Override
@@ -94,6 +96,8 @@ public class RegisterSummary extends ActionBarActivity {
 		placesEditText = (TextView) findViewById(R.id.edittext_origin);
 		registerButton = (Button) findViewById(R.id.button_register);
 		progressBar = (ProgressWheel) findViewById(R.id.progressBar);
+		optionsLayout = (LinearLayout) findViewById(R.id.options_layout);
+
 		// fonts
 		typeface = new Utils(this).getFont("Ubuntu-L");
 		nameTextView.setTypeface(typeface);
@@ -159,6 +163,15 @@ public class RegisterSummary extends ActionBarActivity {
 				registerUserPhoto();
 			}
 		});
+
+		findViewById(R.id.button_back).setOnClickListener(
+				new OnClickListener() {
+
+					@Override
+					public void onClick(View v) {
+						onBackPressed();
+					}
+				});
 	}
 
 	/**
@@ -217,16 +230,16 @@ public class RegisterSummary extends ActionBarActivity {
 	}
 
 	private void showProgress() {
-		if (progressBar != null && registerButton != null) {
+		if (progressBar != null && optionsLayout != null) {
 			progressBar.setVisibility(View.VISIBLE);
-			registerButton.setVisibility(View.GONE);
+			optionsLayout.setVisibility(View.GONE);
 		}
 	}
 
 	private void hideprogress() {
-		if (progressBar != null && registerButton != null) {
+		if (progressBar != null && optionsLayout != null) {
 			progressBar.setVisibility(View.GONE);
-			registerButton.setVisibility(View.VISIBLE);
+			optionsLayout.setVisibility(View.VISIBLE);
 		}
 	}
 
@@ -317,7 +330,7 @@ public class RegisterSummary extends ActionBarActivity {
 					Log.e(TAG, "Complete");
 					uploaded = true;
 				}
-				
+
 			} catch (Exception e) {
 				Log.e(TAG, "Exception " + e.getLocalizedMessage());
 			}

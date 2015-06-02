@@ -80,6 +80,16 @@ public class RegisterName extends ActionBarActivity {
 				startActivity(findPersonIntent);
 			}
 		});
+		
+		findViewById(R.id.button_back).setOnClickListener(
+				new OnClickListener() {
+
+					@Override
+					public void onClick(View v) {
+						onBackPressed();
+					}
+				});
+		
 		// get the data and set on the fields
 		firstName = application.getFirstName();
 		lastName = application.getLastName();
