@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     android:padding="16dp" >
 
-    <com.kakumapp.views.SmartImageView
+    <com.findme.views.SmartImageView
         android:id="@+id/image_view_photo"
         android:layout_width="160dp"
         android:layout_height="160dp"
@@ -16,7 +16,7 @@
         app:civ_borderColor="@color/white"
         app:civ_borderWidth="2dp"
         app:civ_shadow="true" >
-    </com.kakumapp.views.SmartImageView>
+    </com.findme.views.SmartImageView>
 
     <RelativeLayout
         android:layout_width="wrap_content"

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.kakumapp"
+    package="com.findme"
     android:versionCode="1"
     android:versionName="1.6" >
 
@@ -42,7 +42,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
             <intent-filter>
-                <action android:name="com.kakumapp.Kakuma" />
+                <action android:name="com.findme.Kakuma" />
 
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
@@ -52,7 +52,7 @@
             android:label="@string/register"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar.FullScreen" >
             <intent-filter>
-                <action android:name="com.kakumapp.Register" />
+                <action android:name="com.findme.Register" />
 
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
@@ -63,7 +63,7 @@
             android:theme="@style/Theme.AppCompat.Light.NoActionBar.FullScreen"
             android:windowSoftInputMode="stateHidden" >
             <intent-filter>
-                <action android:name="com.kakumapp.RegisterName" />
+                <action android:name="com.findme.RegisterName" />
 
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
@@ -74,7 +74,7 @@
             android:theme="@style/Theme.AppCompat.Light.NoActionBar.FullScreen"
             android:windowSoftInputMode="stateHidden" >
             <intent-filter>
-                <action android:name="com.kakumapp.RegisterPhone" />
+                <action android:name="com.findme.RegisterPhone" />
 
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
@@ -85,7 +85,7 @@
             android:theme="@style/Theme.AppCompat.Light.NoActionBar.FullScreen"
             android:windowSoftInputMode="stateHidden" >
             <intent-filter>
-                <action android:name="com.kakumapp.RegisterOrigin" />
+                <action android:name="com.findme.RegisterOrigin" />
 
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
@@ -94,7 +94,7 @@
             android:name=".RegisterChoosePhoto"
             android:windowSoftInputMode="stateHidden" >
             <intent-filter>
-                <action android:name="com.kakumapp.RegisterChoosePhoto" />
+                <action android:name="com.findme.RegisterChoosePhoto" />
 
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
@@ -103,7 +103,7 @@
             android:name=".RegisterPhoto"
             android:windowSoftInputMode="stateHidden" >
             <intent-filter>
-                <action android:name="com.kakumapp.RegisterPhoto" />
+                <action android:name="com.findme.RegisterPhoto" />
 
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
@@ -112,7 +112,7 @@
             android:name=".RegisterSummary"
             android:windowSoftInputMode="stateHidden" >
             <intent-filter>
-                <action android:name="com.kakumapp.RegisterSummary" />
+                <action android:name="com.findme.RegisterSummary" />
 
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
@@ -121,7 +121,7 @@
             android:name=".Registered"
             android:windowSoftInputMode="stateHidden" >
             <intent-filter>
-                <action android:name="com.kakumapp.Registered" />
+                <action android:name="com.findme.Registered" />
 
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
@@ -130,7 +130,7 @@
             android:name=".Help"
             android:label="@string/help" >
             <intent-filter>
-                <action android:name="com.kakumapp.Help" />
+                <action android:name="com.findme.Help" />
 
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
@@ -139,7 +139,7 @@
             android:name=".FindPerson"
             android:label="@string/recently_registered" >
             <intent-filter>
-                <action android:name="com.kakumapp.FindPerson" />
+                <action android:name="com.findme.FindPerson" />
 
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
@@ -149,7 +149,7 @@
             android:label="@string/search"
             android:windowSoftInputMode="stateHidden" >
             <intent-filter>
-                <action android:name="com.kakumapp.SearchOptions" />
+                <action android:name="com.findme.SearchOptions" />
 
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
@@ -159,7 +159,7 @@
             android:label="@string/search__origin"
             android:windowSoftInputMode="stateHidden" >
             <intent-filter>
-                <action android:name="com.kakumapp.SearchOrigin" />
+                <action android:name="com.findme.SearchOrigin" />
 
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
@@ -169,7 +169,7 @@
             android:label="@string/search__name"
             android:windowSoftInputMode="stateHidden" >
             <intent-filter>
-                <action android:name="com.kakumapp.SearchName" />
+                <action android:name="com.findme.SearchName" />
 
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
@@ -179,7 +179,7 @@
             android:label="@string/search__phone"
             android:windowSoftInputMode="stateHidden" >
             <intent-filter>
-                <action android:name="com.kakumapp.SearchPhone" />
+                <action android:name="com.findme.SearchPhone" />
 
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
@@ -188,7 +188,7 @@
             android:name=".MeetingPoints"
             android:label="@string/meetingPoints" >
             <intent-filter>
-                <action android:name="com.kakumapp.MeetingPoints" />
+                <action android:name="com.findme.MeetingPoints" />
 
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>

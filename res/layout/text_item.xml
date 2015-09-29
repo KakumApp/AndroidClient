@@ -15,7 +15,7 @@
         android:textColor="#333333"
         android:textSize="18sp" />
 
-    <com.kakumapp.views.ExpandableTextView
+    <com.findme.views.ExpandableTextView
         android:id="@+id/expand_text_view"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -44,6 +44,6 @@
             android:layout_marginTop="16dp"
             android:background="@android:color/transparent"
             android:contentDescription="@string/image_desc" />
-    </com.kakumapp.views.ExpandableTextView>
+    </com.findme.views.ExpandableTextView>
 
 </LinearLayout>

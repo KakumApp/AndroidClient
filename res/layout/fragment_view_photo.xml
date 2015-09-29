@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent" >
 
-    <com.kakumapp.views.TouchImageView
+    <com.findme.views.TouchImageView
         android:id="@+id/imageView_taken_photo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
