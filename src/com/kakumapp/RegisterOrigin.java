@@ -29,7 +29,7 @@ import android.graphics.Color;
 import android.graphics.Typeface;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.support.v7.app.ActionBarActivity;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -44,10 +44,10 @@ import android.widget.TextView;
 
 import com.afollestad.materialdialogs.MaterialDialog;
 import com.cocosw.bottomsheet.BottomSheet;
+import com.gc.materialdesign.views.ProgressBarCircularIndeterminate;
 import com.kakumapp.adapters.Country;
 import com.kakumapp.adapters.Place;
 import com.kakumapp.utils.Utils;
-import com.pnikosis.materialishprogress.ProgressWheel;
 
 /**
  * Register a place of origin
@@ -55,7 +55,7 @@ import com.pnikosis.materialishprogress.ProgressWheel;
  * @author paul
  * 
  */
-public class RegisterOrigin extends ActionBarActivity {
+public class RegisterOrigin extends AppCompatActivity {
 
 	public static final String TAG = "RegisterOrigin";
 	private static final String SELECT_COUNTRY = "Select country";
@@ -78,7 +78,7 @@ public class RegisterOrigin extends ActionBarActivity {
 	private ArrayList<String> placeNames = new ArrayList<>();
 	private ArrayList<String> placesToRegister = new ArrayList<>();
 	private BottomSheet bottomSheet;
-	private ProgressWheel progressBar;
+	private ProgressBarCircularIndeterminate progressBar;
 	private LinearLayout optionsLayout;
 	private MaterialDialog dialog;
 	private KakumaApplication application;
@@ -96,7 +96,7 @@ public class RegisterOrigin extends ActionBarActivity {
 		descTextView = (TextView) findViewById(R.id.textView_origin_desc);
 		countriesSpinner = (Spinner) findViewById(R.id.spinner_origin_countries);
 		placesAutoCompleteTextView = (MultiAutoCompleteTextView) findViewById(R.id.autocomplete_origin_places);
-		progressBar = (ProgressWheel) findViewById(R.id.progressBar);
+		progressBar = (ProgressBarCircularIndeterminate) findViewById(R.id.progressBar);
 		optionsLayout = (LinearLayout) findViewById(R.id.options_layout);
 
 		// fonts

@@ -3,7 +3,6 @@ package com.kakumapp;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
-import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -16,7 +15,7 @@ import android.graphics.Typeface;
 import android.hardware.Camera;
 import android.os.Bundle;
 import android.os.Environment;
-import android.support.v7.app.ActionBarActivity;
+import android.support.v7.app.AppCompatActivity;
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.Display;
@@ -44,7 +43,7 @@ import com.kakumapp.utils.Utils;
  */
 
 @SuppressWarnings("deprecation")
-public class RegisterPhoto extends ActionBarActivity implements
+public class RegisterPhoto extends AppCompatActivity implements
 		SurfaceHolder.Callback, Camera.ShutterCallback, Camera.PictureCallback {
 
 	private static final String DIRECTORY_IMAGES = "Kakuma";
@@ -55,7 +54,7 @@ public class RegisterPhoto extends ActionBarActivity implements
 	private File photoFile;
 	private Bitmap bitmap;
 	private int currentCameraId = 0;
-	private ActionBarActivity activity;
+	private AppCompatActivity activity;
 	// control buttons
 	private ImageView flashImageView, switchImageView;
 	// take photo
@@ -83,7 +82,7 @@ public class RegisterPhoto extends ActionBarActivity implements
 
 		typeface = new Utils(this).getFont("Ubuntu-L");
 		backTextView.setTypeface(typeface);
-		
+
 		// get the preview
 		mPreview.getHolder().addCallback(this);
 		mPreview.getHolder().setType(SurfaceHolder.SURFACE_TYPE_PUSH_BUFFERS);
@@ -160,7 +159,6 @@ public class RegisterPhoto extends ActionBarActivity implements
 
 		IMAGE_MAX_SIZE = getScreenSize()[1];
 
-	
 		backTextView.setOnClickListener(new OnClickListener() {
 
 			@Override
@@ -168,6 +166,213 @@ public class RegisterPhoto extends ActionBarActivity implements
 				onBackPressed();
 			}
 		});
+	}
+
+	@Override
+	// public void surfaceChanged(SurfaceHolder holder, int format, int width,
+	// int height) {
+	// Log.e(TAG, "surfaceChanged");
+	// Camera.CameraInfo info = new Camera.CameraInfo();
+	// Camera.getCameraInfo(Camera.CameraInfo.CAMERA_FACING_BACK, info);
+	// int rotation = this.getWindowManager().getDefaultDisplay()
+	// .getRotation();
+	// int degrees = 0;
+	// switch (rotation) {
+	// case Surface.ROTATION_0:
+	// degrees = 0;
+	// break; // Natural orientation
+	// case Surface.ROTATION_90:
+	// degrees = 90;
+	// break; // Landscape left
+	// case Surface.ROTATION_180:
+	// degrees = 180;
+	// break;// Upside down
+	// case Surface.ROTATION_270:
+	// degrees = 270;
+	// break;// Landscape right
+	// }
+	// Log.e(TAG, "Rotation angle " + degrees);
+	// int rotate = (info.orientation - degrees + 360) % 360;
+	// Log.e(TAG, "Rotate " + rotate);
+	// // Set the 'rotation' parameter
+	// Camera.Parameters params = mCamera.getParameters();
+	// params.setRotation(rotate);
+	// mCamera.setParameters(params);
+	// mCamera.setDisplayOrientation(90);
+	// previewCamera();
+	// }
+	public void surfaceChanged(SurfaceHolder holder, int format, int width,
+			int height) {
+		Log.e(TAG, "surfaceChanged");
+		// Camera.Parameters parameters = mCamera.getParameters();
+		Display display = ((WindowManager) getSystemService(WINDOW_SERVICE))
+				.getDefaultDisplay();
+		Camera.CameraInfo info = new Camera.CameraInfo();
+		Camera.getCameraInfo(Camera.CameraInfo.CAMERA_FACING_BACK, info);
+		int degrees = 0;
+		switch (display.getRotation()) {
+		case Surface.ROTATION_0:
+			degrees = 0;
+			mCamera.setDisplayOrientation(90);
+			break; // Natural orientation
+		case Surface.ROTATION_90:
+			degrees = 90;
+			break; // Landscape left
+		case Surface.ROTATION_180:
+			degrees = 180;
+			break;// Upside down
+		case Surface.ROTATION_270:
+			degrees = 270;
+			mCamera.setDisplayOrientation(180);
+			break;// Landscape right
+		}
+		Log.e(TAG, "Rotation angle " + degrees);
+		int rotate = (info.orientation - degrees + 360) % 360;
+		Log.e(TAG, "Rotate " + rotate);
+		// Set the 'rotation' parameter
+		Camera.Parameters params = mCamera.getParameters();
+		params.setRotation(rotate);
+		mCamera.setParameters(params);
+		// mCamera.setDisplayOrientation(90);
+		// previewCamera();
+		mCamera.startPreview();
+		// if (display.getRotation() == Surface.ROTATION_0) {
+		// parameters.setPreviewSize(height, width);
+		// mCamera.setDisplayOrientation(90);
+		// }
+		//
+		// if (display.getRotation() == Surface.ROTATION_90) {
+		// parameters.setPreviewSize(width, height);
+		// }
+		//
+		// if (display.getRotation() == Surface.ROTATION_180) {
+		// parameters.setPreviewSize(height, width);
+		// }
+		//
+		// if (display.getRotation() == Surface.ROTATION_270) {
+		// parameters.setPreviewSize(width, height);
+		// mCamera.setDisplayOrientation(180);
+		// }
+		// mCamera.setParameters(parameters);
+		// previewCamera();
+	}
+
+	public void previewCamera() {
+		try {
+			mCamera.setPreviewDisplay(mPreview.getHolder());
+			mCamera.startPreview();
+		} catch (Exception e) {
+			Log.e(TAG, "Exception " + e.getLocalizedMessage());
+		}
+	}
+
+	/**
+	 * Get Rotation Angle
+	 */
+	public int getRotationAngle() {
+		Camera.CameraInfo info = new android.hardware.Camera.CameraInfo();
+		Camera.getCameraInfo(currentCameraId, info);
+		int rotation = getWindowManager().getDefaultDisplay().getRotation();
+		int degrees = 0;
+		switch (rotation) {
+		// Natural orientation
+		case Surface.ROTATION_0:
+			degrees = 0;
+			mCamera.setDisplayOrientation(90);
+			break;
+		// Landscape left
+		case Surface.ROTATION_90:
+			degrees = 90;
+			break;
+		// Upside down
+		case Surface.ROTATION_180:
+			degrees = 180;
+			break;
+		// Landscape right
+		case Surface.ROTATION_270:
+			degrees = 270;
+			mCamera.setDisplayOrientation(180);
+			break;
+		}
+		int result;
+		if (info.facing == Camera.CameraInfo.CAMERA_FACING_FRONT) {
+			result = (info.orientation + degrees) % 360;
+			// compensate the mirror
+			result = (360 - result) % 360;
+		} else {
+			// back-facing
+			result = (info.orientation - degrees + 360) % 360;
+		}
+		return result;
+	}
+
+	@Override
+	public void onShutter() {
+	}
+
+	/**
+	 * Get the photo taken and save it
+	 */
+	@Override
+	public void onPictureTaken(byte[] data, Camera camera) {
+		try {
+			photoFile = getOutputMediaFile();
+			if (photoFile == null) {
+				Toast.makeText(activity,
+						"Oops! could not save the photo.Try again",
+						Toast.LENGTH_SHORT).show();
+				return;
+			}
+			try {
+				// decode the data
+				Bitmap realImage = BitmapFactory.decodeByteArray(data, 0,
+						data.length);
+				Camera.CameraInfo info = new android.hardware.Camera.CameraInfo();
+				Camera.getCameraInfo(currentCameraId, info);
+				int rotationAngle = getRotationAngle();
+				Log.e(TAG, "Orientation " + info.orientation
+						+ " rotationAngle " + rotationAngle);
+				bitmap = rotate(realImage, info.orientation);
+				// save image
+				FileOutputStream fos = new FileOutputStream(photoFile);
+				bitmap.compress(Bitmap.CompressFormat.JPEG, 100, fos);
+				fos.close();
+				// show the image
+				bitmap = decodeFile(photoFile);
+				showImageFragment(bitmap);
+			} catch (Exception e) {
+				Log.e(TAG, "Exception : " + e.getMessage());
+			}
+		} catch (Exception e) {
+			Log.e(TAG, "onPictureTaken - wrote bytes: " + data.length);
+		}
+		camera.startPreview();
+	}
+
+	@Override
+	public void surfaceCreated(SurfaceHolder holder) {
+		try {
+			previewCamera();
+		} catch (Exception e) {
+			Log.e(TAG, "Exception " + e.getLocalizedMessage());
+		}
+	}
+
+	@Override
+	public void surfaceDestroyed(SurfaceHolder holder) {
+		Log.e(TAG, "Surface destroyed");
+	}
+
+	@Override
+	public void onPause() {
+		super.onPause();
+		mCamera.stopPreview();
+	}
+
+	@Override
+	public void onDestroy() {
+		super.onDestroy();
+		mCamera.release();
 	}
 
 	// show a retry dialog for opening the camera
@@ -247,91 +452,14 @@ public class RegisterPhoto extends ActionBarActivity implements
 		Camera.Parameters params = mCamera.getParameters();
 		params.setRotation(getRotationAngle());
 		try {
-			mCamera.setPreviewDisplay(mPreview.getHolder());
+			// mCamera.setPreviewDisplay(mPreview.getHolder());
 			mCamera.setParameters(params);
-			mCamera.setDisplayOrientation(90);
-			mCamera.startPreview();
-		} catch (IOException e) {
+			// mCamera.setDisplayOrientation(90);
+			// mCamera.startPreview();
+			previewCamera();
+		} catch (Exception e) {
 			Log.e(TAG, "Exception " + e.getLocalizedMessage());
 		}
-	}
-
-	/**
-	 * Get Rotation Angle
-	 */
-	public int getRotationAngle() {
-		Camera.CameraInfo info = new android.hardware.Camera.CameraInfo();
-		Camera.getCameraInfo(currentCameraId, info);
-		int rotation = getWindowManager().getDefaultDisplay().getRotation();
-		int degrees = 0;
-		switch (rotation) {
-		// Natural orientation
-		case Surface.ROTATION_0:
-			degrees = 0;
-			break;
-		// Landscape left
-		case Surface.ROTATION_90:
-			degrees = 90;
-			break;
-		// Upside down
-		case Surface.ROTATION_180:
-			degrees = 180;
-			break;
-		// Landscape right
-		case Surface.ROTATION_270:
-			degrees = 270;
-			break;
-		}
-		int result;
-		if (info.facing == Camera.CameraInfo.CAMERA_FACING_FRONT) {
-			result = (info.orientation + degrees) % 360;
-			// compensate the mirror
-			result = (360 - result) % 360;
-		} else {
-			// back-facing
-			result = (info.orientation - degrees + 360) % 360;
-		}
-		return result;
-	}
-
-	@Override
-	public void onShutter() {
-	}
-
-	/**
-	 * Get the photo taken and save it
-	 */
-	@Override
-	public void onPictureTaken(byte[] data, Camera camera) {
-		try {
-			photoFile = getOutputMediaFile();
-			if (photoFile == null) {
-				Toast.makeText(activity,
-						"Oops! could not save the photo.Try again",
-						Toast.LENGTH_SHORT).show();
-				return;
-			}
-			try {
-				// decode the data
-				Bitmap realImage = BitmapFactory.decodeByteArray(data, 0,
-						data.length);
-				Camera.CameraInfo info = new android.hardware.Camera.CameraInfo();
-				Camera.getCameraInfo(currentCameraId, info);
-				bitmap = rotate(realImage, info.orientation);
-				// save image
-				FileOutputStream fos = new FileOutputStream(photoFile);
-				bitmap.compress(Bitmap.CompressFormat.JPEG, 100, fos);
-				fos.close();
-				// show the image
-				bitmap = decodeFile(photoFile);
-				showImageFragment(bitmap);
-			} catch (Exception e) {
-				Log.e(TAG, "Exception : " + e.getMessage());
-			}
-		} catch (Exception e) {
-			Log.e(TAG, "onPictureTaken - wrote bytes: " + data.length);
-		}
-		camera.startPreview();
 	}
 
 	// Rotation
@@ -418,37 +546,6 @@ public class RegisterPhoto extends ActionBarActivity implements
 		finish();
 	}
 
-	@Override
-	public void surfaceChanged(SurfaceHolder holder, int format, int width,
-			int height) {
-		Camera.CameraInfo info = new Camera.CameraInfo();
-		Camera.getCameraInfo(Camera.CameraInfo.CAMERA_FACING_BACK, info);
-		int rotation = this.getWindowManager().getDefaultDisplay()
-				.getRotation();
-		int degrees = 0;
-		switch (rotation) {
-		case Surface.ROTATION_0:
-			degrees = 0;
-			break; // Natural orientation
-		case Surface.ROTATION_90:
-			degrees = 90;
-			break; // Landscape left
-		case Surface.ROTATION_180:
-			degrees = 180;
-			break;// Upside down
-		case Surface.ROTATION_270:
-			degrees = 270;
-			break;// Landscape right
-		}
-		int rotate = (info.orientation - degrees + 360) % 360;
-		// Set the 'rotation' parameter
-		Camera.Parameters params = mCamera.getParameters();
-		params.setRotation(rotate);
-		mCamera.setParameters(params);
-		mCamera.setDisplayOrientation(90);
-		mCamera.startPreview();
-	}
-
 	private boolean hasAFrontCamera() {
 		int cameraCount = 0;
 		Camera.CameraInfo cameraInfo = new Camera.CameraInfo();
@@ -461,32 +558,6 @@ public class RegisterPhoto extends ActionBarActivity implements
 			}
 		}
 		return hasFrontCamera;
-	}
-
-	@Override
-	public void surfaceCreated(SurfaceHolder holder) {
-		try {
-			mCamera.setPreviewDisplay(mPreview.getHolder());
-		} catch (Exception e) {
-			Log.e(TAG, "Exception " + e.getLocalizedMessage());
-		}
-	}
-
-	@Override
-	public void surfaceDestroyed(SurfaceHolder holder) {
-		Log.e(TAG, "Surface destroyed");
-	}
-
-	@Override
-	public void onPause() {
-		super.onPause();
-		mCamera.stopPreview();
-	}
-
-	@Override
-	public void onDestroy() {
-		super.onDestroy();
-		mCamera.release();
 	}
 
 	/**

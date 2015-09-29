@@ -4,7 +4,7 @@ import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.v7.app.ActionBar;
-import android.support.v7.app.ActionBarActivity;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
@@ -16,7 +16,7 @@ import com.cocosw.bottomsheet.BottomSheet;
 import com.kakumapp.utils.Utils;
 import com.rengwuxian.materialedittext.MaterialEditText;
 
-public class SearchName extends ActionBarActivity {
+public class SearchName extends AppCompatActivity {
 
 	private Toolbar toolbar;
 	private ActionBar actionBar;

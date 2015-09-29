@@ -3,7 +3,7 @@ package com.kakumapp.adapters;
 import java.util.ArrayList;
 import java.util.List;
 
-import android.support.v7.app.ActionBarActivity;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.PopupMenu;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
@@ -18,15 +18,15 @@ import com.kakumapp.R;
 
 public class MeetingPointsListAdapter extends ArrayAdapter<MeetingPoint> {
 
-	private ActionBarActivity context;
+	private AppCompatActivity context;
 
-	public MeetingPointsListAdapter(ActionBarActivity context,
+	public MeetingPointsListAdapter(AppCompatActivity context,
 			int textViewResourceId) {
 		super(context, textViewResourceId);
 		this.context = context;
 	}
 
-	public MeetingPointsListAdapter(ActionBarActivity context, int resource,
+	public MeetingPointsListAdapter(AppCompatActivity context, int resource,
 			List<MeetingPoint> items) {
 		super(context, resource, items);
 		this.context = context;

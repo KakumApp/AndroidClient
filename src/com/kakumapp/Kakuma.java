@@ -1,25 +1,21 @@
 package com.kakumapp;
 
-import java.io.IOException;
-import java.util.Scanner;
-
 import android.content.Intent;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager.NameNotFoundException;
 import android.graphics.Typeface;
 import android.os.Bundle;
-import android.support.v7.app.ActionBarActivity;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.TextView;
 
-import com.amazonaws.regions.Regions;
 import com.kakumapp.utils.SwipeGestureFilter.SwipeGestureListener;
 import com.kakumapp.utils.Utils;
 
-public class Kakuma extends ActionBarActivity implements SwipeGestureListener {
+public class Kakuma extends AppCompatActivity implements SwipeGestureListener {
 
 	private static final String TAG = "Kakuma";
 	private Button registerButton, findAPersonButton;
@@ -84,36 +80,6 @@ public class Kakuma extends ActionBarActivity implements SwipeGestureListener {
 				startActivity(howIntent);
 			}
 		});
-
-		readCredentials();
-	}
-
-	private void readCredentials() {
-		// instance of the global application
-		KakumaApplication application = (KakumaApplication) getApplication();
-		Scanner reader = null;
-		try {
-			reader = new Scanner(getAssets().open("credentials.txt"));
-			String identityPoolId = reader.nextLine();
-			String bucket = reader.nextLine();
-			String region = reader.nextLine();
-			String apiUsername = reader.nextLine();
-			String apiPassword = reader.nextLine();
-
-			application.setRegion(Regions.fromName(region));
-			application.setIdentityPoolId(identityPoolId);
-			application.setBucket(bucket);
-			application.setApiUsername(apiUsername);
-			application.setApiPassword(apiPassword);
-			application.setAWSURL("https://s3-" + region + ".amazonaws.com/"
-					+ bucket + "/");
-		} catch (IOException e) {
-			Log.e(TAG, "Exception " + e.getLocalizedMessage());
-		} finally {
-			if (reader != null) {
-				reader.close();
-			}
-		}
 	}
 
 	@Override

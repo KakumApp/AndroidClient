@@ -31,7 +31,7 @@ import android.graphics.BitmapFactory;
 import android.graphics.Typeface;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.support.v7.app.ActionBarActivity;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -47,16 +47,16 @@ import com.amazonaws.mobileconnectors.s3.transfermanager.Transfer.TransferState;
 import com.amazonaws.mobileconnectors.s3.transfermanager.TransferManager;
 import com.amazonaws.mobileconnectors.s3.transfermanager.Upload;
 import com.cocosw.bottomsheet.BottomSheet;
+import com.gc.materialdesign.views.ProgressBarCircularIndeterminate;
 import com.kakumapp.utils.Utils;
 import com.kakumapp.views.CircularImageView;
-import com.pnikosis.materialishprogress.ProgressWheel;
 
 /**
  * 
  * @author paul
  * 
  */
-public class RegisterSummary extends ActionBarActivity {
+public class RegisterSummary extends AppCompatActivity {
 
 	public static final String TAG = "RegisterSummary";
 	private static String URL;
@@ -75,7 +75,7 @@ public class RegisterSummary extends ActionBarActivity {
 	private KakumaApplication application;
 	private File photoFile;
 	private Bitmap bitmap;
-	private ProgressWheel progressBar;
+	private ProgressBarCircularIndeterminate progressBar;
 	private LinearLayout optionsLayout;
 	private MaterialDialog dialog;
 
@@ -95,7 +95,7 @@ public class RegisterSummary extends ActionBarActivity {
 		phoneEditText = (TextView) findViewById(R.id.edittext_phone);
 		placesEditText = (TextView) findViewById(R.id.edittext_origin);
 		registerButton = (Button) findViewById(R.id.button_register);
-		progressBar = (ProgressWheel) findViewById(R.id.progressBar);
+		progressBar = (ProgressBarCircularIndeterminate) findViewById(R.id.progressBar);
 		optionsLayout = (LinearLayout) findViewById(R.id.options_layout);
 
 		// fonts

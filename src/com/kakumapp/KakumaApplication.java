@@ -1,17 +1,21 @@
 package com.kakumapp;
 
 import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Scanner;
 
 import android.app.Application;
+import android.util.Log;
 
 import com.amazonaws.regions.Regions;
 import com.kakumapp.adapters.Country;
 
 public class KakumaApplication extends Application {
 
-	// private static final String TAG = "KakumaApplication";
-	public static final String APIURL = "http://kakumapp-api.herokuapp.com/";
+	private static final String TAG = "KakumaApplication";
+	public static final String APIURL = "http://kaku.iminds.be/";
+	// public static final String APIURL = "http://kakumapp-api.herokuapp.com/";
 	private String firstName, lastName, otherName, phoneNumber,
 			selectedCountryName;
 	private ArrayList<String> selectedPlaces, selectedPlacesIds;
@@ -35,6 +39,38 @@ public class KakumaApplication extends Application {
 		country = null;
 		photoFile = null;
 
+	}
+
+	@Override
+	public void onCreate() {
+		super.onCreate();
+		readCredentials();
+	}
+
+	private void readCredentials() {
+		// instance of the global application
+		Scanner reader = null;
+		try {
+			reader = new Scanner(getAssets().open("credentials.txt"));
+			String identityPoolId = reader.nextLine();
+			String bucket = reader.nextLine();
+			String region = reader.nextLine();
+			String apiUsername = reader.nextLine();
+			String apiPassword = reader.nextLine();
+
+			setRegion(Regions.fromName(region));
+			setIdentityPoolId(identityPoolId);
+			setBucket(bucket);
+			setApiUsername(apiUsername);
+			setApiPassword(apiPassword);
+			setAWSURL("https://s3-" + region + ".amazonaws.com/" + bucket + "/");
+		} catch (IOException e) {
+			Log.e(TAG, "Exception " + e.getLocalizedMessage());
+		} finally {
+			if (reader != null) {
+				reader.close();
+			}
+		}
 	}
 
 	/**

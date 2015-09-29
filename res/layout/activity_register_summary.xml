@@ -152,16 +152,16 @@
                 android:textSize="16sp" />
         </RelativeLayout>
 
-        <com.pnikosis.materialishprogress.ProgressWheel
+        <com.gc.materialdesign.views.ProgressBarCircularIndeterminate
             android:id="@+id/progressBar"
-            android:layout_width="80dp"
-            android:layout_height="80dp"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
             android:layout_below="@+id/origin_layout"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="20dp"
-            android:visibility="gone"
-            app:matProg_barColor="@color/white"
-            app:matProg_progressIndeterminate="true" />
+            android:background="@color/white"
+            android:padding="8dp"
+            android:visibility="gone" />
 
         <LinearLayout
             android:id="@+id/options_layout"

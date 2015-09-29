@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 import android.os.Bundle;
 import android.support.v7.app.ActionBar;
-import android.support.v7.app.ActionBarActivity;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.widget.ListView;
@@ -12,7 +12,7 @@ import android.widget.ListView;
 import com.kakumapp.adapters.MeetingPoint;
 import com.kakumapp.adapters.MeetingPointsListAdapter;
 
-public class MeetingPoints extends ActionBarActivity {
+public class MeetingPoints extends AppCompatActivity {
 
 	private Toolbar toolbar;
 	private ActionBar actionBar;

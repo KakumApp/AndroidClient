@@ -25,13 +25,13 @@ import android.graphics.Typeface;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.ActionBar;
-import android.support.v7.app.ActionBarActivity;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewGroup;
 import android.view.View.OnClickListener;
+import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.ArrayAdapter;
@@ -42,12 +42,12 @@ import android.widget.TextView;
 
 import com.afollestad.materialdialogs.MaterialDialog;
 import com.cocosw.bottomsheet.BottomSheet;
+import com.gc.materialdesign.views.ProgressBarCircularIndeterminate;
 import com.kakumapp.adapters.Country;
 import com.kakumapp.adapters.Place;
 import com.kakumapp.utils.Utils;
-import com.pnikosis.materialishprogress.ProgressWheel;
 
-public class SearchOrigin extends ActionBarActivity {
+public class SearchOrigin extends AppCompatActivity {
 
 	public static final String TAG = "SearchOrigin";
 	private static final String SELECT_COUNTRY = "Select country";
@@ -66,7 +66,7 @@ public class SearchOrigin extends ActionBarActivity {
 	private ArrayList<Place> places = new ArrayList<>();
 	private ArrayList<String> placeNames = new ArrayList<>();
 	private BottomSheet bottomSheet;
-	private ProgressWheel progressBar;
+	private ProgressBarCircularIndeterminate progressBar;
 	private MaterialDialog dialog;
 	private Toolbar toolbar;
 	private ActionBar actionBar;
@@ -86,7 +86,7 @@ public class SearchOrigin extends ActionBarActivity {
 
 		continueButton = (Button) findViewById(R.id.button_continue);
 		searchDescrTextView = (TextView) findViewById(R.id.textView_origin_desc);
-		progressBar = (ProgressWheel) findViewById(R.id.progressBar);
+		progressBar = (ProgressBarCircularIndeterminate) findViewById(R.id.progressBar);
 		placesAutoCompleteTextView = (MultiAutoCompleteTextView) findViewById(R.id.autocomplete_origin_places);
 		countriesSpinner = (Spinner) findViewById(R.id.spinner_origin_countries);
 

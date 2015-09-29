@@ -5,15 +5,15 @@ import android.content.DialogInterface;
 import android.graphics.Typeface;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
-import android.support.v7.app.ActionBarActivity;
+import android.support.v7.app.AppCompatActivity;
 
 import com.cocosw.bottomsheet.BottomSheet;
 import com.kakumapp.R;
 
 public class Utils {
-	private ActionBarActivity activity;
+	private AppCompatActivity activity;
 
-	public Utils(ActionBarActivity activity) {
+	public Utils(AppCompatActivity activity) {
 		this.activity = activity;
 	}
 

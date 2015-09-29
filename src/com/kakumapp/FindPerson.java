@@ -25,7 +25,7 @@ import android.graphics.Typeface;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.ActionBar;
-import android.support.v7.app.ActionBarActivity;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
@@ -37,13 +37,13 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.afollestad.materialdialogs.MaterialDialog;
+import com.gc.materialdesign.views.ProgressBarCircularIndeterminate;
 import com.kakumapp.adapters.Place;
 import com.kakumapp.adapters.RegisteredPerson;
 import com.kakumapp.adapters.RegisteredPersonsAdapter;
 import com.kakumapp.utils.Utils;
-import com.pnikosis.materialishprogress.ProgressWheel;
 
-public class FindPerson extends ActionBarActivity {
+public class FindPerson extends AppCompatActivity {
 
 	public static final String TAG = "SearchResults";
 	private static String URL, SEARCH_URL = "";
@@ -56,7 +56,7 @@ public class FindPerson extends ActionBarActivity {
 	private ArrayList<RegisteredPerson> registeredPersons = new ArrayList<>();
 	private Button searchButton;
 	private String searchType;
-	private ProgressWheel progressWheel;
+	private ProgressBarCircularIndeterminate progressBar;
 	private MaterialDialog dialog;
 	private boolean search;
 	private KakumaApplication application;
@@ -79,7 +79,7 @@ public class FindPerson extends ActionBarActivity {
 
 		recyclerView = (RecyclerView) findViewById(R.id.recycler_view);
 		searchButton = (Button) findViewById(R.id.button_search);
-		progressWheel = (ProgressWheel) findViewById(R.id.progressWheel);
+		progressBar = (ProgressBarCircularIndeterminate) findViewById(R.id.progressBar);
 		noResultsTextView = (TextView) findViewById(R.id.textView_no_results);
 
 		// fonts
@@ -192,15 +192,15 @@ public class FindPerson extends ActionBarActivity {
 
 	// show progress bar
 	private void showProgress() {
-		if (progressWheel != null) {
-			progressWheel.setVisibility(View.VISIBLE);
+		if (progressBar != null) {
+			progressBar.setVisibility(View.VISIBLE);
 		}
 	}
 
 	// hide progress bar
 	private void hideprogress() {
-		if (progressWheel != null) {
-			progressWheel.setVisibility(View.GONE);
+		if (progressBar != null) {
+			progressBar.setVisibility(View.GONE);
 		}
 	}
 
