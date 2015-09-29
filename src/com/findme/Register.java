@@ -76,7 +76,7 @@ public class Register extends AppCompatActivity {
 	@Override
 	public void onBackPressed() {
 		super.onBackPressed();
-		Intent nameIntent = new Intent(Register.this, Kakuma.class);
+		Intent nameIntent = new Intent(Register.this, FindMe.class);
 		startActivity(nameIntent);
 		finish();
 	}

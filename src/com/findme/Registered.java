@@ -14,7 +14,7 @@ import com.findme.utils.Utils;
 
 public class Registered extends AppCompatActivity {
 
-	private KakumaApplication application;
+	private FindMeApplication application;
 	private TextView textViewGreetings, textViewThanks, textViewInfo1,
 			textViewInfo2, textViewInfo3, backTextView;
 	private Button continueButton, registerButton;
@@ -26,7 +26,7 @@ public class Registered extends AppCompatActivity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_register_success);
 		// app
-		application = (KakumaApplication) getApplication();
+		application = (FindMeApplication) getApplication();
 		// views
 		textViewThanks = (TextView) findViewById(R.id.textView_thanks);
 		textViewGreetings = (TextView) findViewById(R.id.textView_greetings);

@@ -81,15 +81,15 @@ public class RegisterOrigin extends AppCompatActivity {
 	private ProgressBarCircularIndeterminate progressBar;
 	private LinearLayout optionsLayout;
 	private MaterialDialog dialog;
-	private KakumaApplication application;
+	private FindMeApplication application;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_origin);
 		// global app
-		application = (KakumaApplication) getApplication();
-		URL = KakumaApplication.APIURL;
+		application = (FindMeApplication) getApplication();
+		URL = FindMeApplication.APIURL;
 		// get the views
 		continueButton = (Button) findViewById(R.id.button_register_continue);
 		findPersonTextView = (TextView) findViewById(R.id.textView_register_find_person);

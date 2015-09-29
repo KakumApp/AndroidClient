@@ -15,7 +15,7 @@ import android.widget.TextView;
 import com.findme.utils.Utils;
 import com.findme.utils.SwipeGestureFilter.SwipeGestureListener;
 
-public class Kakuma extends AppCompatActivity implements SwipeGestureListener {
+public class FindMe extends AppCompatActivity implements SwipeGestureListener {
 
 	private static final String TAG = "Kakuma";
 	private Button registerButton, findAPersonButton;
@@ -57,7 +57,7 @@ public class Kakuma extends AppCompatActivity implements SwipeGestureListener {
 
 			@Override
 			public void onClick(View v) {
-				Intent registerIntent = new Intent(Kakuma.this, Register.class);
+				Intent registerIntent = new Intent(FindMe.this, Register.class);
 				startActivity(registerIntent);
 			}
 		});
@@ -66,7 +66,7 @@ public class Kakuma extends AppCompatActivity implements SwipeGestureListener {
 
 			@Override
 			public void onClick(View v) {
-				Intent findPersonIntent = new Intent(Kakuma.this,
+				Intent findPersonIntent = new Intent(FindMe.this,
 						FindPerson.class);
 				startActivity(findPersonIntent);
 			}
@@ -76,7 +76,7 @@ public class Kakuma extends AppCompatActivity implements SwipeGestureListener {
 
 			@Override
 			public void onClick(View v) {
-				Intent howIntent = new Intent(Kakuma.this, Help.class);
+				Intent howIntent = new Intent(FindMe.this, Help.class);
 				startActivity(howIntent);
 			}
 		});

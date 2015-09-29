@@ -11,7 +11,7 @@ import android.util.Log;
 import com.amazonaws.regions.Regions;
 import com.findme.adapters.Country;
 
-public class KakumaApplication extends Application {
+public class FindMeApplication extends Application {
 
 	private static final String TAG = "KakumaApplication";
 	public static final String APIURL = "http://kaku.iminds.be/";

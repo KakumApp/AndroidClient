@@ -61,7 +61,7 @@ public class RegisterPhoto extends AppCompatActivity implements
 	private Button captureButton;
 	private boolean hasFrontCamera;
 	private BottomSheet bottomSheet;
-	private KakumaApplication application;
+	private FindMeApplication application;
 	private MaterialDialog dialog;
 	private TextView backTextView;
 	private Typeface typeface;
@@ -72,7 +72,7 @@ public class RegisterPhoto extends AppCompatActivity implements
 		setContentView(R.layout.activity_photo);
 		activity = this;
 		// app
-		application = (KakumaApplication) getApplication();
+		application = (FindMeApplication) getApplication();
 		// get the views
 		mPreview = (SurfaceView) findViewById(R.id.camera_preview);
 		switchImageView = (ImageView) findViewById(R.id.imageView_switch);

@@ -59,7 +59,7 @@ public class FindPerson extends AppCompatActivity {
 	private ProgressBarCircularIndeterminate progressBar;
 	private MaterialDialog dialog;
 	private boolean search;
-	private KakumaApplication application;
+	private FindMeApplication application;
 	private TextView noResultsTextView;
 	private Typeface typeface;
 
@@ -74,8 +74,8 @@ public class FindPerson extends AppCompatActivity {
 		actionBar.setDisplayHomeAsUpEnabled(true);
 
 		// instance of the global application
-		application = (KakumaApplication) getApplication();
-		URL = KakumaApplication.APIURL + "targets?";
+		application = (FindMeApplication) getApplication();
+		URL = FindMeApplication.APIURL + "targets?";
 
 		recyclerView = (RecyclerView) findViewById(R.id.recycler_view);
 		searchButton = (Button) findViewById(R.id.button_search);

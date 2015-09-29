@@ -25,14 +25,14 @@ public class RegisterPhone extends AppCompatActivity {
 	private Typeface typeface;
 	private EditText phoneEditText;
 	private String phoneNumber;
-	private KakumaApplication application;
+	private FindMeApplication application;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_phone);
 		// app
-		application = (KakumaApplication) getApplication();
+		application = (FindMeApplication) getApplication();
 		// get views
 		continueButton = (Button) findViewById(R.id.button_register_continue);
 		descTextView = (TextView) findViewById(R.id.textView_phone_desc);

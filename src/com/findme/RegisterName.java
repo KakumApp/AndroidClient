@@ -27,14 +27,14 @@ public class RegisterName extends AppCompatActivity {
 	private Typeface typeface;
 	private EditText firstNameEditText, lastNameEditText, otherNameEditText;
 	private String firstName, lastName, otherName;
-	private KakumaApplication application;
+	private FindMeApplication application;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_name);
 		// instance of the global application
-		application = (KakumaApplication) getApplication();
+		application = (FindMeApplication) getApplication();
 		// get the fields
 		continueButton = (Button) findViewById(R.id.button_register_continue);
 		descTextView = (TextView) findViewById(R.id.textView_name_desc);

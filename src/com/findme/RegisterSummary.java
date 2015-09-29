@@ -72,7 +72,7 @@ public class RegisterSummary extends AppCompatActivity {
 	private BottomSheet bottomSheet;
 	private Button registerButton;
 	public String jsonData;
-	private KakumaApplication application;
+	private FindMeApplication application;
 	private File photoFile;
 	private Bitmap bitmap;
 	private ProgressBarCircularIndeterminate progressBar;
@@ -84,8 +84,8 @@ public class RegisterSummary extends AppCompatActivity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_register_summary);
 		// app
-		application = (KakumaApplication) getApplication();
-		URL = KakumaApplication.APIURL;
+		application = (FindMeApplication) getApplication();
+		URL = FindMeApplication.APIURL;
 		// get the views
 		nameTextView = (TextView) findViewById(R.id.textView_name);
 		phoneTextView = (TextView) findViewById(R.id.textView_phone);

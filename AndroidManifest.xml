@@ -2,7 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.findme"
     android:versionCode="1"
-    android:versionName="1.6" >
+    android:versionName="1.7" >
 
     <uses-sdk
         android:minSdkVersion="9"
@@ -27,13 +27,13 @@
         android:required="false" />
 
     <application
-        android:name="KakumaApplication"
+        android:name="FindMeApplication"
         android:allowBackup="true"
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
-        android:theme="@style/Theme.Kakuma" >
+        android:theme="@style/Theme.FindMe" >
         <activity
-            android:name=".Kakuma"
+            android:name=".FindMe"
             android:label="@string/app_name"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar.FullScreen" >
             <intent-filter>
@@ -42,7 +42,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
             <intent-filter>
-                <action android:name="com.findme.Kakuma" />
+                <action android:name="com.findme.FindMe" />
 
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
