@@ -77,7 +77,7 @@ public class RegisteredPersonsAdapter extends
 
 			@Override
 			public void onClick(View v) {
-				Intent intent = new Intent("com.kakumapp.MeetingPoints");
+				Intent intent = new Intent(context, MeetingPoint.class);
 				context.startActivity(intent);
 			}
 		});
