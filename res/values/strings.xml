@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="app_name">Kakumapp</string>
-    <string name="app_name_caps">KAKUMAPP</string>
-    <string name="app_desc">Kakumapp reconnects you with your lost loved ones. We enable you to find your friends and family.</string>
+    <string name="app_name">Find Me</string>
+    <string name="app_name_caps">FIND ME</string>
+    <string name="app_desc">Find Me reconnects you with your lost loved ones. We enable you to find your friends and family.</string>
     <string name="action_settings">Settings</string>
     <string name="get_started">TAP TO GET STARTED</string>
     <string name="image">Image</string>
