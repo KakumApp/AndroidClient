@@ -36,6 +36,7 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.MultiAutoCompleteTextView;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -73,6 +74,7 @@ public class SearchOrigin extends AppCompatActivity {
 	private Button continueButton;
 	private TextView searchDescrTextView;
 	private Typeface typeface;
+	private LinearLayout optionsLayout;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -89,6 +91,7 @@ public class SearchOrigin extends AppCompatActivity {
 		progressBar = (ProgressBarCircularIndeterminate) findViewById(R.id.progressBar);
 		placesAutoCompleteTextView = (MultiAutoCompleteTextView) findViewById(R.id.autocomplete_origin_places);
 		countriesSpinner = (Spinner) findViewById(R.id.spinner_origin_countries);
+		optionsLayout = (LinearLayout) findViewById(R.id.options_layout);
 
 		// fonts
 		typeface = new Utils(this).getFont("Ubuntu-L");
@@ -256,17 +259,17 @@ public class SearchOrigin extends AppCompatActivity {
 
 	// show progress bar and hide button
 	private void showProgress() {
-		if (progressBar != null && continueButton != null) {
+		if (progressBar != null && optionsLayout != null) {
 			progressBar.setVisibility(View.VISIBLE);
-			continueButton.setVisibility(View.GONE);
+			optionsLayout.setVisibility(View.GONE);
 		}
 	}
 
 	// hide progress bar and show button
 	private void hideprogress() {
-		if (progressBar != null && continueButton != null) {
+		if (progressBar != null && optionsLayout != null) {
 			progressBar.setVisibility(View.GONE);
-			continueButton.setVisibility(View.VISIBLE);
+			optionsLayout.setVisibility(View.VISIBLE);
 		}
 	}
 
