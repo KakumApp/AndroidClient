@@ -13,6 +13,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.findme.MeetingPoints;
 import com.findme.R;
 import com.findme.views.SmartImageView;
 
@@ -71,13 +72,13 @@ public class RegisteredPersonsAdapter extends
 			viewHolder.photoImageView.setImageUrl(photoURL);
 		} else {
 			viewHolder.photoImageView
-					.setImageResource(R.drawable.default_profile);
+					.setImageResource(R.drawable.ic_default_profile);
 		}
 		viewHolder.meetingButton.setOnClickListener(new OnClickListener() {
 
 			@Override
 			public void onClick(View v) {
-				Intent intent = new Intent(context, MeetingPoint.class);
+				Intent intent = new Intent(context, MeetingPoints.class);
 				context.startActivity(intent);
 			}
 		});
