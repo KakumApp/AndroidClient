@@ -56,9 +56,9 @@ public class Registered extends AppCompatActivity {
 			textViewGreetings.setText("Hello");
 		}
 
-		textViewInfo1
-				.setText(Html
-						.fromHtml("Other people will now be able to find you using Kakumapp."));
+		textViewInfo1.setText(Html
+				.fromHtml("Other people will now be able to find you using "
+						+ getString(R.string.app_name) + "."));
 		textViewInfo2
 				.setText(Html
 						.fromHtml("If someone is looking for you, you will be <u><b>notified on the phone</b></u> number you entered."));

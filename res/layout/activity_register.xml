@@ -20,7 +20,7 @@
             android:layout_centerHorizontal="true"
             android:layout_marginTop="20dp"
             android:contentDescription="@string/image_desc"
-            android:src="@drawable/ic_newaccount" />
+            android:src="@drawable/ic_register" />
 
         <TextView
             android:id="@+id/textView_register_desc"
