@@ -11,7 +11,7 @@
     <string name="home">Home</string>
     <string name="meetingPoints">MeetingPoints</string>
     <string name="meeting_point">Meeting point</string>
-    <string name="search_person">Search for person</string>
+    <string name="search_person">Search for a person</string>
     <string name="search_name_desc">Enter at least one name of the person you are looking for</string>
     <string name="meeting_times">Meeting times</string>
     <string name="search__origin">Search - Origin</string>

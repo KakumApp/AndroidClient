@@ -26,8 +26,6 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.GridLayoutManager;
-import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
@@ -55,7 +53,6 @@ public class SearchResults extends AppCompatActivity {
 	private RecyclerView recyclerView;
 	@SuppressWarnings("rawtypes")
 	private RecyclerView.Adapter mAdapter;
-	private RecyclerView.LayoutManager layoutManager;
 	private ArrayList<RegisteredPerson> registeredPersons = new ArrayList<>();
 	private Button searchButton;
 	private String searchType;
@@ -92,8 +89,7 @@ public class SearchResults extends AppCompatActivity {
 		// use this setting to improve performance if you know that changes
 		// in content do not change the layout size of the RecyclerView
 		recyclerView.setHasFixedSize(true);
-		// use a linear layout manager
-		layoutManager = new LinearLayoutManager(this);
+		// use a custom layout manager
 		recyclerView.setLayoutManager(new GridAutofitLayoutManager(this, 720));
 		// specify an adapter
 		mAdapter = new RegisteredPersonsAdapter(registeredPersons, this);
