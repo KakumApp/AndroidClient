@@ -38,7 +38,7 @@
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
                 android:contentDescription="@string/image_desc"
-                android:src="@drawable/profile" />
+                android:src="@drawable/ic_person" />
 
             <TextView
                 android:id="@+id/textView_name"
@@ -65,7 +65,7 @@
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
                 android:contentDescription="@string/image_desc"
-                android:src="@drawable/profile" />
+                android:src="@drawable/ic_person_origin" />
 
             <TextView
                 android:id="@+id/textView_origin"
@@ -91,7 +91,7 @@
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
                 android:contentDescription="@string/image_desc"
-                android:src="@drawable/profile" />
+                android:src="@drawable/ic_person_phone" />
 
             <TextView
                 android:id="@+id/textView_phone"
@@ -106,9 +106,8 @@
         <Button
             android:id="@+id/button_meeting_point"
             style="@style/Buttonkakuma"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignRight="@+id/name_layout"
             android:layout_below="@+id/phone_layout"
             android:layout_marginTop="8dp"
             android:background="@drawable/border_button"
