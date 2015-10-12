@@ -68,7 +68,10 @@
     <string name="other_name">Other name</string>
     <string name="take_picture">Take picture</string>
     <string name="take_photo">Take photo</string>
-    <string name="how_help">How it works I am not sure yet :)</string>
+    <string name="how_help">You can either Find a person or Register yourself.
+        Registering yourself helps other family members find you.
+        To do so just tap on \'Register\' on the first screen and follow the simple steps and provide the required details about yourself.
+        To Find a person hit the \'Find a person\' button on the start screen and search the person you would like by his/her name, phone number or origin.</string>
     <string name="select_place">Places (Use commas to separate places)</string>
     <string name="taken_photo">Taken photo</string>
     <string name="take_another">Take another</string>

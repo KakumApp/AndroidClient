@@ -56,6 +56,7 @@ import com.gc.materialdesign.views.ProgressBarCircularIndeterminate;
  * @author paul
  * 
  */
+@SuppressWarnings("deprecation")
 public class RegisterSummary extends AppCompatActivity {
 
 	public static final String TAG = "RegisterSummary";

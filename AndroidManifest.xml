@@ -2,7 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.findme"
     android:versionCode="1"
-    android:versionName="1.7" >
+    android:versionName="1.8" >
 
     <uses-sdk
         android:minSdkVersion="9"
@@ -136,7 +136,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".FindPerson"
+            android:name=".SearchResults"
             android:label="@string/recently_registered" >
             <intent-filter>
                 <action android:name="com.findme.FindPerson" />

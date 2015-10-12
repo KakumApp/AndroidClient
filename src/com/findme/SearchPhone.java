@@ -52,7 +52,7 @@ public class SearchPhone extends AppCompatActivity {
 					bundle.putString("searchType", "Phone");
 					bundle.putString("phone", phoneNumber);
 					Intent intent = new Intent(SearchPhone.this,
-							FindPerson.class);
+							SearchResults.class);
 					intent.putExtras(bundle);
 					startActivity(intent);
 				}

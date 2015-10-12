@@ -48,6 +48,7 @@ import com.findme.adapters.Place;
 import com.findme.utils.Utils;
 import com.gc.materialdesign.views.ProgressBarCircularIndeterminate;
 
+@SuppressWarnings("deprecation")
 public class SearchOrigin extends AppCompatActivity {
 
 	public static final String TAG = "SearchOrigin";
@@ -113,7 +114,7 @@ public class SearchOrigin extends AppCompatActivity {
 					}
 					bundle.putStringArrayList("places", selectedPlaces);
 					Intent intent = new Intent(SearchOrigin.this,
-							FindPerson.class);
+							SearchResults.class);
 					intent.putExtras(bundle);
 					startActivity(intent);
 				}

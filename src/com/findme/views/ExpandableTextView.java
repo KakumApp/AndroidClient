@@ -22,6 +22,7 @@ import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
+import android.support.v4.content.res.ResourcesCompat;
 import android.text.TextUtils;
 import android.util.AttributeSet;
 import android.util.SparseBooleanArray;
@@ -227,12 +228,12 @@ public class ExpandableTextView extends LinearLayout implements
 				.getDrawable(R.styleable.ExpandableTextView_collapseDrawable);
 
 		if (mExpandDrawable == null) {
-			mExpandDrawable = getResources().getDrawable(
-					R.drawable.ic_action_expand);
+			mExpandDrawable = ResourcesCompat.getDrawable(getResources(),
+					R.drawable.ic_action_expand, null);
 		}
 		if (mCollapseDrawable == null) {
-			mCollapseDrawable = getResources().getDrawable(
-					R.drawable.ic_action_collapse);
+			mCollapseDrawable = ResourcesCompat.getDrawable(getResources(),
+					R.drawable.ic_action_collapse, null);
 		}
 
 		typedArray.recycle();

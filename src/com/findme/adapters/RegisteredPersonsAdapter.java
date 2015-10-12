@@ -5,11 +5,14 @@ import java.util.ArrayList;
 import android.content.Context;
 import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.util.Patterns;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
+import android.view.ViewTreeObserver;
+import android.view.ViewTreeObserver.OnGlobalLayoutListener;
 import android.widget.Button;
 import android.widget.TextView;
 
@@ -19,6 +22,7 @@ import com.findme.views.SmartImageView;
 
 public class RegisteredPersonsAdapter extends
 		RecyclerView.Adapter<RegisteredPersonsAdapter.ViewHolder> {
+	protected static final String TAG = "RegisteredPersonsAdapter";
 	private ArrayList<RegisteredPerson> registeredPersons;
 	private Context context;
 
@@ -36,9 +40,28 @@ public class RegisteredPersonsAdapter extends
 		// create a new view
 		View itemLayoutView = LayoutInflater.from(parent.getContext()).inflate(
 				R.layout.recently_registered_item, null);
+		measureSize(itemLayoutView);
 		// create ViewHolder
 		ViewHolder viewHolder = new ViewHolder(itemLayoutView);
 		return viewHolder;
+	}
+
+	private void measureSize(final View view) {
+		ViewTreeObserver viewTreeObserver = view.getViewTreeObserver();
+		if (viewTreeObserver.isAlive()) {
+			viewTreeObserver
+					.addOnGlobalLayoutListener(new OnGlobalLayoutListener() {
+						@Override
+						public void onGlobalLayout() {
+							view.getViewTreeObserver()
+									.removeOnGlobalLayoutListener(this);
+							int viewWidth = view.getWidth();
+							int viewHeight = view.getHeight();
+							Log.e(TAG, "Width " + viewWidth + " Height "
+									+ viewHeight);
+						}
+					});
+		}
 	}
 
 	// Replace the contents of a view (invoked by the layout manager)

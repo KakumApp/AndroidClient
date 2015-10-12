@@ -67,7 +67,7 @@ public class FindMe extends AppCompatActivity implements SwipeGestureListener {
 			@Override
 			public void onClick(View v) {
 				Intent findPersonIntent = new Intent(FindMe.this,
-						FindPerson.class);
+						SearchResults.class);
 				startActivity(findPersonIntent);
 			}
 		});

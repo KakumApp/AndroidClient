@@ -72,7 +72,7 @@ public class Registered extends AppCompatActivity {
 			public void onClick(View v) {
 				application.clearData();
 				Intent homeIntent = new Intent(Registered.this,
-						FindPerson.class);
+						SearchResults.class);
 				startActivity(homeIntent);
 				finish();
 			}
@@ -102,7 +102,7 @@ public class Registered extends AppCompatActivity {
 	@Override
 	public void onBackPressed() {
 		application.clearData();
-		Intent homeIntent = new Intent(Registered.this, FindPerson.class);
+		Intent homeIntent = new Intent(Registered.this, SearchResults.class);
 		startActivity(homeIntent);
 		finish();
 	}

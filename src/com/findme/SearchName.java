@@ -65,7 +65,7 @@ public class SearchName extends AppCompatActivity {
 						bundle.putString("grandFatherName", grandFatherName);
 					}
 					Intent intent = new Intent(SearchName.this,
-							FindPerson.class);
+							SearchResults.class);
 					intent.putExtras(bundle);
 					startActivity(intent);
 				}

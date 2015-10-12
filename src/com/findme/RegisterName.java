@@ -76,7 +76,7 @@ public class RegisterName extends AppCompatActivity {
 			@Override
 			public void onClick(View v) {
 				Intent findPersonIntent = new Intent(RegisterName.this,
-						FindPerson.class);
+						SearchResults.class);
 				startActivity(findPersonIntent);
 			}
 		});

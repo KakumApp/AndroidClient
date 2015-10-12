@@ -55,6 +55,7 @@ import com.gc.materialdesign.views.ProgressBarCircularIndeterminate;
  * @author paul
  * 
  */
+@SuppressWarnings("deprecation")
 public class RegisterOrigin extends AppCompatActivity {
 
 	public static final String TAG = "RegisterOrigin";
@@ -82,6 +83,7 @@ public class RegisterOrigin extends AppCompatActivity {
 	private LinearLayout optionsLayout;
 	private MaterialDialog dialog;
 	private FindMeApplication application;
+	private FetchTask fetchTask;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -122,7 +124,7 @@ public class RegisterOrigin extends AppCompatActivity {
 			public void onClick(View v) {
 				// meeting activity
 				Intent findPersonIntent = new Intent(RegisterOrigin.this,
-						FindPerson.class);
+						SearchResults.class);
 				startActivity(findPersonIntent);
 			}
 		});
@@ -135,7 +137,7 @@ public class RegisterOrigin extends AppCompatActivity {
 						onBackPressed();
 					}
 				});
-		
+
 		// create the spinners adapters
 		String[] countriesLocal = { "South Sudan", "Sudan", "Somalia",
 				"Ethiopia", "D.R. Congo", "Burundi", "Rwanda", "Eritrea",
@@ -166,8 +168,7 @@ public class RegisterOrigin extends AppCompatActivity {
 						if (!country.getName().equals(SELECT_COUNTRY)) {
 							// get the places
 							FETCH_TYPE = 2;
-							FetchTask fetchTask = new FetchTask(
-									FetchTask.GET_TASK);
+							fetchTask = new FetchTask(FetchTask.GET_TASK);
 							fetchTask.execute(new String[] { URL + "countries/"
 									+ country.getId() });
 						}
@@ -257,7 +258,7 @@ public class RegisterOrigin extends AppCompatActivity {
 			for (indexOfPlace = 0; indexOfPlace < placesToRegister.size(); indexOfPlace++) {
 				// register a place
 				FETCH_TYPE = 3;
-				FetchTask fetchTask = new FetchTask(FetchTask.POST_TASK);
+				fetchTask = new FetchTask(FetchTask.POST_TASK);
 				fetchTask.addNameValuePair("country", country.getId() + "");
 				fetchTask.addNameValuePair("name",
 						placesToRegister.get(indexOfPlace).trim());
@@ -305,10 +306,18 @@ public class RegisterOrigin extends AppCompatActivity {
 			} else {
 				showErrorMessage("Place required",
 						"You need to enter at least one of the places");
+				if (fetchTask != null
+						&& fetchTask.getStatus() == AsyncTask.Status.RUNNING) {
+					fetchTask.cancel(true);
+				}
 			}
 		} else {
 			showErrorMessage("Country required",
 					"You need to select one of the countries");
+			if (fetchTask != null
+					&& fetchTask.getStatus() == AsyncTask.Status.RUNNING) {
+				fetchTask.cancel(true);
+			}
 		}
 		return valid;
 	}
@@ -342,7 +351,6 @@ public class RegisterOrigin extends AppCompatActivity {
 						@Override
 						public void onPositive(MaterialDialog dialog) {
 							// refetch the data/retry to send some data
-							FetchTask fetchTask = null;
 							switch (FETCH_TYPE) {
 							// case 1:
 							// fetchTask = new FetchTask(FetchTask.GET_TASK);

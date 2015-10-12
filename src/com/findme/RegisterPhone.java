@@ -65,7 +65,7 @@ public class RegisterPhone extends AppCompatActivity {
 			@Override
 			public void onClick(View v) {
 				Intent findPersonIntent = new Intent(RegisterPhone.this,
-						FindPerson.class);
+						SearchResults.class);
 				startActivity(findPersonIntent);
 			}
 		});

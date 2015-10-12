@@ -1,71 +1,90 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:custom="http://schemas.android.com/apk/res-auto"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/bck_landing"
     android:fillViewport="true"
     android:orientation="vertical" >
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/primary"
         android:padding="16dp" >
 
-        <!--
-        <ImageView
-            android:id="@+id/imageView1"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_alignParentTop="true"
-            android:contentDescription="@string/image_desc"
-            android:src="@drawable/bck" />
-        -->
-
         <TextView
-            android:id="@+id/textView_title"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_alignParentTop="true"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="60dp"
-            android:gravity="center"
-            android:padding="16dp"
-            android:text="@string/app_name_caps"
-            android:textColor="@color/white"
-            android:textSize="56sp" />
-
-        <TextView
-            android:id="@+id/textView_version"
+            android:id="@+id/textView_greetings"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/textView_title"
+            android:layout_alignParentTop="true"
             android:layout_centerHorizontal="true"
-            android:layout_marginTop="8dp"
+            android:layout_marginTop="40dp"
+            android:textColor="@color/white"
+            android:textSize="46sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/textView_thanks"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/textView_greetings"
+            android:layout_centerHorizontal="true"
+            android:layout_marginRight="8dp"
+            android:layout_marginTop="30dp"
+            android:gravity="center"
+            android:padding="8dp"
+            android:text="@string/registered_thanks"
+            android:textColor="@color/white"
+            android:textSize="24sp" />
+
+        <TextView
+            android:id="@+id/textView_info1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/textView_thanks"
+            android:layout_centerHorizontal="true"
+            android:layout_marginRight="8dp"
+            android:layout_marginTop="30dp"
+            android:layout_weight="30"
             android:gravity="center"
             android:padding="8dp"
             android:textColor="@color/white"
-            android:textSize="20sp" />
+            android:textSize="18sp" />
 
         <TextView
-            android:id="@+id/textView_desc"
+            android:id="@+id/textView_info2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/textView_version"
+            android:layout_below="@+id/textView_info1"
             android:layout_centerHorizontal="true"
-            android:layout_marginTop="60dp"
+            android:layout_marginRight="8dp"
+            android:layout_marginTop="30dp"
+            android:layout_weight="30"
             android:gravity="center"
-            android:padding="16dp"
-            android:text="@string/app_desc"
+            android:padding="8dp"
             android:textColor="@color/white"
-            android:textSize="22sp" />
+            android:textSize="18sp" />
+
+        <TextView
+            android:id="@+id/textView_info3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/textView_info2"
+            android:layout_centerHorizontal="true"
+            android:layout_marginRight="8dp"
+            android:layout_marginTop="30dp"
+            android:layout_weight="30"
+            android:gravity="center"
+            android:padding="8dp"
+            android:textColor="@color/white"
+            android:textSize="18sp" />
 
         <LinearLayout
             android:id="@+id/options_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/textView_desc"
-            android:layout_marginTop="80dp"
+            android:layout_below="@+id/textView_info3"
+            android:layout_marginTop="40dp"
             android:gravity="center"
             android:orientation="horizontal"
             android:paddingLeft="20dp"
@@ -78,11 +97,11 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="left"
                 android:layout_marginRight="20dp"
-                android:background="@drawable/border_button_transparent"
+                android:background="@drawable/border_button_white"
                 android:paddingLeft="48dp"
                 android:paddingRight="48dp"
                 android:text="@string/register"
-                android:textColor="@color/white" />
+                android:textColor="@color/primary" />
 
             <Button
                 android:id="@+id/button_find_a_person"
@@ -91,7 +110,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="right"
                 android:layout_marginLeft="20dp"
-                android:background="@drawable/border_button"
+                android:background="@drawable/border_button_transparent"
                 android:paddingLeft="48dp"
                 android:paddingRight="48dp"
                 android:text="@string/find_a_person"
@@ -99,15 +118,15 @@
         </LinearLayout>
 
         <TextView
-            android:id="@+id/textView_how_to_use"
+            android:id="@+id/textView_back"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/options_layout"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="40dp"
             android:gravity="center"
-            android:padding="16dp"
-            android:text="@string/how_to_use"
+            android:padding="8dp"
+            android:text="@string/back"
             android:textColor="@color/white"
             android:textSize="20sp" />
     </RelativeLayout>
