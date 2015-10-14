@@ -2,6 +2,7 @@ package com.findme.adapters;
 
 import java.util.ArrayList;
 
+import android.annotation.TargetApi;
 import android.content.Context;
 import android.os.Build;
 import android.support.v7.widget.RecyclerView;
@@ -42,7 +43,7 @@ public class RegisteredPersonsAdapter extends
 		ViewHolder viewHolder = new ViewHolder(itemLayoutView);
 		return viewHolder;
 	}
-	
+
 	private void measureSize(final View view) {
 		ViewTreeObserver viewTreeObserver = view.getViewTreeObserver();
 		if (viewTreeObserver.isAlive()) {
@@ -50,19 +51,24 @@ public class RegisteredPersonsAdapter extends
 					.addOnGlobalLayoutListener(new OnGlobalLayoutListener() {
 						@Override
 						public void onGlobalLayout() {
-							if (Build.VERSION.SDK_INT < Build.VERSION_CODES.JELLY_BEAN) {
-								view.getViewTreeObserver()
-										.removeGlobalOnLayoutListener(this);
-							} else {
-								view.getViewTreeObserver()
-										.removeOnGlobalLayoutListener(this);
-							}
+							removeOnGlobalLayoutListener(view, this);
 							int viewWidth = view.getWidth();
 							int viewHeight = view.getHeight();
 							Log.e(TAG, "Width " + viewWidth + " Height "
 									+ viewHeight);
 						}
 					});
+		}
+	}
+
+	@SuppressWarnings("deprecation")
+	@TargetApi(Build.VERSION_CODES.JELLY_BEAN)
+	private void removeOnGlobalLayoutListener(View v,
+			ViewTreeObserver.OnGlobalLayoutListener listener) {
+		if (Build.VERSION.SDK_INT < 16) {
+			v.getViewTreeObserver().removeGlobalOnLayoutListener(listener);
+		} else {
+			v.getViewTreeObserver().removeOnGlobalLayoutListener(listener);
 		}
 	}
 
