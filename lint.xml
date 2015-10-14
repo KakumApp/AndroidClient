@@ -4,4 +4,7 @@
         <ignore path="src/com/kakumapp/views/CircularImageView.java" />
         <ignore path="src/com/kakumapp/views/ExpandableTextView.java" />
     </issue>
+    <issue id="NewApi">
+        <ignore path="src/com/findme/adapters/RegisteredPersonsAdapter.java" />
+    </issue>
 </lint>
