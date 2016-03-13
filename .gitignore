@@ -1,6 +1,8 @@
-assets/credentials.txt
-# generated files
-bin/
-gen/
-# Local configuration file (sdk path, etc)
-project.properties
+.gradle
+/local.properties
+/.idea/workspace.xml
+/.idea/libraries
+.DS_Store
+/build
+/captures
+app/src/main/assets/credentials.txt
